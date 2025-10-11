@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import InventoriesPage from "./pages/InventoriesPage.tsx/InventoriesPage";
+import InventoryDetailsPage from "./pages/InventoryDetailsPage/InventoryDetailsPage/InventoryDetailsPage";
 
 function App() {
   return (
@@ -12,6 +13,8 @@ function App() {
 
 
         <Route path="/inventories" element={<InventoriesPage />} />
+        <Route path="/inventories/:id" element={<InventoryDetailsPage />} />
+
       </Routes>
     </BrowserRouter>
   );
