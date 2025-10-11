@@ -1,18 +1,16 @@
-import { useEffect, useState } from "react";
-import type { User } from "../types/user";
-import { fetchUsers } from "../services/userService";
+// import { useEffect, useState } from "react";
 
-export function useUsers() {
-  const [users, setUsers] = useState<User[]>([]);
+// export function useUsers() {
+//   const [users, setUsers] = useState<User[]>([]);
 
-  async function loadUsers() {
-    const data = await fetchUsers();
-    setUsers([...data]); 
-  }
+//   async function loadUsers() {
+//     const data = await fetchUsers();
+//     setUsers([...data]); 
+//   }
 
-  useEffect(() => {
-    loadUsers();
-  }, []);
+//   useEffect(() => {
+//     loadUsers();
+//   }, []);
 
-  return { users, loadUsers };
-}
+//   return { users, loadUsers };
+// }
