@@ -1,5 +1,7 @@
+import InventoriesTable from "../../components/InventoryTable/InventoryTable";
+
 const InventoriesPage = () => {
-    return ( <>Hello World</> );
+    return ( <><InventoriesTable></InventoriesTable></> );
 }
  
 export default InventoriesPage;
