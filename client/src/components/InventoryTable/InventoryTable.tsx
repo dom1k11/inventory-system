@@ -2,9 +2,11 @@ import { useState } from "react";
 
 import "./InventoryTable.css";
 import InventoryRow from "../InventoryRow/InventoryRow";
+import { useInventories } from "../../hooks/useInventories";
 
 const InventoryTable = () => {
   const [page, setPage] = useState(1);
+  const { inventories } = useInventories();
 
   return (
     <div className="inventory-table-container">
@@ -19,14 +21,9 @@ const InventoryTable = () => {
           </tr>
         </thead>
         <tbody>
-          <InventoryRow></InventoryRow>
-          <InventoryRow></InventoryRow>
-          <InventoryRow></InventoryRow>
-          <InventoryRow></InventoryRow>
-          <InventoryRow></InventoryRow>
-          <InventoryRow></InventoryRow>
-          <InventoryRow></InventoryRow>
-          <InventoryRow></InventoryRow>
+          {inventories.map((inventory) => (
+            <InventoryRow key={inventory.id} inventory = {inventory}></InventoryRow>
+          ))}
         </tbody>
       </table>
 

@@ -1,14 +1,14 @@
-const InventoryRow = () => {
+const InventoryRow = ({inventory}) => {
   return (
     <>
       <tr>
         <td>
-          <b>1</b>
+          <b> {inventory.id}</b>
         </td>
-        <td>Some Title</td>
-        <td>Some Description</td>
-        <td>Some Category</td>
-        <td>Some Creator</td>
+        <td>{inventory.title}</td>
+        <td>{inventory.description}</td>
+        <td>{inventory.category}</td>
+        <td>{inventory.created_by}</td>
       </tr>
     </>
   );
