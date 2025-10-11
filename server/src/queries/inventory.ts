@@ -8,3 +8,4 @@ export async function getInventories() {
   `;
   return pool.query(query);
 }
+//TODO Make a limit (OFFSET) to not to pull all the data
