@@ -1,14 +1,14 @@
-const ItemRow = ({ item }) => {
+const ItemRow = ({ item, allKeys }) => {
   return (
-    <>
-      <tr>
-        <td>
-          <b> {item.custom_id}</b>
-        </td>
-        <td>{item.field_title}</td>
-        <td>{item.value}</td>
-      </tr>
-    </>
+    <tr>
+      {allKeys.map((key) => {
+        const value =
+          item[key] ??
+          item.fields?.[key] ??
+          "-";
+        return <td key={key}>{value}</td>;
+      })}
+    </tr>
   );
 };
 
