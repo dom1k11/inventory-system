@@ -1,11 +1,11 @@
 .app-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 1rem;
   background-color: #f8f9fa;
   border-bottom: 1px solid #dee2e6;
   height: 64px;
+  gap: 1rem
 }
 .app-header h1 {
   margin: 0;
