@@ -1,29 +1,44 @@
 import NavbarButton from "./NavbarButton";
 import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
-const Navbar = () => {
+
+type NavbarProps = {
+  activeTab: "items" | "fields" | "customId";
+  setActiveTab: (tab: "items" | "fields" | "customId") => void;
+};
+
+const Navbar = ({ activeTab, setActiveTab }: NavbarProps) => {
   const navigate = useNavigate();
 
   return (
     <nav className="navbar-container">
       <div className="btn-toolbar-left">
         <NavbarButton
-          onClick={() => {}}
+          onClick={() => setActiveTab("items")}
           label="Items"
-          variant="btn btn-outline-primary"
-          disabled={!false}
+          variant={
+            activeTab === "items"
+              ? "btn btn-primary"
+              : "btn btn-outline-primary"
+          }
         />
         <NavbarButton
-          onClick={() => {}}
+          onClick={() => setActiveTab("fields")}
           label="Fields"
-          variant="btn btn-outline-primary"
-          disabled={!false}
+          variant={
+            activeTab === "fields"
+              ? "btn btn-primary"
+              : "btn btn-outline-primary"
+          }
         />
         <NavbarButton
-          onClick={() => {}}
+          onClick={() => setActiveTab("customId")}
           label="Custom ID"
-          variant="btn btn-outline-primary"
-          disabled={!false}
+          variant={
+            activeTab === "customId"
+              ? "btn btn-primary"
+              : "btn btn-outline-primary"
+          }
         />
       </div>
 
@@ -35,7 +50,6 @@ const Navbar = () => {
           }}
           label="Log out"
           variant="btn btn-outline-secondary"
-          disabled={false}
         />
       </div>
     </nav>
