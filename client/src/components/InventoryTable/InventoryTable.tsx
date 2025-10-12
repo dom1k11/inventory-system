@@ -1,11 +1,8 @@
-import { useState } from "react";
-
 import "./InventoryTable.css";
 import InventoryRow from "../InventoryRow/InventoryRow";
 import { useInventories } from "../../hooks/useInventories";
 
 const InventoryTable = () => {
-  const [page, setPage] = useState(1);
   const { inventories } = useInventories();
 
   return (
@@ -22,12 +19,13 @@ const InventoryTable = () => {
         </thead>
         <tbody>
           {inventories.map((inventory) => (
-            <InventoryRow key={inventory.id} inventory = {inventory}></InventoryRow>
+            <InventoryRow
+              key={inventory.id}
+              inventory={inventory}
+            ></InventoryRow>
           ))}
         </tbody>
       </table>
-
-      
     </div>
   );
 };
