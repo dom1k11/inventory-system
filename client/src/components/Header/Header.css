@@ -1,15 +1,25 @@
 .app-header {
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 1rem;
   background-color: #f8f9fa;
   border-bottom: 1px solid #dee2e6;
-  height: 64px;
-  gap: 1rem
+  height: 84px;
+  gap: 1rem;
+  position: relative; 
 }
+
 .app-header h1 {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 600;
   color: #212529;
+  text-align: center;
+  flex: 1;
+}
+
+.app-header .btn {
+  position: absolute;
+  left: 1rem;
 }

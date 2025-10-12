@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import "./Header.css";
-const Header = () => {
+
+const Header = ({ title = "" }) => {
   const navigate = useNavigate();
+
   return (
     <header className="app-header">
       <button
@@ -10,7 +12,7 @@ const Header = () => {
       >
         Home
       </button>
-      <h1>Inventory System</h1>
+      <h1>{title}</h1>
     </header>
   );
 };
