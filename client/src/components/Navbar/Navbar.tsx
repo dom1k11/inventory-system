@@ -9,14 +9,20 @@ const Navbar = () => {
       <div className="btn-toolbar-left">
         <NavbarButton
           onClick={() => {}}
-          label="Delete"
-          variant="btn-danger"
+          label="Items"
+          variant="btn btn-outline-primary"
           disabled={!false}
         />
         <NavbarButton
           onClick={() => {}}
-          label="Edit"
-          variant="btn-warning"
+          label="Fields"
+          variant="btn btn-outline-primary"
+          disabled={!false}
+        />
+        <NavbarButton
+          onClick={() => {}}
+          label="Custom ID"
+          variant="btn btn-outline-primary"
           disabled={!false}
         />
       </div>
