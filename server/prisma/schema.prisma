@@ -1,0 +1,98 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model custom_field_values {
+  id                Int             @id @default(autoincrement())
+  item_id           Int
+  field_template_id Int
+  value             String?
+  created_at        DateTime?       @default(now()) @db.Timestamp(6)
+  field_templates   field_templates @relation(fields: [field_template_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  items             items           @relation(fields: [item_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([item_id, field_template_id])
+}
+
+model field_templates {
+  id                  Int                   @id @default(autoincrement())
+  inventory_id        Int
+  field_type          String
+  title               String                @db.VarChar(100)
+  created_at          DateTime?             @default(now()) @db.Timestamp(6)
+  custom_field_values custom_field_values[]
+  inventories         inventories           @relation(fields: [inventory_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model inventories {
+  id                      Int                       @id @default(autoincrement())
+  title                   String                    @db.VarChar(100)
+  description             String?
+  category                String?                   @db.VarChar(100)
+  created_by              Int?
+  is_public               Boolean?                  @default(true)
+  image_url               String?
+  created_at              DateTime?                 @default(now()) @db.Timestamp(6)
+  updated_at              DateTime?                 @default(now()) @db.Timestamp(6)
+  field_templates         field_templates[]
+  users                   users?                    @relation(fields: [created_by], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  inventory_access        inventory_access[]
+  inventory_custom_fields inventory_custom_fields[]
+  items                   items[]
+}
+
+model inventory_access {
+  id           Int         @id @default(autoincrement())
+  inventory_id Int
+  user_id      Int
+  can_edit     Boolean     @default(false)
+  created_at   DateTime    @default(now()) @db.Timestamp(6)
+  inventories  inventories @relation(fields: [inventory_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  users        users       @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([inventory_id, user_id])
+}
+
+model inventory_custom_fields {
+  id           Int         @id @default(autoincrement())
+  inventory_id Int
+  field_type   String      @db.VarChar(50)
+  value        String?     @db.VarChar(50)
+  position     Int
+  inventories  inventories @relation(fields: [inventory_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model items {
+  id                  Int                   @id @default(autoincrement())
+  inventory_id        Int
+  created_by          Int?
+  custom_id           String                @db.VarChar(50)
+  created_at          DateTime?             @default(now()) @db.Timestamp(6)
+  updated_at          DateTime?             @default(now()) @db.Timestamp(6)
+  sequence_number     Int?
+  custom_field_values custom_field_values[]
+  users               users?                @relation(fields: [created_by], references: [id], onUpdate: NoAction)
+  inventories         inventories           @relation(fields: [inventory_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([inventory_id, custom_id])
+}
+
+model users {
+  id               Int                @id @default(autoincrement())
+  name             String             @db.VarChar(100)
+  email            String             @unique @db.VarChar(100)
+  password_hash    String
+  role             String?
+  is_blocked       Boolean?           @default(false)
+  created_at       DateTime?          @default(now()) @db.Timestamp(6)
+  inventories      inventories[]
+  inventory_access inventory_access[]
+  items            items[]
+
+  @@index([email], map: "idx_users_email")
+}

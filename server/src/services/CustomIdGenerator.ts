@@ -1,29 +1,16 @@
-import pool from '../db';
 import { randomUUID } from 'crypto';
+import { getDate } from '../utils/getTodayDate';
+import { getCustomIdFormat } from '../queries/getCustomIdFormat';
 
 function getRandomInt(max: number) {
   return Math.floor(Math.random() * max);
-}
-
-function getDate() {
-  const now = new Date();
-  return now.toISOString().split('T')[0];
 }
 
 export async function generateCustomId(
   inventoryId: number,
   sequenceNumber: number,
 ) {
-  const formatQuery = `
-    SELECT field_type, value
-    FROM inventory_custom_fields
-    WHERE inventory_id = $1
-    ORDER BY position;
-  `;
-  const { rows: fields } = await pool.query(formatQuery, [inventoryId]);
-  if (!fields.length) {
-    throw new Error(`No custom ID format defined for inventory ${inventoryId}`);
-  }
+  const fields = await getCustomIdFormat(inventoryId);
 
   const idParts: string[] = [];
 
@@ -53,6 +40,5 @@ export async function generateCustomId(
     }
   }
 
-  const customId = idParts.join('-');
-  return customId;
+  return idParts.join('-');
 }
