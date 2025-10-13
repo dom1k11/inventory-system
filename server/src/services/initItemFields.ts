@@ -1,18 +1,9 @@
 import prisma from '../prisma';
-
+import { getFieldTemplates } from '../queries/getFieldtemplates';
+import { mapTemplateValues } from './mapTemplates';
+import { insertFieldValues } from './insertFieldValues';
 export async function initItemFields(itemId: number, inventoryId: number) {
-  const templates = await prisma.field_templates.findMany({
-    where: { inventory_id: inventoryId },
-    select: { id: true },
-  });
-
-  const values = templates.map((t) => ({
-    item_id: itemId,
-    field_template_id: t.id,
-    value: '%empty data%',
-  }));
-
-  await prisma.custom_field_values.createMany({
-    data: values,
-  });
+  const templates = await getFieldTemplates(inventoryId);
+  const values = mapTemplateValues(templates, itemId);
+  await insertFieldValues(values);
 }
