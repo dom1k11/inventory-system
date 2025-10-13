@@ -1,6 +1,6 @@
 export function mapTemplateValues(
-  templates: { id: number }[],
-  itemId: number,
+  templates,
+  itemId,
   defaultValue = '%empty data%',
 ) {
   return templates.map((t) => ({
