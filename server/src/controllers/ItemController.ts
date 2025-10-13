@@ -1,4 +1,4 @@
-import { addItem } from '../services/addNewItem';
+import { addItem } from '../services/addEmptyItem';
 import { controller } from '../utils/controllerWrapper';
 
 export const handleAddItem = controller(async (req, res) => {

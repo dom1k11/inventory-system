@@ -17,9 +17,7 @@ export async function addItem(inventoryId: number, createdBy: number) {
     customId,
     sequenceNumber,
   );
-  console.log('Inserted:', item);
 
   return item;
 }
 
-addItem(3, 2);
