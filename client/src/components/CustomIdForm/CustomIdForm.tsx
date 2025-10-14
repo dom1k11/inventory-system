@@ -1,20 +1,43 @@
 import { useState } from "react";
+import FormatSelector from "./FormatSelector/FormatSelector";
+import {
+  handleChange,
+  handleTypeChange,
+  handleAdd,
+  handleRemove,
+} from "./handlers/handlers";
 
 const CustomIdForm = () => {
-  const [fixed, setFixed] = useState("PR-");
-  const [random] = useState(() =>
-    Math.floor(Math.random() * 1_000_000_000)
-      .toString()
-      .padStart(9, "0")
-  );
-  const [sequenceFormat, setSequenceFormat] = useState("D3");
+  const [fields, setFields] = useState([
+    { id: 1, type: "fixed", value: "PR" },
+    { id: 2, type: "random_9", value: "" },
+    { id: 3, type: "sequence", value: "D3" },
+  ]);
 
-  const previewSequence = () => {
-    const digits = parseInt(sequenceFormat.replace("D", ""), 10);
-    return "1".padStart(digits, "0");
-  };
-
-  const example = `${fixed}${random}-${previewSequence()}`;
+  const example = fields
+    .map((f) => {
+      switch (f.type) {
+        case "fixed":
+          return f.value || "";
+        case "random_9":
+          return Math.floor(Math.random() * 1_000_000_000)
+            .toString()
+            .padStart(9, "0");
+        case "sequence": {
+          const digits = parseInt(f.value.replace("D", ""), 10);
+          return "1".padStart(digits, "0");
+        }
+        case "date":
+          return new Date().toISOString().split("T")[0];
+        case "random_6":
+          return Math.floor(Math.random() * 1_000_000)
+            .toString()
+            .padStart(6, "0");
+        default:
+          return "";
+      }
+    })
+    .join("-");
 
   return (
     <div className="container mt-4">
@@ -28,74 +51,37 @@ const CustomIdForm = () => {
       </h2>
 
       <form className="d-flex flex-column gap-3">
-        {/* Fixed */}
-        <div className="row g-2 align-items-center border rounded p-2">
-          <div className="col-md-3">
-            <select className="form-select" value="Fixed" disabled>
-              <option>Fixed</option>
-            </select>
-          </div>
-          <div className="col-md-6">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="PR-"
-              value={fixed}
-              onChange={(e) => setFixed(e.target.value)}
-            />
-          </div>
-          <div className="col-md-3 text-end"></div>
-          <small className="text-muted">
-            A piece of unchanging text. You can use Unicode emoji.
-          </small>
-        </div>
+        {fields.map((f) => (
+          <FormatSelector
+            key={f.id}
+            label={f.type}
+            type={f.type}
+            value={f.value}
+            onChange={(val) =>
+              setFields((prev) => handleChange(prev, f.id, val))
+            }
+            onTypeChange={(val) =>
+              setFields((prev) => handleTypeChange(prev, f.id, val))
+            }
+            onRemove={() => setFields((prev) => handleRemove(prev, f.id))}
+          />
+        ))}
 
-        {/* Random */}
-        <div className="row g-2 align-items-center border rounded p-2">
-          <div className="col-md-3">
-            <select className="form-select" value="9-digit random" disabled>
-              <option>9-digit random</option>
-            </select>
-          </div>
-          <div className="col-md-6">
-            <input
-              disabled
-              type="text"
-              className="form-control"
-              placeholder="D9"
-              value={random}
-              readOnly
-            />
-          </div>
-          <div className="col-md-3 text-end"></div>
-          <small className="text-muted">Random number (e.g. 237898742)</small>
-        </div>
+        <button
+          type="button"
+          className="btn btn-outline-primary"
+          onClick={() => setFields((prev) => handleAdd(prev))}
+        >
+          Add element
+        </button>
 
-        {/* Sequence */}
-        <div className="row g-2 align-items-center border rounded p-2">
-          <div className="col-md-3">
-            <select className="form-select" value="Sequence" disabled>
-              <option>Sequence</option>
-            </select>
-          </div>
-          <div className="col-md-6">
-            <select
-              className="form-select"
-              value={sequenceFormat}
-              onChange={(e) => setSequenceFormat(e.target.value)}
-            >
-              <option value="D">D (1)</option>
-              <option value="D2">D2 (01)</option>
-              <option value="D3">D3 (001)</option>
-              <option value="D4">D4 (0001)</option>
-              <option value="D5">D5 (00001)</option>
-            </select>
-          </div>
-          <div className="col-md-3 text-end"></div>
-          <small className="text-muted">
-            Defines number of leading zeros for sequential numbering.
-          </small>
-        </div>
+        <button
+          type="button"
+          className="btn btn-success"
+          onClick={() => console.log({ fields })}
+        >
+          Submit Custom ID
+        </button>
       </form>
     </div>
   );
