@@ -6,8 +6,11 @@ import {
   handleAdd,
   handleRemove,
 } from "./handlers/handlers";
+import { useParams } from "react-router-dom";
+import { changeCustomId } from "../../api/customid";
 
 const CustomIdForm = () => {
+  const { id } = useParams();
   const [fields, setFields] = useState([
     { id: 1, type: "fixed", value: "PR" },
     { id: 2, type: "random_9", value: "" },
@@ -78,7 +81,7 @@ const CustomIdForm = () => {
         <button
           type="button"
           className="btn btn-success"
-          onClick={() => console.log({ fields })}
+          onClick={() => changeCustomId(Number(id), fields)}
         >
           Submit Custom ID
         </button>
