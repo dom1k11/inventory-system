@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const CustomIdForm = () => {
   const [fixed, setFixed] = useState("PR-");
-  const [random, setRandom] = useState(() =>
+  const [random] = useState(() =>
     Math.floor(Math.random() * 1_000_000_000)
       .toString()
       .padStart(9, "0")
