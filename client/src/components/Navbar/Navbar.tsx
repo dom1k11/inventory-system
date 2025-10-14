@@ -1,7 +1,7 @@
 import NavbarButton from "./NavbarButton";
 import { useNavigate } from "react-router-dom";
+import { handleAdd } from "../../services/itemAddHandler";
 import "./Navbar.css";
-
 type NavbarProps = {
   activeTab: "items" | "fields" | "customId";
   setActiveTab: (tab: "items" | "fields" | "customId") => void;
@@ -10,9 +10,16 @@ type NavbarProps = {
 const Navbar = ({ activeTab, setActiveTab }: NavbarProps) => {
   const navigate = useNavigate();
 
+  
+
   return (
     <nav className="navbar-container">
       <div className="btn-toolbar-left">
+        <NavbarButton
+          onClick={handleAdd}
+          label="New Item"
+          variant="btn btn-success"
+        />
         <NavbarButton
           onClick={() => setActiveTab("items")}
           label="Items"

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchItems } from "../services/itemService";
+import { fetchItems } from "../api/items";
 import { useParams } from "react-router-dom";
 
 export function useItems() {

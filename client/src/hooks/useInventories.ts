@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchInventories } from "../services/inventoriesService";
-
+import { fetchInventories } from "../api/inventories";
 export function useInventories() {
   const [inventories, setInventories] = useState<any[]>([]);
 
