@@ -1,7 +1,7 @@
 import { createItem } from "../api/items";
-export async function handleAdd() {
+export async function handleAdd(id) {
   try {
-    await createItem(1, 1); //TODO Change to get inventortyId as param and createdBy from localStorage
+    await createItem(id, 1); //TODO Change and createdBy from sessionStorage
   } catch (err) {
     console.error("Failed to create item:", err);
   }

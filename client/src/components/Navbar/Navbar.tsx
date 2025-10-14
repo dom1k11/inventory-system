@@ -1,5 +1,5 @@
 import NavbarButton from "./NavbarButton";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { handleAdd } from "../../services/itemAddHandler";
 import "./Navbar.css";
 type NavbarProps = {
@@ -9,14 +9,13 @@ type NavbarProps = {
 
 const Navbar = ({ activeTab, setActiveTab }: NavbarProps) => {
   const navigate = useNavigate();
-
-  
+  const { id } = useParams();
 
   return (
     <nav className="navbar-container">
       <div className="btn-toolbar-left">
         <NavbarButton
-          onClick={handleAdd}
+          onClick={() => handleAdd(Number(id))}
           label="New Item"
           variant="btn btn-success"
         />
