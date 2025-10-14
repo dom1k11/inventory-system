@@ -1,12 +1,9 @@
 import { useMemo } from "react";
-import { useItems } from "../../../hooks/useItem";
 import ItemRow from "../ItemRow/ItemRow";
 import { getTableKeys } from "../../../utils/getTableKeys";
 import "./ItemsTable.css";
 
-const ItemsTable = () => {
-  const { items } = useItems();
-
+const ItemsTable = ({ items }) => {
   const allKeys = useMemo(() => getTableKeys(items), [items]);
 
   return (

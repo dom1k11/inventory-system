@@ -2,12 +2,8 @@ import NavbarButton from "./NavbarButton";
 import { useNavigate, useParams } from "react-router-dom";
 import { handleAdd } from "../../services/itemAddHandler";
 import "./Navbar.css";
-type NavbarProps = {
-  activeTab: "items" | "fields" | "customId";
-  setActiveTab: (tab: "items" | "fields" | "customId") => void;
-};
 
-const Navbar = ({ activeTab, setActiveTab }: NavbarProps) => {
+const Navbar = ({ activeTab, setActiveTab, loadItems }) => {
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -15,7 +11,10 @@ const Navbar = ({ activeTab, setActiveTab }: NavbarProps) => {
     <nav className="navbar-container">
       <div className="btn-toolbar-left">
         <NavbarButton
-          onClick={() => handleAdd(Number(id))}
+          onClick={async () => {
+            await handleAdd(Number(id));
+            await loadItems();
+          }}
           label="New Item"
           variant="btn btn-success"
         />

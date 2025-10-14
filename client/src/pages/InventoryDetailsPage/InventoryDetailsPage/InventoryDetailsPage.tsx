@@ -5,6 +5,7 @@ import Navbar from "../../../components/Navbar/Navbar";
 import ItemsTable from "../ItemsTable/ItemsTable";
 import CustomIdForm from "../../../components/CustomIdForm/CustomIdForm";
 import { useInventories } from "../../../hooks/useInventories";
+import { useItems } from "../../../hooks/useItem";
 import "./InventoryDetailsPage.css";
 
 const InventoryDetailsPage = () => {
@@ -12,16 +13,25 @@ const InventoryDetailsPage = () => {
   const { inventories } = useInventories();
   const inventory = inventories.find((inv) => inv.id === Number(id));
 
-  const [activeTab, setActiveTab] = useState<"items" | "fields" | "customId">("items");
+  const [activeTab, setActiveTab] = useState<"items" | "fields" | "customId">(
+    "items"
+  );
 
+  const { items, loadItems } = useItems();
   return (
     <>
       <Header title={inventory ? inventory.title : "Loading..."} />
-      <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
+      <Navbar
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        loadItems={loadItems}
+      />
 
-      {activeTab === "items" && <ItemsTable />}
+      {activeTab === "items" && <ItemsTable items={items} />}
       {activeTab === "customId" && <CustomIdForm />}
-      {activeTab === "fields" && <p style={{ padding: "20px" }}>Fields placeholder...</p>}
+      {activeTab === "fields" && (
+        <p style={{ padding: "20px" }}>Fields placeholder...</p>
+      )}
     </>
   );
 };

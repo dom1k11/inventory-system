@@ -4,18 +4,17 @@ import { useParams } from "react-router-dom";
 
 export function useItems() {
   const { id } = useParams();
-  const [items, setInventories] = useState<any[]>([]);
+  const [items, setItems] = useState([]);
 
   async function loadItems() {
     if (!id) return;
     const data = await fetchItems(Number(id));
-    console.log(data);
-    setInventories([...data]);
+    setItems(data);
   }
 
   useEffect(() => {
     loadItems();
   }, [id]);
 
-  return { items, loadItems };
+  return { items, loadItems, setItems };
 }
