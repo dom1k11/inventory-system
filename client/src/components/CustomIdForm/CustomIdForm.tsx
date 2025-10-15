@@ -81,8 +81,8 @@ const CustomIdForm = () => {
               {...provided.droppableProps}
               className="d-flex flex-column gap-3"
             >
-              {fields.map((f, index) => (
-                <Draggable key={f.id} draggableId={String(f.id)} index={index}>
+              {fields.map((field, index) => (
+                <Draggable key={field.id} draggableId={String(field.id)} index={index}>
                   {(provided) => (
                     <div
                       ref={provided.innerRef}
@@ -90,14 +90,13 @@ const CustomIdForm = () => {
                       {...provided.dragHandleProps}
                     >
                       <FormatSelector
-                        label={f.type}
-                        type={f.type}
-                        value={f.value}
+                        type={field.type}
+                        value={field.value}
                         onChange={(val) =>
-                          setFields((prev) => handleChange(prev, f.id, val))
+                          setFields((prev) => handleChange(prev, field.id, val))
                         }
                         onTypeChange={(val) =>
-                          setFields((prev) => handleTypeChange(prev, f.id, val))
+                          setFields((prev) => handleTypeChange(prev, field.id, val))
                         }
                       />
                     </div>
