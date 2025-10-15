@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useFormat } from "./hooks/useFormat";
 import FormatSelector from "./FormatSelector/FormatSelector";
 import {
   handleChange,
@@ -7,27 +7,12 @@ import {
   handleRemove,
 } from "./handlers/handlers";
 import { useParams } from "react-router-dom";
-import { changeCustomId, fetchCurrentCustomId } from "../../api/customid";
+import { changeCustomId } from "../../api/customid";
 
 const CustomIdForm = () => {
   const { id } = useParams();
-  const [fields, setFields] = useState([]);
-
-  useEffect(() => {
-    async function loadFormat() {
-      const data = await fetchCurrentCustomId(Number(id));
-      if (Array.isArray(data)) {
-        setFields(
-          data.map((f, index) => ({
-            id: index + 1,
-            type: f.field_type,
-            value: f.value || "",
-          }))
-        );
-      }
-    }
-    loadFormat();
-  }, [id]);
+  const { fields, setFields, loading } = useFormat(Number(id));
+  if (loading) return <p>Loading...</p>;
 
   const example = fields
     .map((f) => {
