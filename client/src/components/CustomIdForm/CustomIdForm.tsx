@@ -82,7 +82,11 @@ const CustomIdForm = () => {
               className="d-flex flex-column gap-3"
             >
               {fields.map((field, index) => (
-                <Draggable key={field.id} draggableId={String(field.id)} index={index}>
+                <Draggable
+                  key={field.id}
+                  draggableId={String(field.id)}
+                  index={index}
+                >
                   {(provided) => (
                     <div
                       ref={provided.innerRef}
@@ -96,7 +100,9 @@ const CustomIdForm = () => {
                           setFields((prev) => handleChange(prev, field.id, val))
                         }
                         onTypeChange={(val) =>
-                          setFields((prev) => handleTypeChange(prev, field.id, val))
+                          setFields((prev) =>
+                            handleTypeChange(prev, field.id, val)
+                          )
                         }
                       />
                     </div>
@@ -104,6 +110,13 @@ const CustomIdForm = () => {
                 </Draggable>
               ))}
               {provided.placeholder}
+              <button
+                type="button"
+                className="btn btn-outline-primary btn-lg w-100 mb-4"
+                onClick={() => setFields((prev) => handleAdd(prev))}
+              >
+                Add new element
+              </button>
             </form>
           )}
         </Droppable>
@@ -114,21 +127,13 @@ const CustomIdForm = () => {
               {...provided.droppableProps}
               className="trash-zone border border-danger p-3 rounded text-center"
             >
-              Drop here to delete {provided.placeholder}
+              <b>Drop here to delete</b> {provided.placeholder}
             </div>
           )}
         </Droppable>
       </DragDropContext>
 
       <div className="mt-3 d-flex gap-2">
-        <button
-          type="button"
-          className="btn btn-outline-primary"
-          onClick={() => setFields((prev) => handleAdd(prev))}
-        >
-          Add element
-        </button>
-
         <button
           type="button"
           className="btn btn-success"
