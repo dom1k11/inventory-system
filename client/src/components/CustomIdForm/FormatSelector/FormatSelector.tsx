@@ -36,6 +36,14 @@ const FormatSelector = ({ type, value, onChange, onTypeChange, onRemove }) => {
             value="Random 9-digit"
           />
         )}
+        {type === "random_6" && (
+          <input
+            disabled
+            type="text"
+            className="form-control"
+            value="Random 6-digit"
+          />
+        )}
 
         {type === "sequence" && (
           <select
@@ -59,15 +67,22 @@ const FormatSelector = ({ type, value, onChange, onTypeChange, onRemove }) => {
             value="YYYY-MM-DD"
           />
         )}
-         {type === "random_6" && (
+         {type === "20_bit_random" && (
           <input
             disabled
             type="text"
             className="form-control"
-            value="Random 6-digit"
+            value="Random 20-bit"
           />
         )}
-        
+         {type === "32_bit_random" && (
+          <input
+            disabled
+            type="text"
+            className="form-control"
+            value="Random 32-bit"
+          />
+        )}
       </div>
 
       <div className="col-md-3 text-end">

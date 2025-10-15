@@ -35,6 +35,19 @@ export async function generateCustomId(
         const digits = parseInt(f.value?.replace('D', '') || '3', 10);
         idParts.push(sequenceNumber.toString().padStart(digits, '0'));
         break;
+      case '20_bit_random': {
+        const buf = new Uint32Array(1);
+        crypto.getRandomValues(buf);
+        idParts.push((buf[0] & 0xfffff).toString());
+        break;
+      }
+
+      case '32_bit_random': {
+        const buf = new Uint32Array(1);
+        crypto.getRandomValues(buf);
+        idParts.push(buf[0].toString());
+        break;
+      }
       default:
         console.warn(`Unknown field type: ${f.field_type}`);
     }

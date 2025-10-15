@@ -15,30 +15,46 @@ const CustomIdForm = () => {
   if (loading) return <p>Loading...</p>;
 
   const example = fields
-    .map((f) => {
-      switch (f.type) {
+    .map((field) => {
+      console.log("FIELD TYPE:", field.type);
+
+      switch (field.type) {
         case "fixed":
-          return f.value || "";
+          return field.value || "";
         case "random_9":
           return Math.floor(Math.random() * 1_000_000_000)
             .toString()
             .padStart(9, "0");
-        case "sequence": {
-          const digits = parseInt(f.value.replace("D", ""), 10);
-          return "1".padStart(digits, "0");
-        }
-        case "date":
-          return new Date().toISOString().split("T")[0];
         case "random_6":
           return Math.floor(Math.random() * 1_000_000)
             .toString()
             .padStart(6, "0");
+        case "sequence": {
+          const digits = parseInt(field.value.replace("D", ""), 10);
+          return "1".padStart(digits, "0");
+        }
+        case "date":
+          return new Date().toISOString().split("T")[0];
+        case "20_bit_random": {
+          const buf = new Uint32Array(1);
+          crypto.getRandomValues(buf);
+          console.log(buf);
+
+          return buf[0] & 0xfffff;
+        }
+        case "32_bit_random": {
+          const buf = new Uint32Array(1);
+          crypto.getRandomValues(buf);
+          console.log(buf);
+          return buf[0];
+        }
+
         default:
           return "";
       }
     })
     .join("-");
-
+    //TODO IMPORTANT: CREATE ENDPOINT TO GENERATE CUSTOM_ID PREVIEW ON SERVER
   return (
     <div className="container mt-4">
       <p className="text-muted">
