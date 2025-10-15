@@ -10,7 +10,7 @@ import "./InventoryDetailsPage.css";
 
 const InventoryDetailsPage = () => {
   const { id } = useParams();
-  const { inventories } = useInventories();
+  const { inventories, loading } = useInventories();
   const inventory = inventories.find((inv) => inv.id === Number(id));
 
   const [activeTab, setActiveTab] = useState<"items" | "fields" | "customId">(
@@ -18,6 +18,8 @@ const InventoryDetailsPage = () => {
   );
 
   const { items, loadItems } = useItems();
+  if (loading) return <p>Loading...</p>;
+
   return (
     <>
       <Header title={inventory ? inventory.title : "Loading..."} />
