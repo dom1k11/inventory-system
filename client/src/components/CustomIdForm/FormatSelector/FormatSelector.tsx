@@ -1,5 +1,11 @@
 import { typeOptions } from "../consts/typeOptions";
-import { sequenceOptions } from "../consts/sequenceOptions";
+import PrefixSelector from "./Selectors/PrefixSelector";
+import Random9Selector from "./Selectors/Random9Selector";
+import Random6Selector from "./Selectors/Random6Selector";
+import SequenceSelector from "./Selectors/SequenceSelector";
+import DateSelector from "./Selectors/DateSelector";
+import Bit20Selector from "./Selectors/bit20Selector";
+import Bit32Selector from "./Selectors/bit32Selector";
 const FormatSelector = ({ type, value, onChange, onTypeChange }) => {
   return (
     <div className="row g-2 align-items-center border rounded p-2">
@@ -19,70 +25,22 @@ const FormatSelector = ({ type, value, onChange, onTypeChange }) => {
 
       <div className="col-md-8">
         {type === "fixed" && (
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Prefix (e.g. PR-)"
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
-          />
+          <PrefixSelector value={value} onChange={onChange}></PrefixSelector>
         )}
 
-        {type === "random_9" && (
-          <input
-            disabled
-            type="text"
-            className="form-control"
-            value="Random 9-digit"
-          />
-        )}
-        {type === "random_6" && (
-          <input
-            disabled
-            type="text"
-            className="form-control"
-            value="Random 6-digit"
-          />
-        )}
+        {type === "random_9" && <Random9Selector></Random9Selector>}
+        {type === "random_6" && <Random6Selector></Random6Selector>}
 
         {type === "sequence" && (
-          <select
-            className="form-select"
+          <SequenceSelector
             value={value}
-            onChange={(e) => onChange(e.target.value)}
-          >
-            {sequenceOptions.map((opt) => (
-              <option key={opt.value} value={opt.value}>
-                {opt.label}
-              </option>
-            ))}
-          </select>
+            onChange={onChange}
+          ></SequenceSelector>
         )}
 
-        {type === "date" && (
-          <input
-            disabled
-            type="text"
-            className="form-control"
-            value="YYYY-MM-DD"
-          />
-        )}
-        {type === "20_bit_random" && (
-          <input
-            disabled
-            type="text"
-            className="form-control"
-            value="Random 20-bit"
-          />
-        )}
-        {type === "32_bit_random" && (
-          <input
-            disabled
-            type="text"
-            className="form-control"
-            value="Random 32-bit"
-          />
-        )}
+        {type === "date" && <DateSelector></DateSelector>}
+        {type === "20_bit_random" && <Bit20Selector></Bit20Selector>}
+        {type === "32_bit_random" && <Bit32Selector></Bit32Selector>}
       </div>
     </div>
   );

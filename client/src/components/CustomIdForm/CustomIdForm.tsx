@@ -109,6 +109,7 @@ const CustomIdForm = () => {
                   )}
                 </Draggable>
               ))}
+              
               {provided.placeholder}
               <button
                 type="button"
@@ -136,10 +137,10 @@ const CustomIdForm = () => {
       <div className="mt-3 d-flex gap-2">
         <button
           type="button"
-          className="btn btn-success"
+          className="btn btn-success btn-lg w-100 mb-4"
           onClick={() => changeCustomId(Number(id), fields)}
         >
-          Submit Custom ID
+          Save Changes
         </button>
       </div>
     </div>
