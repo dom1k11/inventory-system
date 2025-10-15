@@ -8,16 +8,27 @@ import {
 } from "./handlers/handlers";
 import { useParams } from "react-router-dom";
 import { changeCustomId } from "../../api/customid";
+import {
+  DragDropContext,
+  Droppable,
+  Draggable,
+} from "@hello-pangea/dnd";
 
 const CustomIdForm = () => {
   const { id } = useParams();
   const { fields, setFields, loading } = useFormat(Number(id));
   if (loading) return <p>Loading...</p>;
 
+  const handleDragEnd = (result: any) => {
+    if (!result.destination) return;
+    const updated = Array.from(fields);
+    const [moved] = updated.splice(result.source.index, 1);
+    updated.splice(result.destination.index, 0, moved);
+    setFields(updated);
+  };
+
   const example = fields
     .map((field) => {
-      console.log("FIELD TYPE:", field.type);
-
       switch (field.type) {
         case "fixed":
           return field.value || "";
@@ -38,23 +49,20 @@ const CustomIdForm = () => {
         case "20_bit_random": {
           const buf = new Uint32Array(1);
           crypto.getRandomValues(buf);
-          console.log(buf);
-
           return buf[0] & 0xfffff;
         }
         case "32_bit_random": {
           const buf = new Uint32Array(1);
           crypto.getRandomValues(buf);
-          console.log(buf);
           return buf[0];
         }
-
         default:
           return "";
       }
     })
     .join("-");
-    //TODO IMPORTANT: CREATE ENDPOINT TO GENERATE CUSTOM_ID PREVIEW ON SERVER
+
+  // ✅ твой UI + drag-n-drop обёртка
   return (
     <div className="container mt-4">
       <p className="text-muted">
@@ -66,23 +74,49 @@ const CustomIdForm = () => {
         <span className="text-secondary">{example}</span>
       </h2>
 
-      <form className="d-flex flex-column gap-3">
-        {fields.map((f) => (
-          <FormatSelector
-            key={f.id}
-            label={f.type}
-            type={f.type}
-            value={f.value}
-            onChange={(val) =>
-              setFields((prev) => handleChange(prev, f.id, val))
-            }
-            onTypeChange={(val) =>
-              setFields((prev) => handleTypeChange(prev, f.id, val))
-            }
-            onRemove={() => setFields((prev) => handleRemove(prev, f.id))}
-          />
-        ))}
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <Droppable droppableId="fields">
+          {(provided) => (
+            <form
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              className="d-flex flex-column gap-3"
+            >
+              {fields.map((f, index) => (
+                <Draggable key={f.id} draggableId={String(f.id)} index={index}>
+                  {(provided) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                    >
+                      <FormatSelector
+                        label={f.type}
+                        type={f.type}
+                        value={f.value}
+                        onChange={(val) =>
+                          setFields((prev) => handleChange(prev, f.id, val))
+                        }
+                        onTypeChange={(val) =>
+                          setFields((prev) =>
+                            handleTypeChange(prev, f.id, val)
+                          )
+                        }
+                        onRemove={() =>
+                          setFields((prev) => handleRemove(prev, f.id))
+                        }
+                      />
+                    </div>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+            </form>
+          )}
+        </Droppable>
+      </DragDropContext>
 
+      <div className="mt-3 d-flex gap-2">
         <button
           type="button"
           className="btn btn-outline-primary"
@@ -98,7 +132,7 @@ const CustomIdForm = () => {
         >
           Submit Custom ID
         </button>
-      </form>
+      </div>
     </div>
   );
 };
