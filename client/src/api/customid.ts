@@ -6,3 +6,7 @@ export async function changeCustomId(inventoryId, fields) {
     body: JSON.stringify({ inventoryId, fields }),
   });
 }
+
+export async function fetchCurrentCustomId(inventoryId) {
+  return apiWrapper(`/customid/${inventoryId}`);
+}
