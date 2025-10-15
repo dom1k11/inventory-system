@@ -65,7 +65,10 @@ const CustomIdForm = () => {
   return (
     <div className="container mt-4">
       <p className="text-muted">
-        You can set up items with inventory numbers in your preferred format.
+        You can set up items with inventory numbers in your preferred format.{" "}
+        <br></br>
+        To create a format, add new elements, edit them, drag to reorder, or
+        drag them do delete box.
       </p>
 
       <h2>
@@ -109,7 +112,7 @@ const CustomIdForm = () => {
                   )}
                 </Draggable>
               ))}
-              
+
               {provided.placeholder}
               <button
                 type="button"
