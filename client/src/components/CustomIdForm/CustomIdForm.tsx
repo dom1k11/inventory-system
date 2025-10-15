@@ -1,18 +1,9 @@
 import { useFormat } from "./hooks/useFormat";
 import FormatSelector from "./FormatSelector/FormatSelector";
-import {
-  handleChange,
-  handleTypeChange,
-  handleAdd,
-  handleRemove,
-} from "./handlers/handlers";
+import { handleChange, handleTypeChange, handleAdd } from "./handlers/handlers";
 import { useParams } from "react-router-dom";
 import { changeCustomId } from "../../api/customid";
-import {
-  DragDropContext,
-  Droppable,
-  Draggable,
-} from "@hello-pangea/dnd";
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 
 const CustomIdForm = () => {
   const { id } = useParams();
@@ -20,7 +11,15 @@ const CustomIdForm = () => {
   if (loading) return <p>Loading...</p>;
 
   const handleDragEnd = (result: any) => {
+    const { source, destination } = result;
+
     if (!result.destination) return;
+
+    if (destination.droppableId === "trash") {
+      setFields((prev) => prev.filter((_, i) => i !== source.index));
+      return;
+    }
+
     const updated = Array.from(fields);
     const [moved] = updated.splice(result.source.index, 1);
     updated.splice(result.destination.index, 0, moved);
@@ -61,8 +60,8 @@ const CustomIdForm = () => {
       }
     })
     .join("-");
+  //TODO IMPORTANT: CREATE ENDPOINT TO GENERATE CUSTOM_ID PREVIEW ON SERVER
 
-  // ✅ твой UI + drag-n-drop обёртка
   return (
     <div className="container mt-4">
       <p className="text-muted">
@@ -98,12 +97,7 @@ const CustomIdForm = () => {
                           setFields((prev) => handleChange(prev, f.id, val))
                         }
                         onTypeChange={(val) =>
-                          setFields((prev) =>
-                            handleTypeChange(prev, f.id, val)
-                          )
-                        }
-                        onRemove={() =>
-                          setFields((prev) => handleRemove(prev, f.id))
+                          setFields((prev) => handleTypeChange(prev, f.id, val))
                         }
                       />
                     </div>
@@ -112,6 +106,17 @@ const CustomIdForm = () => {
               ))}
               {provided.placeholder}
             </form>
+          )}
+        </Droppable>
+        <Droppable droppableId="trash">
+          {(provided) => (
+            <div
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              className="trash-zone border border-danger p-3 rounded text-center"
+            >
+              Drop here to delete {provided.placeholder}
+            </div>
           )}
         </Droppable>
       </DragDropContext>

@@ -1,6 +1,6 @@
 import { typeOptions } from "../consts/typeOptions";
 import { sequenceOptions } from "../consts/sequenceOptions";
-const FormatSelector = ({ type, value, onChange, onTypeChange, onRemove }) => {
+const FormatSelector = ({ type, value, onChange, onTypeChange }) => {
   return (
     <div className="row g-2 align-items-center border rounded p-2">
       <div className="col-md-3">
@@ -67,7 +67,7 @@ const FormatSelector = ({ type, value, onChange, onTypeChange, onRemove }) => {
             value="YYYY-MM-DD"
           />
         )}
-         {type === "20_bit_random" && (
+        {type === "20_bit_random" && (
           <input
             disabled
             type="text"
@@ -75,7 +75,7 @@ const FormatSelector = ({ type, value, onChange, onTypeChange, onRemove }) => {
             value="Random 20-bit"
           />
         )}
-         {type === "32_bit_random" && (
+        {type === "32_bit_random" && (
           <input
             disabled
             type="text"
@@ -83,16 +83,6 @@ const FormatSelector = ({ type, value, onChange, onTypeChange, onRemove }) => {
             value="Random 32-bit"
           />
         )}
-      </div>
-
-      <div className="col-md-3 text-end">
-        <button
-          type="button"
-          className="btn btn-outline-danger btn-sm"
-          onClick={onRemove}
-        >
-          Remove
-        </button>
       </div>
     </div>
   );
