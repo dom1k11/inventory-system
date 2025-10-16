@@ -1,5 +1,5 @@
 import { Droppable, Draggable } from "@hello-pangea/dnd";
-import FormatSelector from "../../FormatSelector/FormatSelector";
+import FormatSelector from "../FormatSelector/FormatSelector";
 import {
   handleChange,
   handleTypeChange,

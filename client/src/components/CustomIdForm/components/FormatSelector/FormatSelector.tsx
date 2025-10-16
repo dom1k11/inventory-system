@@ -1,4 +1,4 @@
-import { typeOptions } from "../consts/typeOptions";
+import { typeOptions } from "../../consts/typeOptions";
 import PrefixSelector from "./Selectors/PrefixSelector";
 import Random9Selector from "./Selectors/Random9Selector";
 import Random6Selector from "./Selectors/Random6Selector";
@@ -13,6 +13,7 @@ const FormatSelector = ({ type, value, onChange, onTypeChange }) => {
   return (
     <>
       <div className="custom-id-row">
+        <span style={{fontSize:"2em"}}>&#8645;</span>
         <div className="col-md-3">
           <select
             className="form-select"

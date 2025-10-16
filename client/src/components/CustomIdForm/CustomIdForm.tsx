@@ -7,13 +7,14 @@ import FieldsList from "./components/FieldsList/FieldsList";
 import ExamplePreview from "./components/ExamplePreview/ExamplePreview";
 import SubmitButton from "./components/SubmitButton/SubmitButton";
 import Header from "./components/Header/Header";
+import "./CustomIdForm.css"
 const CustomIdForm = () => {
   const { id } = useParams();
   const { fields, setFields, loading } = useFormat(Number(id));
   if (loading) return <p>Loading...</p>;
 
   return (
-    <div className="container mt-4">
+    <div className="custom-id-container">
       <Header></Header>
 
       <ExamplePreview fields={fields} />
@@ -29,9 +30,8 @@ const CustomIdForm = () => {
         <TrashZone />
       </DragDropContext>
 
-      <div className="mt-3 d-flex gap-2">
         <SubmitButton id={Number(id)} fields={fields} />
-      </div>
+
     </div>
   );
 };

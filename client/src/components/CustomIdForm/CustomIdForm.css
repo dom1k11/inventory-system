@@ -1,0 +1,8 @@
+.custom-id-container {
+  max-width: 1000px;
+  margin: 2em auto; 
+  background-color: #fcf8f8;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}

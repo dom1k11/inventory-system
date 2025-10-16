@@ -1,4 +1,4 @@
-import { sequenceOptions } from "../../consts/sequenceOptions";
+import { sequenceOptions } from "../../../consts/sequenceOptions";
 const SequenceSelector = ({value, onChange}) => {
   return (
     <select
