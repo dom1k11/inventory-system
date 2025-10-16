@@ -7,7 +7,7 @@ import CustomIdForm from "../../../components/CustomIdForm/CustomIdForm";
 import { useInventories } from "../../../hooks/useInventories";
 import { useItems } from "../../../hooks/useItem";
 import "./InventoryDetailsPage.css";
-
+import CustomFieldsForm from "./components/CustomFieldsForm/CustomFieldsForm";
 const InventoryDetailsPage = () => {
   const { id } = useParams();
   const { inventories, loading } = useInventories();
@@ -32,7 +32,7 @@ const InventoryDetailsPage = () => {
       {activeTab === "items" && <ItemsTable items={items} />}
       {activeTab === "customId" && <CustomIdForm />}
       {activeTab === "fields" && (
-        <p style={{ padding: "20px" }}>Fields placeholder...</p>
+       <CustomFieldsForm></CustomFieldsForm>
       )}
     </>
   );
