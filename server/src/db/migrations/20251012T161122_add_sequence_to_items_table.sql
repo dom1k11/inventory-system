@@ -1,3 +1,3 @@
 -- SQL migration
 ALTER TABLE items
-ADD COLUMN sequence_number INTEGER;
+ADD COLUMN IF NOT EXISTS sequence_number INTEGER;
