@@ -14,7 +14,6 @@ model custom_field_values {
   value             String?
   created_at        DateTime?       @default(now()) @db.Timestamp(6)
   field_templates   field_templates @relation(fields: [field_template_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  items             items           @relation(fields: [item_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
   @@unique([item_id, field_template_id])
 }
@@ -25,6 +24,9 @@ model field_templates {
   field_type          String
   title               String                @db.VarChar(100)
   created_at          DateTime?             @default(now()) @db.Timestamp(6)
+  description         String?
+  is_visible          Boolean?              @default(false)
+  position            Int                   @default(0)
   custom_field_values custom_field_values[]
   inventories         inventories           @relation(fields: [inventory_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
 }
@@ -68,16 +70,15 @@ model inventory_custom_fields {
 }
 
 model items {
-  id                  Int                   @id @default(autoincrement())
-  inventory_id        Int
-  created_by          Int?
-  custom_id           String                @db.VarChar(50)
-  created_at          DateTime?             @default(now()) @db.Timestamp(6)
-  updated_at          DateTime?             @default(now()) @db.Timestamp(6)
-  sequence_number     Int?
-  custom_field_values custom_field_values[]
-  users               users?                @relation(fields: [created_by], references: [id], onUpdate: NoAction)
-  inventories         inventories           @relation(fields: [inventory_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  id              Int         @id @default(autoincrement())
+  inventory_id    Int
+  created_by      Int?
+  custom_id       String      @db.VarChar(50)
+  created_at      DateTime?   @default(now()) @db.Timestamp(6)
+  updated_at      DateTime?   @default(now()) @db.Timestamp(6)
+  sequence_number Int?
+  users           users?      @relation(fields: [created_by], references: [id], onUpdate: NoAction)
+  inventories     inventories @relation(fields: [inventory_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
   @@unique([inventory_id, custom_id])
 }

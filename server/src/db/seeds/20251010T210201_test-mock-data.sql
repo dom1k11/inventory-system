@@ -48,116 +48,170 @@ VALUES
   );
 
 -- 🧩 FIELD TEMPLATES
-INSERT INTO field_templates (
-  inventory_id,
-  field_type,
-  title,
-  description,
-  is_visible,
-  position
-)
+INSERT INTO
+  field_templates (
+    inventory_id,
+    field_type,
+    title,
+    description,
+    is_visible,
+    position
+  )
 VALUES
   -- Printers
-  (1, 'text_single', 'Brand', 'Printer brand name', true, 1),
-  (1, 'text_single', 'Model', 'Model name or number', true, 2),
-  (1, 'number', 'Year', 'Year of manufacture', true, 3),
-
+  (
+    1,
+    'text_single',
+    'Brand',
+    'Printer brand name',
+    true,
+    1
+  ),
+  (
+    1,
+    'text_single',
+    'Model',
+    'Model name or number',
+    true,
+    2
+  ),
+  (
+    1,
+    'number',
+    'Year',
+    'Year of manufacture',
+    true,
+    3
+  ),
   -- Laptops
-  (2, 'text_single', 'Brand', 'Laptop brand', true, 1),
-  (2, 'text_single', 'Model', 'Laptop model', true, 2),
+  (
+    2,
+    'text_single',
+    'Brand',
+    'Laptop brand',
+    true,
+    1
+  ),
+  (
+    2,
+    'text_single',
+    'Model',
+    'Laptop model',
+    true,
+    2
+  ),
   (2, 'number', 'Price', 'Price in EUR', true, 3),
-
   -- Books
   (3, 'text_single', 'Title', 'Book title', true, 1),
-  (3, 'text_single', 'Author', 'Book author', true, 2),
-  (3, 'number', 'Year', 'Year of publication', true, 3),
-
+  (
+    3,
+    'text_single',
+    'Author',
+    'Book author',
+    true,
+    2
+  ),
+  (
+    3,
+    'number',
+    'Year',
+    'Year of publication',
+    true,
+    3
+  ),
   -- Maps and Globes
-  (4, 'text_single', 'Type', 'Map or globe type', true, 1),
-  (4, 'text_single', 'Region', 'Geographical region', true, 2),
-  (4, 'number', 'Year', 'Year created or printed', true, 3);
-
+  (
+    4,
+    'text_single',
+    'Type',
+    'Map or globe type',
+    true,
+    1
+  ),
+  (
+    4,
+    'text_single',
+    'Region',
+    'Geographical region',
+    true,
+    2
+  ),
+  (
+    4,
+    'number',
+    'Year',
+    'Year created or printed',
+    true,
+    3
+  );
 
 -- 💻 ITEMS
-INSERT INTO items (
-  inventory_id,
-  created_by,
-  custom_id,
-  sequence_number
-)
+INSERT INTO
+  items (
+    inventory_id,
+    created_by,
+    custom_id,
+    sequence_number
+  )
 VALUES
   -- Printers
   (1, 1, 'PR-0001', 1),
   (1, 1, 'PR-0002', 2),
   (1, 1, 'PR-0003', 3),
-
   -- Laptops
   (2, 1, 'NB-0001', 1),
   (2, 1, 'NB-0002', 2),
   (2, 1, 'NB-0003', 3),
-
   -- Books
   (3, 2, 'BK-0001', 1),
   (3, 2, 'BK-0002', 2),
   (3, 2, 'BK-0003', 3),
-
   -- Maps / Globes
   (4, 2, 'MP-0001', 1),
   (4, 2, 'MP-0002', 2),
   (4, 2, 'GL-0001', 3);
 
-
 -- 🧾 CUSTOM FIELD VALUES
-INSERT INTO custom_field_values (item_id, field_template_id, value)
+INSERT INTO
+  custom_field_values (item_id, field_template_id, value)
 VALUES
   -- Printers
   (1, 1, 'HP'),
   (1, 2, 'LaserJet 1200'),
   (1, 3, '2019'),
-
   (2, 1, 'Canon'),
   (2, 2, 'Pixma G3411'),
   (2, 3, '2021'),
-
   (3, 1, 'Epson'),
   (3, 2, 'EcoTank L3250'),
   (3, 3, '2020'),
-
   -- Laptops
   (4, 4, 'Acer'),
   (4, 5, 'Aspire 3'),
   (4, 6, '550'),
-
   (5, 4, 'Dell'),
   (5, 5, 'Latitude E7450'),
   (5, 6, '720'),
-
   (6, 4, 'Lenovo'),
   (6, 5, 'ThinkPad X1'),
   (6, 6, '950'),
-
   -- Books
   (7, 7, 'War and Peace'),
   (7, 8, 'Leo Tolstoy'),
   (7, 9, '1869'),
-
   (8, 7, '1984'),
   (8, 8, 'George Orwell'),
   (8, 9, '1949'),
-
   (9, 7, 'The Hobbit'),
   (9, 8, 'J.R.R. Tolkien'),
   (9, 9, '1937'),
-
   -- Maps and Globes
   (10, 10, 'Wall Map'),
   (10, 11, 'Europe'),
   (10, 12, '2018'),
-
   (11, 10, 'Political Map'),
   (11, 11, 'World'),
   (11, 12, '2020'),
-
   (12, 10, 'Globe'),
   (12, 11, 'Earth'),
   (12, 12, '2015');
