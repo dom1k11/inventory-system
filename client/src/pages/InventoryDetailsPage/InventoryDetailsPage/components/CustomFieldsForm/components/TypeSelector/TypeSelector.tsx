@@ -1,6 +1,6 @@
 import { fieldOptions } from "../../consts/fieldOptions";
 
-const TypeSelector = (field) => {
+const TypeSelector = ({field}) => {
   return (
     <div className="col-md-3">
       <label className="form-label">Type</label>

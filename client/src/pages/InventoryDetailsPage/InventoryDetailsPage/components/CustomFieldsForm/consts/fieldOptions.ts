@@ -20,7 +20,7 @@ export const fieldOptions = [
     hint: "",
   },
   {
-    value: "bool",
+    value: "boolean",
     label: "True/False",
     hint: "",
   },

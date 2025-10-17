@@ -21,7 +21,7 @@ export async function getInventoryItems(id: number) {
       i.created_at,
       jsonb_object_agg(
         ft.title, 
-        cfv.value ORDER BY ft.id
+        cfv.value ORDER BY ft.position ASC
       ) AS fields
     FROM items AS i
     LEFT JOIN users AS u

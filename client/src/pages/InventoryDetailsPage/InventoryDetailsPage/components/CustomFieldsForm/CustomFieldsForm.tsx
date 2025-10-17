@@ -19,8 +19,8 @@ const CustomFieldsForm = () => {
       {fields.map((field) => (
         <div key={field.id} className="card p-3 mb-3 shadow-sm">
           <div className="row g-3 align-items-center">
-            <TypeSelector />
-            <TitleInput />
+            <TypeSelector field = {field}/>
+            <TitleInput field = {field} />
             <Checkbox />
           </div>
         </div>
