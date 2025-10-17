@@ -7,7 +7,12 @@ import TitleInput from "./components/TitleInput/TitleInput";
 import TypeSelector from "./components/TypeSelector/TypeSelector";
 import { useFields } from "./hooks/useFields";
 import NewElementBtn from "./components/NewElementBtn/NewElementBtn";
-import { handleTitleChange, handleTypeChange } from "./handlers/handlers";
+import {
+  handleRemove,
+  handleTitleChange,
+  handleTypeChange,
+} from "./handlers/handlers";
+import { deleteCustomField } from "../../../../../api/inventories";
 const CustomFieldsForm = () => {
   const { id } = useParams();
   const { fields, loading, setFields } = useFields(Number(id));
@@ -34,6 +39,15 @@ const CustomFieldsForm = () => {
             />{" "}
             <Checkbox />
           </div>
+          <button
+            className="btn btn-danger mt-2"
+            onClick={async () => {
+              setFields((prev) => handleRemove(prev, field.id));
+              await deleteCustomField(Number(id), [field.id]);
+            }}
+          >
+            Remove
+          </button>
         </div>
       ))}
       <NewElementBtn setFields={setFields}></NewElementBtn>

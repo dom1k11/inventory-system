@@ -26,5 +26,13 @@ export const handleChangeTypeFields = controller(async (req, res) => {
   // const deletedFields = await deleteFieldTypes(inventoryId);
   const newFields = await insertFieldTypes(inventoryId, fields);
 
-  res.json({  newFields });
+  res.json({ newFields });
+});
+
+export const handleDeleteTypeFields = controller(async (req, res) => {
+  const { inventoryId, ids } = req.body;
+
+  const deletedFields = await deleteFieldTypes(inventoryId, ids);
+
+  res.json({ deletedFields });
 });

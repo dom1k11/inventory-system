@@ -6,7 +6,7 @@ export const handleAdd = (fields) => [
     title: "",
     description: "",
     is_visible: false,
-    isNew: true
+    isNew: true,
   },
 ];
 
@@ -16,3 +16,4 @@ export const handleTitleChange = (fields, id, newValue) =>
 export const handleTypeChange = (fields, id, newType) =>
   fields.map((f) => (f.id === id ? { ...f, field_type: newType } : f));
 
+export const handleRemove = (fields, id) => fields.filter((f) => f.id !== id);

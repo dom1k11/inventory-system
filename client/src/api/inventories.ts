@@ -10,8 +10,15 @@ export function fetchInventoryFields(id: number) {
 
 
 export async function addCustomField(inventoryId, fields) {
-  return apiWrapper(`/inventories/fields/change`, {
-    method: "PUT",
+  return apiWrapper(`/inventories/fields/add`, {
+    method: "POST",
     body: JSON.stringify({ inventoryId, fields }),
+  });
+}
+
+export async function deleteCustomField(inventoryId, ids) {
+  return apiWrapper(`/inventories/fields/delete`, {
+    method: "DELETE",
+    body: JSON.stringify({ inventoryId, ids }),
   });
 }
