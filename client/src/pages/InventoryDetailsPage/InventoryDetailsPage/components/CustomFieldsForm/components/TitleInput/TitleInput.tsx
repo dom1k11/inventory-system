@@ -1,4 +1,4 @@
-const TitleInput = ({field}) => {
+const TitleInput = ({field, onChange}) => {
   return (
     <div className="col-md-3">
       <label className="form-label">Title</label>
@@ -6,6 +6,7 @@ const TitleInput = ({field}) => {
         className="form-control"
         value={field.title}
         placeholder="Enter title"
+        onChange={(e)=> onChange(e.target.value)}
         
       />
     </div>

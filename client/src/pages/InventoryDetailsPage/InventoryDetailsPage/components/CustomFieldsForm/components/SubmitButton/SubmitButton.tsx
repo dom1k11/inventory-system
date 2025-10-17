@@ -1,9 +1,14 @@
 import { useState } from "react";
+import { addCustomField } from "../../../../../../../api/inventories";
 
-const SubmitButton = () => {
+const SubmitButton = ({ id, fields }) => {
   const [isSaved, setIsSaved] = useState(false);
+  const newFields = fields.filter((f) => f.isNew);
+  if (newFields.length === 0) return;
 
   const handleClick = async () => {
+    await addCustomField(id, newFields);
+
     setIsSaved(true);
 
     setTimeout(() => setIsSaved(false), 2000);
