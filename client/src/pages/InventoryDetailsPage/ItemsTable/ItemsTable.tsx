@@ -6,6 +6,13 @@ import "./ItemsTable.css";
 const ItemsTable = ({ items }) => {
   const allKeys = useMemo(() => getTableKeys(items), [items]);
 
+  if (!items?.length)
+    return (
+      <div className="text-center my-5">
+        <p className="text-muted mb-3">No items yet.</p>
+      </div>
+    );
+
   return (
     <div className="inventory-table-container">
       <table className="table table-hover">
