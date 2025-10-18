@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import Header from "../../../components/Header/Header";
 import Navbar from "../../../components/Navbar/Navbar";
-import ItemsTable from "../ItemsTable/ItemsTable";
+import ItemsTable from "../Items/ItemsTable/ItemsTable";
 import CustomIdForm from "../../../components/CustomIdForm/CustomIdForm";
 import { useInventories } from "../../../hooks/useInventories";
 import { useItems } from "../../../hooks/useItem";

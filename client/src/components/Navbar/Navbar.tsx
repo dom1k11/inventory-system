@@ -10,13 +10,21 @@ const Navbar = ({ activeTab, setActiveTab, loadItems }) => {
   return (
     <nav className="navbar-container">
       <div className="btn-toolbar-left">
-        <NavbarButton
+         <NavbarButton
           onClick={async () => {
             await handleAdd(Number(id));
             await loadItems();
           }}
           label="New Item"
           variant="btn btn-success"
+        />
+         <NavbarButton
+          onClick={async () => {
+            await loadItems();
+          }}
+          label="Delete items"
+          variant="btn btn-danger"
+          disabled
         />
         <NavbarButton
           onClick={() => setActiveTab("items")}
