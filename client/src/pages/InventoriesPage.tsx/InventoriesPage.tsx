@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Header from "../../components/Header/Header";
-import InventoriesTable from "../../components/InventoryTable/InventoryTable";
+import InventoriesTable from "./InventoryTable/InventoryTable";
 
 const InventoriesPage = () => {
   const [loading, setLoading] = useState(true);

@@ -8,6 +8,7 @@ import { useInventories } from "../../../hooks/useInventories";
 import { useItems } from "../../../hooks/useItem";
 import "./InventoryDetailsPage.css";
 import CustomFieldsForm from "./components/CustomFieldsForm/CustomFieldsForm";
+import Toolbar from "./components/Toolbar/Toolbar";
 const InventoryDetailsPage = () => {
   const { id } = useParams();
   const { inventories, loading } = useInventories();
@@ -23,17 +24,11 @@ const InventoryDetailsPage = () => {
   return (
     <>
       <Header title={inventory ? inventory.title : "Loading..."} />
-      <Navbar
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        loadItems={loadItems}
-      />
-
+      <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
+      <Toolbar loadItems={loadItems}></Toolbar>
       {activeTab === "items" && <ItemsTable items={items} />}
       {activeTab === "customId" && <CustomIdForm />}
-      {activeTab === "fields" && (
-       <CustomFieldsForm></CustomFieldsForm>
-      )}
+      {activeTab === "fields" && <CustomFieldsForm></CustomFieldsForm>}
     </>
   );
 };

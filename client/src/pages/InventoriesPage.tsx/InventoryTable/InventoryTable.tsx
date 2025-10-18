@@ -1,6 +1,6 @@
 import "./InventoryTable.css";
 import InventoryRow from "../InventoryRow/InventoryRow";
-import { useInventories } from "../../hooks/useInventories";
+import { useInventories } from "../../../hooks/useInventories";
 
 const InventoryTable = () => {
   const { inventories } = useInventories();
