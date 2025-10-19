@@ -1,13 +1,8 @@
-const ItemRow = ({ item, allKeys, checked, onToggle }) => {
+const ItemRow = ({ item, allKeys }) => {
   return (
     <tr>
       <td>
-        <input
-          type="checkbox"
-          className="form-check-input"
-          checked={checked}
-          onChange={onToggle}
-        ></input>
+        
       </td>
       {allKeys.map((key) => {
         const value = item[key] ?? item.fields?.[key] ?? "-";
