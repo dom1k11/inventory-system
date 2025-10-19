@@ -4,31 +4,54 @@ import Header from "../../../components/Header/Header";
 import Navbar from "../../../components/Navbar/Navbar";
 import ItemsTable from "../Items/ItemsTable/ItemsTable";
 import CustomIdForm from "../../../components/CustomIdForm/CustomIdForm";
-import { useInventories } from "../../../hooks/useInventories";
-import { useItems } from "../../../hooks/useItem";
-import "./InventoryDetailsPage.css";
 import CustomFieldsForm from "./components/CustomFieldsForm/CustomFieldsForm";
 import Toolbar from "./components/Toolbar/Toolbar";
+import { useInventories } from "../../../hooks/useInventories";
+import { useItems } from "../../../hooks/useItem";
+import { deleteItems } from "../../../api/items";
+import "./InventoryDetailsPage.css";
+
 const InventoryDetailsPage = () => {
   const { id } = useParams();
   const { inventories, loading } = useInventories();
-  const inventory = inventories.find((inv) => inv.id === Number(id));
-
-  const [activeTab, setActiveTab] = useState<"items" | "fields" | "customId">(
-    "items"
-  );
-
   const { items, loadItems } = useItems();
+
+  const [activeTab, setActiveTab] = useState<"items" | "fields" | "customId">("items");
+  const [selectedIds, setSelectedIds] = useState<number[]>([]);
+
+  const inventory = inventories.find((inv) => inv.id === Number(id));
   if (loading) return <p>Loading...</p>;
+
+  async function handleDeleteSelected() {
+    if (!selectedIds.length) return;
+    await deleteItems(Number(id), selectedIds);
+    await loadItems();
+    setSelectedIds([]);
+  }
+  //TODO MOVE TO SERVICES
 
   return (
     <>
       <Header title={inventory ? inventory.title : "Loading..."} />
       <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
-      <Toolbar loadItems={loadItems}></Toolbar>
-      {activeTab === "items" && <ItemsTable items={items} />}
+
+      {activeTab === "items" && (
+        <>
+          <Toolbar
+            loadItems={loadItems}
+            deleteSelected={handleDeleteSelected}
+            disableDelete={!selectedIds.length}
+          />
+          <ItemsTable
+            items={items}
+            selectedIds={selectedIds}
+            setSelectedIds={setSelectedIds}
+          />
+        </>
+      )}
+
       {activeTab === "customId" && <CustomIdForm />}
-      {activeTab === "fields" && <CustomFieldsForm></CustomFieldsForm>}
+      {activeTab === "fields" && <CustomFieldsForm />}
     </>
   );
 };

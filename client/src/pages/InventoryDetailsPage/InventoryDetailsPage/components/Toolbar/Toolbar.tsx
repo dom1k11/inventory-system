@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { handleAdd } from "../../../../../services/itemAddHandler";
 import "./Toolbar.css";
 
-const Toolbar = ({ loadItems }) => {
+const Toolbar = ({ loadItems, deleteSelected, disableDelete }) => {
   const { id } = useParams();
 
   return (
@@ -19,12 +19,10 @@ const Toolbar = ({ loadItems }) => {
           disabled={false}
         />
         <ToolbarButton
-          onClick={async () => {
-            await loadItems();
-          }}
+          onClick={deleteSelected}
           label="Delete items"
           variant="btn btn-danger"
-          disabled
+          disabled={disableDelete}
         />
       </div>
     </nav>
