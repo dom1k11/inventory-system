@@ -1,8 +1,10 @@
 import { Router } from 'express';
-import { handleAddItem } from '../controllers/ItemController';
+import { handleAddItem, handleDeleteItems } from '../controllers/ItemController';
 
 const router = Router();
 
 router.post('/item', handleAddItem);
+router.delete('/item/delete', handleDeleteItems);
+
 
 export default router;
