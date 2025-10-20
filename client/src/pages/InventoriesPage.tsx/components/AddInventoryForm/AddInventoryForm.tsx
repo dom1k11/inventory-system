@@ -59,7 +59,6 @@ const AddInventoryForm = ({ onCreated, onClose }) => {
           placeholder="List of Notebooks"
           value={formData.description}
           onChange={handleChange}
-          required
         ></textarea>
       </div>
       <div className="mb-3">
@@ -73,7 +72,6 @@ const AddInventoryForm = ({ onCreated, onClose }) => {
           placeholder="Equipment"
           value={formData.category}
           onChange={handleChange}
-          required
         />
       </div>
       <button

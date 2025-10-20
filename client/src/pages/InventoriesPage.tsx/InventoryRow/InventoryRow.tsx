@@ -10,7 +10,11 @@ const InventoryRow = ({ inventory }) => {
       >
         <td>
           {" "}
-          <input type="checkbox" className="form-check-input"></input>
+          <input
+            type="checkbox"
+            className="form-check-input"
+            onClick={(e) => e.stopPropagation()}
+          ></input>
         </td>
 
         <td>{inventory.title}</td>
