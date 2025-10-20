@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-const InventoryRow = ({ inventory }) => {
+import { toggleSelection } from "../../../helpers/selection";
+const InventoryRow = ({ inventory, selectedIds, setSelectedIds }) => {
   const navigate = useNavigate();
 
   return (
@@ -13,7 +14,11 @@ const InventoryRow = ({ inventory }) => {
           <input
             type="checkbox"
             className="form-check-input"
+            checked={selectedIds.includes(inventory.id)}
             onClick={(e) => e.stopPropagation()}
+            onChange={() =>
+              setSelectedIds(toggleSelection(selectedIds, inventory.id))
+            }
           ></input>
         </td>
 

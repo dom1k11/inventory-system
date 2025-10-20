@@ -28,3 +28,11 @@ export async function addInventory(title, description, category, created_by) {
     body: JSON.stringify({ title, description, category, created_by }),
   });
 }
+
+export async function deleteInventories(ids) {
+  return apiWrapper(`/inventories/delete`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ ids }),
+  });
+}

@@ -3,7 +3,7 @@ import ToolbarButton from "./ToolbarButton";
 import AddInventoryForm from "../AddInventoryForm/AddInventoryForm";
 import "./Toolbar.css";
 
-const Toolbar = ({ onCreated }) => {
+const Toolbar = ({ onCreated, deleteSelected, disableDelete }) => {
   const [showForm, setShowForm] = useState(false);
 
   return (
@@ -17,10 +17,10 @@ const Toolbar = ({ onCreated }) => {
             disabled={false}
           />
           <ToolbarButton
-            onClick={() => {}}
+            onClick={deleteSelected}
             label="Delete Inventory"
             variant="btn btn-danger"
-            disabled
+            disabled={disableDelete}
           />
         </div>
       </nav>
