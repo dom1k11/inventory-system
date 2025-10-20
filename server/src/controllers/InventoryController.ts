@@ -4,6 +4,7 @@ import { getItemFields } from '../queries/getItemFields';
 import { insertFieldTypes } from '../queries/insertFieldTypes';
 import { deleteFieldTypes } from '../queries/deleteFieldTypes';
 import { insertInventory } from '../queries/insertInventory';
+import { deleteInventories } from '../queries/deleteInventories';
 export const handleGetInventories = controller(async (req, res) => {
   const result = await getInventories();
   res.json(result.rows);
@@ -40,7 +41,7 @@ export const handleDeleteTypeFields = controller(async (req, res) => {
 
 export const handleAddInventory = controller(async (req, res) => {
   const { title, description, category, created_by } = req.body;
-  
+
   const inventory = await insertInventory(
     title,
     description,
@@ -48,4 +49,10 @@ export const handleAddInventory = controller(async (req, res) => {
     created_by,
   );
   res.json({ inventory });
+});
+
+export const handleDeleteInventories = controller(async (req, res) => {
+  const { ids } = req.body;
+  const deletedItems = await deleteInventories(ids);
+  res.json({ deletedItems });
 });
