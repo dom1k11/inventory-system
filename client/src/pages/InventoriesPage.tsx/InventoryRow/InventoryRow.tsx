@@ -12,9 +12,7 @@ const InventoryRow = ({ inventory }) => {
           {" "}
           <input type="checkbox" className="form-check-input"></input>
         </td>
-        <td>
-          <b> {inventory.id}</b>
-        </td>
+
         <td>{inventory.title}</td>
         <td>{inventory.description}</td>
         <td>{inventory.category}</td>

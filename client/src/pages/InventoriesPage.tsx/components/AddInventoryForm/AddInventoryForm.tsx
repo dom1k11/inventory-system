@@ -1,21 +1,17 @@
 import { useState } from "react";
 import { addInventory } from "../../../../api/inventories";
 
-const AddInventoryForm = () => {
+const AddInventoryForm = ({ onCreated, onClose }) => {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     category: "",
     created_by: 1,
   });
-  console.log(formData);
-
   const [isSubmitted, setIsSubmitted] = useState(false);
-
 
   function handleChange(e) {
     const { id, value } = e.target;
-
     setFormData((prev) => ({ ...prev, [id]: value }));
   }
 
@@ -27,13 +23,17 @@ const AddInventoryForm = () => {
       formData.category,
       formData.created_by
     );
+    if (onCreated) await onCreated();
     setIsSubmitted(true);
+    setTimeout(() => {
+      setIsSubmitted(false);
+      if (onClose) onClose();
+    }, 1000);
   }
 
   return (
     <form className="p-4 border rounded bg-light" onSubmit={handleSubmit}>
       <h4 className="mb-3">Add New Inventory</h4>
-
       <div className="mb-3">
         <label htmlFor="title" className="form-label">
           Title
@@ -45,9 +45,9 @@ const AddInventoryForm = () => {
           placeholder="Notebooks"
           value={formData.title}
           onChange={handleChange}
+          required
         />
       </div>
-
       <div className="mb-3">
         <label htmlFor="description" className="form-label">
           Description
@@ -59,9 +59,9 @@ const AddInventoryForm = () => {
           placeholder="List of Notebooks"
           value={formData.description}
           onChange={handleChange}
+          required
         ></textarea>
       </div>
-
       <div className="mb-3">
         <label htmlFor="category" className="form-label">
           Category
@@ -73,9 +73,9 @@ const AddInventoryForm = () => {
           placeholder="Equipment"
           value={formData.category}
           onChange={handleChange}
+          required
         />
       </div>
-
       <button
         type="submit"
         className={`btn w-100 ${
