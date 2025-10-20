@@ -1,16 +1,14 @@
-import { useInventories } from "../../hooks/useInventories";
 import Header from "../../components/Header/Header";
 import InventoriesTable from "./InventoryTable/InventoryTable";
 import Toolbar from "./components/Toolbar/Toolbar";
 
 const InventoriesPage = () => {
-  const { inventories, loadInventories } = useInventories();
 
   return (
     <>
       <Header title="Inventories" />
-      <Toolbar onCreated={loadInventories} />
-      <InventoriesTable inventories={inventories} />
+      <Toolbar  />
+      <InventoriesTable />
     </>
   );
 };
