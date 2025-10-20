@@ -10,6 +10,10 @@ const InventoryTable = () => {
       <table className="table table-hover">
         <thead>
           <tr>
+            <th>
+              {" "}
+              <input type="checkbox" className="form-check-input"></input>
+            </th>
             <th>#</th>
             <th>Title</th>
             <th>Description</th>

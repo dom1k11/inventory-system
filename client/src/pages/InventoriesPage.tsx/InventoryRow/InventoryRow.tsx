@@ -8,6 +8,8 @@ const InventoryRow = ({ inventory }) => {
         onClick={() => navigate(`/inventories/${inventory.id}`)}
         style={{ cursor: "pointer" }}
       >
+        <td>              <input type="checkbox" className="form-check-input"></input>
+</td>
         <td>
           <b> {inventory.id}</b>
         </td>

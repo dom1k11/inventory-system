@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Header from "../../components/Header/Header";
 import InventoriesTable from "./InventoryTable/InventoryTable";
+import Toolbar from "./components/Toolbar/Toolbar";
 
 const InventoriesPage = () => {
   const [loading, setLoading] = useState(true);
@@ -14,6 +15,7 @@ const InventoriesPage = () => {
   return (
     <>
       <Header title="Inventories" />
+      <Toolbar></Toolbar>
       <InventoriesTable></InventoriesTable>
     </>
   );
