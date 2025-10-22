@@ -18,6 +18,7 @@ const InventoriesPage = () => {
     setSelectedIds([]);
   }
 
+ 
   return (
     <>
       <Header title="Inventories" />

@@ -42,7 +42,7 @@ const AddInventoryForm = ({ onCreated, onClose }) => {
           type="text"
           className="form-control"
           id="title"
-          placeholder="Notebooks"
+          placeholder="(E.g. Notebooks)"
           value={formData.title}
           onChange={handleChange}
           required
@@ -56,7 +56,7 @@ const AddInventoryForm = ({ onCreated, onClose }) => {
           className="form-control"
           id="description"
           rows={3}
-          placeholder="List of Notebooks"
+          placeholder="E.g (List of Notebooks in school)"
           value={formData.description}
           onChange={handleChange}
         ></textarea>
@@ -69,7 +69,7 @@ const AddInventoryForm = ({ onCreated, onClose }) => {
           type="text"
           className="form-control"
           id="category"
-          placeholder="Equipment"
+          placeholder="E.g. (Equipment)"
           value={formData.category}
           onChange={handleChange}
         />

@@ -2,6 +2,12 @@ import "./InventoryTable.css";
 import InventoryRow from "../InventoryRow/InventoryRow";
 
 const InventoryTable = ({ inventories, selectedIds, setSelectedIds }) => {
+  if (!inventories?.length)
+    return (
+      <div className="text-center my-5">
+        <p className="text-muted mb-3">No inventories yet.</p>
+      </div>
+    );
   return (
     <div className="inventory-table-container">
       <table className="table table-hover">
