@@ -3,6 +3,7 @@ import { addItem } from '../services/addItem';
 import { initItemFields } from '../services/initItemFields';
 import { controller } from '../utils/controllerWrapper';
 import { insertFieldValues } from '../queries/insertFieldValues';
+import { getFieldTemplates } from '../queries/getFieldtemplates';
 export const handleAddItem = controller(async (req, res) => {
   const { inventoryId, createdBy, fields } = req.body;
   const item = await addItem(inventoryId, createdBy);
@@ -25,4 +26,10 @@ export const handleDeleteItems = controller(async (req, res) => {
   const { inventoryId, ids } = req.body;
   const deletedItems = await deleteItems(inventoryId, ids);
   res.json({ deletedItems });
+});
+
+export const handleGetFieldTemplates = controller(async (req, res) => {
+  const { inventoryId } = req.body;
+  const templates = await getFieldTemplates(inventoryId);
+  res.json(templates);
 });
