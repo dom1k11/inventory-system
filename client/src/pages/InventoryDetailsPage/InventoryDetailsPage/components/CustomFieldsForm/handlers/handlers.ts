@@ -2,7 +2,7 @@ export const handleAdd = (fields) => [
   ...fields,
   {
     id: Date.now(),
-    field_type: "single",
+    field_type: "text_single",
     title: "",
     description: "",
     is_visible: false,
