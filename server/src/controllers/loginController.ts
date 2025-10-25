@@ -12,10 +12,10 @@ export const handleLogin = controller(async (req, res) => {
     return;
   }
 
-//   if (!(await validatePassword(password, user.password_hash))) {
-//     res.status(401).json({ error: 'Invalid password' });
-//     return;
-//   }
+  if (!(await validatePassword(password, user.password_hash))) {
+    res.status(401).json({ error: 'Invalid password' });
+    return;
+  }
   if (user.is_blocked) {
     res.status(403).json({ error: 'User is blocked' });
     return;
