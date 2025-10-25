@@ -1,5 +1,4 @@
 import "./LoginForm.css";
-import { LoginFormProps } from "../../types/loginFormProps";
 
 const LoginForm = ({
   email,
@@ -9,7 +8,8 @@ const LoginForm = ({
   onChange,
   onSubmit,
   onGoToRegister,
-}: LoginFormProps) => {
+  onGuestLogin
+}) => {
   return (
     <div className="login-container">
       <h1>Login</h1>
@@ -41,6 +41,10 @@ const LoginForm = ({
 
       <button className="btn btn-light" onClick={onGoToRegister}>
         New here? Sign up
+      </button>
+
+      <button className="btn btn-light" onClick={onGuestLogin}>
+        Guest view
       </button>
 
       {error && <p style={{ color: "red" }}>{error}</p>}

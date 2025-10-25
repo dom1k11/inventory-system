@@ -13,8 +13,9 @@ export async function apiWrapper(path: string, options: RequestInit = {}) {
 
   if (res.status === 401 || res.status === 403) {
     localStorage.removeItem("token");
-    window.location.href = "/login";
+    // window.location.href = "/login";
     return Promise.reject("Unauthorized");
+    
   }
 
   if (!res.ok) {

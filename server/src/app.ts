@@ -5,18 +5,14 @@ import ItemRoute from './routes/item';
 import CustomIdRoute from './routes/customid';
 import authRoute from './routes/authentication';
 
-
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use('/', authRoute);
+
 app.use('/', InventoryRoute);
 app.use('/', ItemRoute);
 app.use('/', CustomIdRoute);
-app.use('/', authRoute);
-
-
-
-
 
 export default app;
