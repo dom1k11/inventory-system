@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../../components/LoginForm/LoginForm";
-
+import { login } from "../../api/login";
 const LoginPage = () => {
   const navigate = useNavigate();
+
 
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
@@ -18,6 +19,7 @@ const LoginPage = () => {
     setLoading(true);
 
     try {
+      await login(form.email, form.password) //it@school.local | hash_it
       navigate("/inventories");
     } catch (err: any) {
       setError(err.message);
