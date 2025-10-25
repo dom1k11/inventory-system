@@ -2,40 +2,52 @@ import { useEffect, useState } from "react";
 import { getFieldTemplates } from "../../../../../api/items";
 import { createItem } from "../../../../../api/items";
 import { useParams } from "react-router-dom";
-const AddItemForm = ({ onCreated, onClose }) => {
+const AddItemForm = ({ onCreated, onClose, loadItems }) => {
   const [formData, setFormData] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [fieldTemplates, setFieldTemplates] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
 
-  // function handleChange(e) {
-  //   const { id, value } = e.target;
-  //   setFormData((prev) => ({ ...prev, [id]: value }));
-  // }
+  function handleChange(e) {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
+    console.log(formData);
+  }
+
+  function getValues() {
+    const values = fieldTemplates.map((t) => ({
+      field_template_id: t.id,
+      value: formData[t.id] ?? "",
+    }));
+    return values;
+  }
 
   const { id } = useParams();
   useEffect(() => {
+    setLoading(true);
     async function loadTemplates() {
       const templates = await getFieldTemplates(Number(id));
       setFieldTemplates(templates);
+      setLoading(false);
     }
     loadTemplates();
   }, [id]);
 
   async function handleSubmit(e) {
-    // e.preventDefault();
-    // await createItem(1, 1, [
-    //   { field_template_id: 1, value: "aBlue" },
-    //   { field_template_id: 2, value: "11 kg" },
-    //   { field_template_id: 3, value: "Metal" },
-    //   { field_template_id: 4, value: "12 kg" },
-    //   { field_template_id: 5, value: "Metal" },
-    // ]);
-    // if (onCreated) await onCreated();
-    // setIsSubmitted(true);
-    // setTimeout(() => {
-    //   setIsSubmitted(false);
-    //   if (onClose) onClose();
-    // }, 1000);
+    e.preventDefault();
+    await createItem(
+      Number(id),
+      1,
+      //TODO: change created by
+      getValues()
+    );
+    if (onCreated) await onCreated();
+    loadItems()
+    setIsSubmitted(true);
+    setTimeout(() => {
+      setIsSubmitted(false);
+      if (onClose) onClose();
+    }, 1000);
   }
 
   function buildForm() {
@@ -54,6 +66,7 @@ const AddItemForm = ({ onCreated, onClose }) => {
                 name={template.title}
                 placeholder={template.title}
                 className="form-control"
+                onChange={handleChange}
               />
             </div>
           );
@@ -69,6 +82,7 @@ const AddItemForm = ({ onCreated, onClose }) => {
                 name={template.title}
                 placeholder={template.title}
                 className="form-control"
+                onChange={handleChange}
               />
             </div>
           );
@@ -85,6 +99,7 @@ const AddItemForm = ({ onCreated, onClose }) => {
                 name={template.title}
                 placeholder={template.title}
                 className="form-control"
+                onChange={handleChange}
               />
             </div>
           );
@@ -101,6 +116,7 @@ const AddItemForm = ({ onCreated, onClose }) => {
                 name={template.title}
                 placeholder={template.title}
                 className="form-control"
+                onChange={handleChange}
               />
             </div>
           );
@@ -113,6 +129,7 @@ const AddItemForm = ({ onCreated, onClose }) => {
                 type="checkbox"
                 name={template.title}
                 className="form-check-input"
+                onChange={handleChange}
               />
               <label htmlFor={template.id} className="form-check-label ms-2">
                 {template.title}
@@ -126,6 +143,9 @@ const AddItemForm = ({ onCreated, onClose }) => {
     });
   }
 
+  if (loading) {
+    return <p>Loading fields...</p>;
+  }
   return (
     <>
       <form className="p-4 border rounded bg-light" onSubmit={handleSubmit}>

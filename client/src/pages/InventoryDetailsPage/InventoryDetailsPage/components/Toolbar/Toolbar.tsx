@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import "./Toolbar.css";
 import AddItemForm from "../AddItemForm/AddItemForm";
 
-const Toolbar = ({ onCreated, deleteSelected, disableDelete }) => {
+const Toolbar = ({ onCreated, deleteSelected, disableDelete, loadItems }) => {
   const [showForm, setShowForm] = useState(false);
 
   const { id } = useParams();
@@ -58,6 +58,7 @@ const Toolbar = ({ onCreated, deleteSelected, disableDelete }) => {
                   <AddItemForm
                     onCreated={onCreated}
                     onClose={() => setShowForm(false)}
+                    loadItems={loadItems}
                   />
                 </div>
               </div>
