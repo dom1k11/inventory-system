@@ -22,10 +22,10 @@ export async function deleteCustomField(inventoryId, ids) {
   });
 }
 
-export async function addInventory(title, description, category, created_by) {
+export async function addInventory(title, description, category) {
   return apiWrapper(`/inventories/add`, {
     method: "POST",
-    body: JSON.stringify({ title, description, category, created_by }),
+    body: JSON.stringify({ title, description, category }),
   });
 }
 

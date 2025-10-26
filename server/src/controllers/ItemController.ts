@@ -5,7 +5,9 @@ import { controller } from '../utils/controllerWrapper';
 import { insertFieldValues } from '../queries/insertFieldValues';
 import { getFieldTemplates } from '../queries/getFieldtemplates';
 export const handleAddItem = controller(async (req, res) => {
-  const { inventoryId, createdBy, fields } = req.body;
+  const { inventoryId, fields } = req.body;
+  const createdBy = req.user!.id;
+
   const item = await addItem(inventoryId, createdBy);
 
   if (fields && fields.length > 0) {

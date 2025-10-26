@@ -6,7 +6,6 @@ const AddInventoryForm = ({ onCreated, onClose }) => {
     title: "",
     description: "",
     category: "",
-    created_by: 1,
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -21,7 +20,6 @@ const AddInventoryForm = ({ onCreated, onClose }) => {
       formData.title,
       formData.description,
       formData.category,
-      formData.created_by
     );
     if (onCreated) await onCreated();
     setIsSubmitted(true);

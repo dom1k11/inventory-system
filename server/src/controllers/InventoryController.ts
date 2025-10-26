@@ -25,7 +25,6 @@ export const handleGetInventoryFields = controller(async (req, res) => {
 });
 export const handleChangeTypeFields = controller(async (req, res) => {
   const { inventoryId, fields } = req.body;
-  // const deletedFields = await deleteFieldTypes(inventoryId);
   const newFields = await insertFieldTypes(inventoryId, fields);
 
   res.json({ newFields });
@@ -33,21 +32,20 @@ export const handleChangeTypeFields = controller(async (req, res) => {
 
 export const handleDeleteTypeFields = controller(async (req, res) => {
   const { inventoryId, ids } = req.body;
-
   const deletedFields = await deleteFieldTypes(inventoryId, ids);
-
   res.json({ deletedFields });
 });
 
 export const handleAddInventory = controller(async (req, res) => {
-  const { title, description, category, created_by } = req.body;
-
+  const { title, description, category } = req.body;
+  const created_by = req.user!.id;
   const inventory = await insertInventory(
     title,
     description,
     category,
     created_by,
   );
+  console.log(req);
   res.json({ inventory });
 });
 

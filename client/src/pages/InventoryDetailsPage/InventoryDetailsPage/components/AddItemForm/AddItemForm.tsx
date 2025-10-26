@@ -38,8 +38,6 @@ const AddItemForm = ({ onCreated, onClose, loadItems }) => {
     e.preventDefault();
     await createItem(
       Number(id),
-      1,
-      //TODO: change created by
       getValues()
     );
     if (onCreated) await onCreated();

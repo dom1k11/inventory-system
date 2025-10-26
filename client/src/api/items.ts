@@ -4,10 +4,10 @@ export function fetchItems(id: number) {
   return apiWrapper(`/inventories/${id}/items`);
 }
 
-export async function createItem(inventoryId, createdBy, fields) {
+export async function createItem(inventoryId, fields) {
   return apiWrapper(`/item`, {
     method: "POST",
-    body: JSON.stringify({ inventoryId, createdBy, fields }),
+    body: JSON.stringify({ inventoryId, fields }),
   });
 }
 
