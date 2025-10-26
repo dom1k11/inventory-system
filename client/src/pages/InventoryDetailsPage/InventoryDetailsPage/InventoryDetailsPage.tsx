@@ -34,7 +34,8 @@ const InventoryDetailsPage = () => {
   return (
     <>
       <Header title={inventory ? inventory.title : "Loading..."} />
-      <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
+      <Navbar activeTab={activeTab} setActiveTab={setActiveTab}             ownerId={inventory.created_by}
+ />
 
       {activeTab === "items" && (
         <>

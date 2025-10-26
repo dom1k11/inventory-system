@@ -1,9 +1,9 @@
 import NavbarButton from "./NavbarButton";
 import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
-import { isLoggedIn } from "../../helpers/auth";
+import { isLoggedIn, isOwner } from "../../helpers/auth";
 
-const Navbar = ({ activeTab, setActiveTab }) => {
+const Navbar = ({ activeTab, setActiveTab,ownerId }) => {
   const navigate = useNavigate();
 
   return (
@@ -26,7 +26,7 @@ const Navbar = ({ activeTab, setActiveTab }) => {
               ? "btn btn-primary"
               : "btn btn-outline-primary"
           }
-          disabled={!isLoggedIn()}
+          disabled={!isOwner(ownerId) && !isLoggedIn()}
         />
         <NavbarButton
           onClick={() => setActiveTab("customId")}
@@ -36,7 +36,7 @@ const Navbar = ({ activeTab, setActiveTab }) => {
               ? "btn btn-primary"
               : "btn btn-outline-primary"
           }
-          disabled={!isLoggedIn()}
+          disabled={!isOwner(ownerId) && !isLoggedIn()}
         />
       </div>
 

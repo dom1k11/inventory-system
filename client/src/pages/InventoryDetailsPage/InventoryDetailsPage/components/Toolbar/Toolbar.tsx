@@ -26,7 +26,8 @@ const Toolbar = ({
             }}
             label="New Item"
             variant="btn btn-success"
-            disabled={false}
+            disabled={!isOwner(ownerId)}
+
           />
           <ToolbarButton
             onClick={deleteSelected}
