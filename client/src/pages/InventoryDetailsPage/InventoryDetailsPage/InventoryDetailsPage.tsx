@@ -22,6 +22,7 @@ const InventoryDetailsPage = () => {
   const inventory = inventories.find((inv) => inv.id === Number(id));
   if (loading) return <p>Loading...</p>;
 
+  console.log("inventory owner", inventory.created_by)
   async function handleDeleteSelected() {
     if (!selectedIds.length) return;
     await deleteItems(Number(id), selectedIds);
@@ -41,6 +42,8 @@ const InventoryDetailsPage = () => {
             loadItems={loadItems}
             deleteSelected={handleDeleteSelected}
             disableDelete={!selectedIds.length}
+            ownerId={inventory.created_by}
+
           />
           <ItemsTable
             items={items}

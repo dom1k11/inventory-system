@@ -1,14 +1,21 @@
 import ToolbarButton from "./ToolbarButton";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
 import "./Toolbar.css";
 import AddItemForm from "../AddItemForm/AddItemForm";
 import { isLoggedIn } from "../../../../../helpers/auth";
-const Toolbar = ({ onCreated, deleteSelected, disableDelete, loadItems }) => {
+import { isOwner } from "../../../../../helpers/auth";
+const Toolbar = ({
+  onCreated,
+  deleteSelected,
+  disableDelete,
+  loadItems,
+  ownerId,
+}) => {
   const [showForm, setShowForm] = useState(false);
 
-  const { id } = useParams();
   if (!isLoggedIn()) return null;
+  if (!isOwner(ownerId)) return null;
+
   return (
     <>
       <nav className="toolbar-container">
@@ -16,8 +23,6 @@ const Toolbar = ({ onCreated, deleteSelected, disableDelete, loadItems }) => {
           <ToolbarButton
             onClick={async () => {
               setShowForm(true);
-              // await handleAdd(Number(id));
-              // await loadItems();
             }}
             label="New Item"
             variant="btn btn-success"
