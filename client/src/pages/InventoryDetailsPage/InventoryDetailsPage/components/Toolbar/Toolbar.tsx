@@ -3,12 +3,12 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import "./Toolbar.css";
 import AddItemForm from "../AddItemForm/AddItemForm";
-
+import { isLoggedIn } from "../../../../../helpers/auth";
 const Toolbar = ({ onCreated, deleteSelected, disableDelete, loadItems }) => {
   const [showForm, setShowForm] = useState(false);
 
   const { id } = useParams();
-
+  if (!isLoggedIn()) return null;
   return (
     <>
       <nav className="toolbar-container">

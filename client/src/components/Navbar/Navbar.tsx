@@ -1,6 +1,7 @@
 import NavbarButton from "./NavbarButton";
 import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
+import { isLoggedIn } from "../../helpers/auth";
 
 const Navbar = ({ activeTab, setActiveTab }) => {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ const Navbar = ({ activeTab, setActiveTab }) => {
               ? "btn btn-primary"
               : "btn btn-outline-primary"
           }
+          disabled={!isLoggedIn()}
         />
         <NavbarButton
           onClick={() => setActiveTab("customId")}
@@ -34,18 +36,14 @@ const Navbar = ({ activeTab, setActiveTab }) => {
               ? "btn btn-primary"
               : "btn btn-outline-primary"
           }
+          disabled={!isLoggedIn()}
         />
       </div>
 
       <div className="btn-toolbar-right">
-        <NavbarButton
-          onClick={() => {
-            localStorage.removeItem("token");
-            navigate("/login");
-          }}
-          label="Log out"
-          variant="btn btn-outline-secondary"
-        />
+        {/* <NavbarButton
+         
+        /> */}
       </div>
     </nav>
   );

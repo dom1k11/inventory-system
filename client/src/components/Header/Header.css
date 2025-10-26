@@ -1,13 +1,11 @@
 .app-header {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   padding: 1rem;
   background-color: #f8f9fa;
   border-bottom: 1px solid #dee2e6;
   height: 84px;
-  gap: 1rem;
-  position: relative; 
 }
 
 .app-header h1 {
@@ -15,11 +13,10 @@
   font-size: 2rem;
   font-weight: 600;
   color: #212529;
-  text-align: center;
   flex: 1;
+  text-align: center; 
 }
 
-.app-header .btn {
-  position: absolute;
-  left: 1rem;
+.app-header button {
+  position: static;
 }

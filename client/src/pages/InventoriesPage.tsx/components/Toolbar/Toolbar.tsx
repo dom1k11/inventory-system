@@ -2,9 +2,11 @@ import { useState } from "react";
 import ToolbarButton from "./ToolbarButton";
 import AddInventoryForm from "../AddInventoryForm/AddInventoryForm";
 import "./Toolbar.css";
+import { isLoggedIn } from "../../../../helpers/auth";
 
 const Toolbar = ({ onCreated, deleteSelected, disableDelete }) => {
   const [showForm, setShowForm] = useState(false);
+  if (!isLoggedIn()) return null;
 
   return (
     <>
@@ -16,6 +18,7 @@ const Toolbar = ({ onCreated, deleteSelected, disableDelete }) => {
             variant="btn btn-success"
             disabled={false}
           />
+
           <ToolbarButton
             onClick={deleteSelected}
             label="Delete Inventory"

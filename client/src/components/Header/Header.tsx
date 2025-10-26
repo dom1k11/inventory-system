@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import "./Header.css";
-
 const Header = ({ title = "" }) => {
   const navigate = useNavigate();
 
@@ -13,6 +12,16 @@ const Header = ({ title = "" }) => {
         Home
       </button>
       <h1>{title}</h1>
+
+      <button
+        className="btn btn-outline-secondary"
+        onClick={() => {
+          localStorage.removeItem("token");
+          navigate("/login");
+        }}
+      >
+        Log Out
+      </button>
     </header>
   );
 };
