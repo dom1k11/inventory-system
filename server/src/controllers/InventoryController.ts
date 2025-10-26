@@ -39,13 +39,13 @@ export const handleDeleteTypeFields = controller(async (req, res) => {
 export const handleAddInventory = controller(async (req, res) => {
   const { title, description, category } = req.body;
   const created_by = req.user!.id;
+
   const inventory = await insertInventory(
     title,
     description,
     category,
     created_by,
   );
-  console.log(req);
   res.json({ inventory });
 });
 

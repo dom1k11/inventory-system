@@ -10,7 +10,7 @@ export async function canEditInventory(req, res, next) {
   if (!inventory) {
     return res.status(404).json({ error: 'Inventory not found' });
   }
-  if (req.user.decoded.role === 'admin') return next();
+  if (req.user.role === 'admin') return next();
   if (inventory.created_by === userId) return next();
 
   const access = await prisma.inventory_access.findFirst({
@@ -21,3 +21,5 @@ export async function canEditInventory(req, res, next) {
 
   return res.status(403).json({ error: 'Access denied' });
 }
+
+
