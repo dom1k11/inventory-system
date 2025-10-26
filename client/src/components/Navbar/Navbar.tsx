@@ -1,11 +1,8 @@
 import NavbarButton from "./NavbarButton";
-import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import { isLoggedIn, isOwner } from "../../helpers/auth";
 
-const Navbar = ({ activeTab, setActiveTab,ownerId }) => {
-  const navigate = useNavigate();
-
+const Navbar = ({ activeTab, setActiveTab, ownerId }) => {
   return (
     <nav className="navbar-container">
       <div className="btn-toolbar-left">
@@ -38,12 +35,6 @@ const Navbar = ({ activeTab, setActiveTab,ownerId }) => {
           }
           disabled={!isOwner(ownerId) && !isLoggedIn()}
         />
-      </div>
-
-      <div className="btn-toolbar-right">
-        {/* <NavbarButton
-         
-        /> */}
       </div>
     </nav>
   );

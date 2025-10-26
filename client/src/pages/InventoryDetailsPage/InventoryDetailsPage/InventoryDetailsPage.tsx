@@ -16,13 +16,15 @@ const InventoryDetailsPage = () => {
   const { inventories, loading } = useInventories();
   const { items, loadItems } = useItems();
 
-  const [activeTab, setActiveTab] = useState<"items" | "fields" | "customId">("items");
+  const [activeTab, setActiveTab] = useState<"items" | "fields" | "customId">(
+    "items"
+  );
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
 
   const inventory = inventories.find((inv) => inv.id === Number(id));
   if (loading) return <p>Loading...</p>;
 
-  console.log("inventory owner", inventory.created_by)
+  console.log("inventory owner", inventory.created_by);
   async function handleDeleteSelected() {
     if (!selectedIds.length) return;
     await deleteItems(Number(id), selectedIds);
@@ -34,8 +36,11 @@ const InventoryDetailsPage = () => {
   return (
     <>
       <Header title={inventory ? inventory.title : "Loading..."} />
-      <Navbar activeTab={activeTab} setActiveTab={setActiveTab}             ownerId={inventory.created_by}
- />
+      <Navbar
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        ownerId={inventory.created_by}
+      />
 
       {activeTab === "items" && (
         <>
@@ -44,7 +49,6 @@ const InventoryDetailsPage = () => {
             deleteSelected={handleDeleteSelected}
             disableDelete={!selectedIds.length}
             ownerId={inventory.created_by}
-
           />
           <ItemsTable
             items={items}
