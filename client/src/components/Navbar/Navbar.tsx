@@ -23,7 +23,7 @@ const Navbar = ({ activeTab, setActiveTab, ownerId }) => {
               ? "btn btn-primary"
               : "btn btn-outline-primary"
           }
-          disabled={!isOwner(ownerId) && !isLoggedIn()}
+          disabled={!isOwner(ownerId)}
         />
         <NavbarButton
           onClick={() => setActiveTab("customId")}
@@ -33,7 +33,7 @@ const Navbar = ({ activeTab, setActiveTab, ownerId }) => {
               ? "btn btn-primary"
               : "btn btn-outline-primary"
           }
-          disabled={!isOwner(ownerId) && !isLoggedIn()}
+          disabled={!isOwner(ownerId)}
         />
       </div>
     </nav>
