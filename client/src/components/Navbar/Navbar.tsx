@@ -1,6 +1,6 @@
 import NavbarButton from "./NavbarButton";
 import "./Navbar.css";
-import { isLoggedIn, isOwner } from "../../helpers/auth";
+import { isOwner } from "../../helpers/auth";
 
 const Navbar = ({ activeTab, setActiveTab, ownerId }) => {
   return (
@@ -30,6 +30,16 @@ const Navbar = ({ activeTab, setActiveTab, ownerId }) => {
           label="Custom ID"
           variant={
             activeTab === "customId"
+              ? "btn btn-primary"
+              : "btn btn-outline-primary"
+          }
+          disabled={!isOwner(ownerId)}
+        />
+        <NavbarButton
+          onClick={() => setActiveTab("access")}
+          label="Access"
+          variant={
+            activeTab === "access"
               ? "btn btn-primary"
               : "btn btn-outline-primary"
           }

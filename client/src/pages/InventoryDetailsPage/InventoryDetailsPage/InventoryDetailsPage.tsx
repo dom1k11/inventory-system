@@ -10,15 +10,16 @@ import { useInventories } from "../../../hooks/useInventories";
 import { useItems } from "../../../hooks/useItem";
 import { deleteItems } from "../../../api/items";
 import "./InventoryDetailsPage.css";
+import AccessForm from "./components/AccessForm/AccessForm";
 
 const InventoryDetailsPage = () => {
   const { id } = useParams();
   const { inventories, loading } = useInventories();
   const { items, loadItems } = useItems();
 
-  const [activeTab, setActiveTab] = useState<"items" | "fields" | "customId">(
-    "items"
-  );
+  const [activeTab, setActiveTab] = useState<
+    "items" | "fields" | "customId" | "access"
+  >("items");
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
 
   const inventory = inventories.find((inv) => inv.id === Number(id));
@@ -61,6 +62,7 @@ const InventoryDetailsPage = () => {
 
       {activeTab === "customId" && <CustomIdForm />}
       {activeTab === "fields" && <CustomFieldsForm />}
+      {activeTab === "access" && <AccessForm />}
     </>
   );
 };
