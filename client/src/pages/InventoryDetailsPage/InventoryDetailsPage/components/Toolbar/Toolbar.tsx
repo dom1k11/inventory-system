@@ -26,7 +26,7 @@ const Toolbar = ({
             }}
             label="New Item"
             variant="btn btn-success"
-            disabled={isOwner(ownerId)}
+            disabled={!isOwner(ownerId)}
             
           />
           <ToolbarButton
