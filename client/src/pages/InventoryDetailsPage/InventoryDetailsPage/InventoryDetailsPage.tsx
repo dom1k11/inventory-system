@@ -45,6 +45,7 @@ const InventoryDetailsPage = () => {
       {activeTab === "items" && (
         <>
           <Toolbar
+            onCreated={loadItems}
             loadItems={loadItems}
             deleteSelected={handleDeleteSelected}
             disableDelete={!selectedIds.length}

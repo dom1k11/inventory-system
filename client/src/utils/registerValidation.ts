@@ -8,7 +8,7 @@ export function validateRegistrationForm(
   email: string,
   password: string
 ) {
-  const errors = {};
+  const errors: Record<string, string> = {};
 
   if (!name.trim()) errors.name = "Name is required";
   if (!validateEmail(email)) errors.email = "Invalid email address";
