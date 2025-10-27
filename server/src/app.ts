@@ -4,7 +4,7 @@ import InventoryRoute from './routes/inventory';
 import ItemRoute from './routes/item';
 import CustomIdRoute from './routes/customid';
 import authRoute from './routes/authentication';
-
+import AccessRoute from './routes/access'
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -14,5 +14,6 @@ app.use('/', authRoute);
 app.use('/', InventoryRoute);
 app.use('/', ItemRoute);
 app.use('/', CustomIdRoute);
+app.use('/', AccessRoute)
 
 export default app;
