@@ -37,6 +37,8 @@ const AccessForm = () => {
     );
     console.log("selectedAccess:", selectedAccess);
     console.log("Grant access:", newAccess);
+    console.log({ id, selectedUserId, selectedAccess });
+
   };
 
   return (
