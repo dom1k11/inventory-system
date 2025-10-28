@@ -12,3 +12,10 @@ export function fetchAccessUsers(inventoryId) {
     body: JSON.stringify({ inventoryId }),
   });
 }
+
+export async function removeAccess(inventoryId, userIds) {
+  return apiWrapper(`/access/remove`, {
+    method: "DELETE",
+    body: JSON.stringify({ inventoryId, userIds }),
+  });
+}

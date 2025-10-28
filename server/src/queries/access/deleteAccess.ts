@@ -1,10 +1,10 @@
 import prisma from '../../prisma';
 
-export async function deleteAccess(inventoryId, userId) {
+export async function removeAccess(inventoryId, userIds) {
   return prisma.inventory_access.deleteMany({
     where: {
       inventory_id: inventoryId,
-      user_id: userId,
+      user_id: { in: userIds }
     },
   });
 }

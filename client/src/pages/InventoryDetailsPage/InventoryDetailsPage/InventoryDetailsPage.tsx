@@ -12,6 +12,8 @@ import { deleteItems } from "../../../api/items";
 import "./InventoryDetailsPage.css";
 import AccessForm from "./components/AccessForm/AccessForm";
 
+//TODO REFACTOR! IMPORTANT!
+
 const InventoryDetailsPage = () => {
   const { id } = useParams();
   const { inventories, loading } = useInventories();
@@ -62,7 +64,7 @@ const InventoryDetailsPage = () => {
 
       {activeTab === "customId" && <CustomIdForm />}
       {activeTab === "fields" && <CustomFieldsForm />}
-      {activeTab === "access" && <AccessForm />}
+      {activeTab === "access" && <AccessForm ownerId={inventory.created_by} />}
     </>
   );
 };
