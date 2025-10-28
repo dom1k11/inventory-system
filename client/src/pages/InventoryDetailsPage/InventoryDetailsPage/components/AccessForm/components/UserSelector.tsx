@@ -1,12 +1,13 @@
-const UserSelector = () => {
+const UserSelector = ({ users, onChange }) => {
   return (
-    <>
-      {" "}
-      <select className="form-select">
-        <option>User1</option>
-        <option>User 1</option>
-      </select>
-    </>
+    <select className="form-select" onChange={(e) => onChange(e.target.value)}>
+      <option value="">Select user</option>
+      {users.map((u) => (
+        <option key={u.id} value={u.id}>
+          {u.name}
+        </option>
+      ))}
+    </select>
   );
 };
 

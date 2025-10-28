@@ -1,11 +1,10 @@
 import { useState } from "react";
-
-const SubmitButton = () => {
+const SubmitButton = ({ onClick }) => {
   const [isSaved, setIsSaved] = useState(false);
 
-  const handleClick = async () => {
+  const handleClick = async (e) => {
+    await onClick(e);
     setIsSaved(true);
-
     setTimeout(() => setIsSaved(false), 2000);
   };
 

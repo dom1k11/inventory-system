@@ -1,12 +1,13 @@
-const AccessSelector = () => {
+const AccessSelector = ({ onChange }) => {
   return (
-    <>
-      {" "}
-      <select className="form-control">
-        <option>Read Only</option>
-        <option>Write</option>
-      </select>
-    </>
+    <select
+      className="form-control"
+      defaultValue="false"
+      onChange={(e) => onChange(e.target.value === "true")}
+    >
+      <option value="false">Read Only</option>
+      <option value="true">Write Access</option>
+    </select>
   );
 };
 
