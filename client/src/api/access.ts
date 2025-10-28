@@ -5,3 +5,10 @@ export async function grantAccess(inventoryId, userId, canEdit) {
     body: JSON.stringify({ inventoryId, userId, canEdit }),
   });
 }
+
+export function fetchAccessUsers(inventoryId) {
+  return apiWrapper(`/access`, {
+    method: "POST",
+    body: JSON.stringify({ inventoryId }),
+  });
+}
