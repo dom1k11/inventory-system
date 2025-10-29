@@ -1,6 +1,6 @@
-import { deleteCustomIdFields } from '../queries/deleteCustomIdFields';
-import { insertCustomIdFields } from '../queries/insertCustomIdFields';
-import { getCustomIdFormat } from '../queries/getCustomIdFormat';
+import { deleteCustomIdFields } from '../queries/inventories/customId/deleteCustomIdFields';
+import { insertCustomIdFields } from '../queries//inventories/customId/insertCustomIdFields';
+import { getCustomIdFormat } from '../queries/inventories/customId/getCustomIdFormat';
 import { controller } from '../utils/controllerWrapper';
 export const handleChangeCustomIdFields = controller(async (req, res) => {
   const { inventoryId, fields } = req.body;

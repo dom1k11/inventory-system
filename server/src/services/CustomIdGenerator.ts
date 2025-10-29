@@ -1,6 +1,6 @@
 import { randomUUID } from 'crypto';
 import { getDate } from '../utils/getTodayDate';
-import { getCustomIdFormat } from '../queries/getCustomIdFormat';
+import { getCustomIdFormat } from '../queries/inventories/customId/getCustomIdFormat';
 
 function getRandomInt(max: number) {
   return Math.floor(Math.random() * max);
