@@ -36,7 +36,7 @@ const RegisterPage = () => {
 
       console.log("redirecting")
       setSuccess(
-        "✅ Registration successful! Check your email and verify to log in!"
+        "✅ Registration successful! You can log in now! Redirecting..."
       );
       console.log("redirecting finished!");
 

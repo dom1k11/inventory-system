@@ -12,7 +12,7 @@ import { deleteItems } from "../../../api/items";
 import "./InventoryDetailsPage.css";
 import AccessForm from "./components/AccessForm/AccessForm";
 
-//TODO REFACTOR! IMPORTANT!
+//TODO REFACTOR! IMPORTANT! MAKE ONE SOURCE OF TRUTH
 
 const InventoryDetailsPage = () => {
   const { id } = useParams();

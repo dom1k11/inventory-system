@@ -1,8 +1,29 @@
 nav.toolbar-container {
-  
-  padding: 0.5rem 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(236, 232, 232);
+  padding: 0.5rem 1rem;
+  background: #ece8e8;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.btn-toolbar-left {
+  display: flex;
+  gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  nav.toolbar-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-toolbar-left {
+    flex-direction: column;
+  }
+
+  .btn-toolbar-left .btn {
+    width: 100%;
+  }
 }

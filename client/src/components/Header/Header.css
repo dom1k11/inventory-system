@@ -3,20 +3,30 @@
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
-  background-color: #f8f9fa;
+  background: #f8f9fa;
   border-bottom: 1px solid #dee2e6;
-  height: 84px;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .app-header h1 {
-  margin: 0;
-  font-size: 2rem;
-  font-weight: 600;
-  color: #212529;
   flex: 1;
-  text-align: center; 
+  text-align: center;
+  font-size: 1.6rem;
+  margin: 0;
 }
 
-.app-header button {
-  position: static;
+@media (max-width: 768px) {
+  .app-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .app-header h1 {
+    font-size: 1.3rem;
+  }
+
+  .app-header button {
+    width: 100%;
+  }
 }

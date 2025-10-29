@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import Header from "../../components/Header/Header";
 import InventoriesTable from "./InventoryTable/InventoryTable";
 import Toolbar from "./components/Toolbar/Toolbar";
@@ -9,7 +8,6 @@ import { deleteInventories } from "../../api/inventories";
 const InventoriesPage = () => {
   const { inventories, loadInventories } = useInventories();
   const [selectedIds, setSelectedIds] = useState([]);
-  console.log(selectedIds);
 
   async function handleDeleteSelected() {
     if (!selectedIds.length) return;
@@ -18,7 +16,6 @@ const InventoriesPage = () => {
     setSelectedIds([]);
   }
 
- 
   return (
     <>
       <Header title="Inventories" />
