@@ -1,4 +1,4 @@
-import prisma from '../prisma';
+import prisma from '../../../prisma';
 
 export async function deleteFieldTypes(inventoryId: number, ids: number[]) {
   return prisma.field_templates.deleteMany({

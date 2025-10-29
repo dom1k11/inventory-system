@@ -1,10 +1,10 @@
 import { controller } from '../utils/controllerWrapper';
-import { getInventories, getInventoryItems } from '../queries/inventory';
-import { getItemFields } from '../queries/getItemFields';
-import { insertFieldTypes } from '../queries/insertFieldTypes';
-import { deleteFieldTypes } from '../queries/deleteFieldTypes';
-import { insertInventory } from '../queries/insertInventory';
-import { deleteInventories } from '../queries/deleteInventories';
+import { getInventories, getInventoryItems } from '../queries/inventories/inventory';
+import { getItemFields } from '../queries/items/getItemFields';
+import { insertFieldTypes } from '../queries/inventories/customFields/insertFieldTypes';
+import { deleteFieldTypes } from '../queries/inventories/customFields/deleteFieldTypes';
+import { insertInventory } from '../queries/inventories/insertInventory';
+import { deleteInventories } from '../queries/inventories/deleteInventories';
 export const handleGetInventories = controller(async (req, res) => {
   const result = await getInventories();
   res.json(result.rows);

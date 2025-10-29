@@ -1,4 +1,4 @@
-import prisma from '../prisma';
+import prisma from '../../prisma';
 
 export async function deleteInventories(ids: number[]) {
   if (!ids.length) return { count: 0 };

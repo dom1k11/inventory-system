@@ -1,4 +1,4 @@
-import prisma from '../prisma';
+import prisma from '../../../prisma';
 
 export async function getCustomIdFormat(inventoryId: number) {
   const fields = await prisma.inventory_custom_fields.findMany({

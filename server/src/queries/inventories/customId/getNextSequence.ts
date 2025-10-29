@@ -1,4 +1,4 @@
-import prisma from '../prisma';
+import prisma from '../../../prisma';
 
 export async function getNextSequence(inventoryId: number) {
   const result = await prisma.items.aggregate({

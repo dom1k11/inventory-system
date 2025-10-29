@@ -1,9 +1,9 @@
-import { deleteItems } from '../queries/deleteItems';
+import { deleteItems } from '../queries/items/deleteItems';
 import { addItem } from '../services/addItem';
 import { initItemFields } from '../services/initItemFields';
 import { controller } from '../utils/controllerWrapper';
-import { insertFieldValues } from '../queries/insertFieldValues';
-import { getFieldTemplates } from '../queries/getFieldtemplates';
+import { insertFieldValues } from '../queries/inventories/customFields/insertFieldValues';
+import { getFieldTemplates } from '../queries/inventories/customFields/getFieldtemplates';
 export const handleAddItem = controller(async (req, res) => {
   const { inventoryId, fields } = req.body;
   const createdBy = (req as any).user.id;

@@ -1,5 +1,5 @@
-import { getNextSequence } from '../queries/getNextSequence';
-import { insertItem } from '../queries/insertItem';
+import { getNextSequence } from '../queries/inventories/customId/getNextSequence';
+import { insertItem } from '../queries/items/insertItem';
 import { generateCustomId } from './CustomIdGenerator';
 
 export async function addItem(inventoryId: number, createdBy: number) {

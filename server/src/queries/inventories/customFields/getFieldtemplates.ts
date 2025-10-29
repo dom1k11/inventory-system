@@ -1,4 +1,4 @@
-import prisma from '../prisma';
+import prisma from '../../../prisma';
 
 export async function getFieldTemplates(inventoryId: number) {
   const templates = await prisma.field_templates.findMany({
