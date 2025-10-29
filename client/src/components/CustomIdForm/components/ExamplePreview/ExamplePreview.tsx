@@ -1,4 +1,3 @@
-
 const ExamplePreview = ({ fields }) => {
   const example = fields
     .map((field) => {
@@ -38,8 +37,7 @@ const ExamplePreview = ({ fields }) => {
   return (
     <>
       <h2>
-        <strong>Example:</strong>{" "}
-        <span className="text-secondary">{example}</span>
+        <strong>Example:</strong> <span className="text-secondary">{example}</span>
       </h2>
       {/* TODO IMPORTANT: CREATE ENDPOINT TO GENERATE CUSTOM_ID PREVIEW ON SERVER */}
     </>

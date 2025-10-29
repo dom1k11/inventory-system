@@ -1,9 +1,7 @@
 const ItemRow = ({ item, allKeys }) => {
   return (
     <tr>
-      <td>
-        
-      </td>
+      <td></td>
       {allKeys.map((key) => {
         const value = item[key] ?? item.fields?.[key] ?? "-";
         return (

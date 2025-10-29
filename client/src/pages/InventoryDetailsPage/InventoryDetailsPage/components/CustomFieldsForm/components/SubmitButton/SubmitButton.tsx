@@ -18,9 +18,7 @@ const SubmitButton = ({ id, fields }) => {
     <div className="mt-3 d-flex gap-2">
       <button
         type="button"
-        className={`btn btn-lg w-50 mx-auto ${
-          isSaved ? "btn-outline-success" : "btn-success"
-        }`}
+        className={`btn btn-lg w-50 mx-auto ${isSaved ? "btn-outline-success" : "btn-success"}`}
         onClick={handleClick}
         disabled={isSaved}
       >

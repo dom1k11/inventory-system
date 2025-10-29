@@ -1,10 +1,6 @@
 import { API_URL } from "../constants/api_url";
 
-export async function register(
-  name,
-  email,
-  password
-){
+export async function register(name, email, password) {
   const res = await fetch(`${API_URL}/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

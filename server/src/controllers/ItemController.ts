@@ -8,7 +8,6 @@ export const handleAddItem = controller(async (req, res) => {
   const { inventoryId, fields } = req.body;
   const createdBy = (req as any).user.id;
 
-
   const item = await addItem(inventoryId, createdBy);
 
   if (fields && fields.length > 0) {

@@ -9,7 +9,7 @@ export async function getFieldTemplates(inventoryId: number) {
       title: true,
       description: true,
       is_visible: true,
-      position:true
+      position: true,
     },
   });
   return templates;

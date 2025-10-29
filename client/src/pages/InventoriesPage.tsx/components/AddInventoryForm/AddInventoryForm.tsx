@@ -16,11 +16,7 @@ const AddInventoryForm = ({ onCreated, onClose }) => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    await addInventory(
-      formData.title,
-      formData.description,
-      formData.category,
-    );
+    await addInventory(formData.title, formData.description, formData.category);
     if (onCreated) await onCreated();
     setIsSubmitted(true);
     setTimeout(() => {
@@ -74,9 +70,7 @@ const AddInventoryForm = ({ onCreated, onClose }) => {
       </div>
       <button
         type="submit"
-        className={`btn w-100 ${
-          isSubmitted ? "btn-outline-success" : "btn-success"
-        }`}
+        className={`btn w-100 ${isSubmitted ? "btn-outline-success" : "btn-success"}`}
         disabled={isSubmitted}
       >
         {isSubmitted ? "Created ✓" : "Create Inventory"}

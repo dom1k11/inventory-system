@@ -18,28 +18,15 @@ const RegisterPage = () => {
     setErrors({});
     setSuccess("");
 
-    const newErrors = validateRegistrationForm(
-      form.name,
-      form.email,
-      form.password
-    );
+    const newErrors = validateRegistrationForm(form.name, form.email, form.password);
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
 
     try {
-      console.log("Register started!");
-
       await register(form.name, form.email, form.password);
-      console.log("Register finished");
-
-      console.log("redirecting")
-      setSuccess(
-        "✅ Registration successful! You can log in now! Redirecting..."
-      );
-      console.log("redirecting finished!");
-
+      setSuccess("✅ Registration successful! You can log in now! Redirecting...");
       setTimeout(() => navigate("/login"), 3000);
     } catch (err) {
       console.error("Registration failed", err);

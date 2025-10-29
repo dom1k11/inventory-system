@@ -8,10 +8,7 @@ const Header = ({ title = "" }) => {
 
   return (
     <header className="app-header">
-      <button
-        onClick={() => navigate("/inventories")}
-        className="btn btn-primary"
-      >
+      <button onClick={() => navigate("/inventories")} className="btn btn-primary">
         Home
       </button>
 

@@ -4,13 +4,7 @@ import "./Toolbar.css";
 import AddItemForm from "../AddItemForm/AddItemForm";
 import { isLoggedIn } from "../../../../../helpers/auth";
 import { isOwner } from "../../../../../helpers/auth";
-const Toolbar = ({
-  onCreated,
-  deleteSelected,
-  disableDelete,
-  loadItems,
-  ownerId,
-}) => {
+const Toolbar = ({ onCreated, deleteSelected, disableDelete, loadItems, ownerId }) => {
   const [showForm, setShowForm] = useState(false);
 
   if (!isLoggedIn()) return null;
@@ -27,7 +21,6 @@ const Toolbar = ({
             label="New Item"
             variant="btn btn-success"
             disabled={!isOwner(ownerId)}
-            
           />
           <ToolbarButton
             onClick={deleteSelected}
@@ -40,16 +33,9 @@ const Toolbar = ({
 
       {showForm && (
         <>
-          <div
-            className="modal-backdrop fade show"
-            onClick={() => setShowForm(false)}
-          ></div>
+          <div className="modal-backdrop fade show" onClick={() => setShowForm(false)}></div>
 
-          <div
-            className="modal d-block"
-            tabIndex={-1}
-            onClick={() => setShowForm(false)}
-          >
+          <div className="modal d-block" tabIndex={-1} onClick={() => setShowForm(false)}>
             <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
               <div className="modal-content">
                 <div className="modal-header">

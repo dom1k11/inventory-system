@@ -1,7 +1,5 @@
 import { handleAdd } from "../../handlers/handlers";
-const NewElementBtn = ({setFields}) => {
-
-
+const NewElementBtn = ({ setFields }) => {
   return (
     <button
       type="button"

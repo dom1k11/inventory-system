@@ -1,11 +1,7 @@
 import TypeSelector from "../TypeSelector/TypeSelector";
 import TitleInput from "../TitleInput/TitleInput";
 import Checkbox from "../Checkbox/Checkbox";
-import {
-  handleRemove,
-  handleTitleChange,
-  handleTypeChange,
-} from "../../handlers/handlers";
+import { handleRemove, handleTitleChange, handleTypeChange } from "../../handlers/handlers";
 import { deleteCustomField } from "../../../../../../../api/inventories";
 
 const FieldsList = ({ id, fields, setFields }) => {
@@ -21,23 +17,16 @@ const FieldsList = ({ id, fields, setFields }) => {
           <div className="row g-3 align-items-center">
             <TypeSelector
               field={field}
-              onChange={(newType) =>
-                setFields((prev) => handleTypeChange(prev, field.id, newType))
-              }
+              onChange={(newType) => setFields((prev) => handleTypeChange(prev, field.id, newType))}
             />
             <TitleInput
               field={field}
-              onChange={(value) =>
-                setFields((prev) => handleTitleChange(prev, field.id, value))
-              }
+              onChange={(value) => setFields((prev) => handleTitleChange(prev, field.id, value))}
             />
             <Checkbox />
           </div>
 
-          <button
-            className="btn btn-danger mt-2"
-            onClick={() => handleDelete(field.id)}
-          >
+          <button className="btn btn-danger mt-2" onClick={() => handleDelete(field.id)}>
             Remove
           </button>
         </div>

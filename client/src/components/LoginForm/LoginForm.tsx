@@ -8,7 +8,7 @@ const LoginForm = ({
   onChange,
   onSubmit,
   onGoToRegister,
-  onGuestLogin
+  onGuestLogin,
 }) => {
   return (
     <div className="login-container">

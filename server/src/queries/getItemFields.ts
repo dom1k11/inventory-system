@@ -11,8 +11,8 @@ export async function getItemFields(inventoryId: number) {
       description: true,
       is_visible: true,
       position: true,
-      created_at: true, 
+      created_at: true,
     },
   });
-  return fields
+  return fields;
 }

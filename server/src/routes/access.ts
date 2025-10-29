@@ -1,5 +1,9 @@
 import { Router } from 'express';
-import { handleGetAccessUsers, handleGrantAccess, handleRemoveAccess } from '../controllers/AccessController';
+import {
+  handleGetAccessUsers,
+  handleGrantAccess,
+  handleRemoveAccess,
+} from '../controllers/AccessController';
 import { authMiddleware } from '../middlewares/authMiddleware';
 const router = Router();
 

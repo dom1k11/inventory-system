@@ -12,7 +12,6 @@ const AddItemForm = ({ onCreated, onClose, loadItems }) => {
   function handleChange(e) {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
-    console.log(formData);
   }
 
   function getValues() {
@@ -36,10 +35,7 @@ const AddItemForm = ({ onCreated, onClose, loadItems }) => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    await createItem(
-      Number(id),
-      getValues()
-    );
+    await createItem(Number(id), getValues());
     if (onCreated) await onCreated();
     loadItems();
     setIsSubmitted(true);
@@ -58,9 +54,7 @@ const AddItemForm = ({ onCreated, onClose, loadItems }) => {
         {buildForm(fieldTemplates, handleChange)}
         <button
           type="submit"
-          className={`btn w-100 ${
-            isSubmitted ? "btn-outline-success" : "btn-success"
-          }`}
+          className={`btn w-100 ${isSubmitted ? "btn-outline-success" : "btn-success"}`}
           disabled={isSubmitted}
         >
           {isSubmitted ? "Created ✓" : "Create Item"}

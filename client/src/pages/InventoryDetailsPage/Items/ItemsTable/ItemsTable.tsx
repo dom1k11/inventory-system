@@ -24,12 +24,10 @@ const ItemsTable = ({ items, selectedIds, setSelectedIds }) => {
                 className="form-check-input"
                 checked={items.length > 0 && selectedIds.length === items.length}
                 onChange={(e) =>
-                  e.target.checked
-                    ? setSelectedIds(items.map((i) => i.id))
-                    : setSelectedIds([])
+                  e.target.checked ? setSelectedIds(items.map((i) => i.id)) : setSelectedIds([])
                 }
               />
-            </th> 
+            </th>
             {allKeys.map((key) => (
               <th key={key}>{key}</th>
             ))}
@@ -44,9 +42,7 @@ const ItemsTable = ({ items, selectedIds, setSelectedIds }) => {
                   type="checkbox"
                   className="form-check-input"
                   checked={selectedIds.includes(item.item_id)}
-                  onChange={() =>
-                    setSelectedIds(toggleSelection(selectedIds, item.item_id))
-                  }
+                  onChange={() => setSelectedIds(toggleSelection(selectedIds, item.item_id))}
                 />
               </td>
               {allKeys.map((key) => {

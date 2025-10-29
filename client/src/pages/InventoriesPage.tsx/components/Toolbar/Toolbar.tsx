@@ -30,16 +30,9 @@ const Toolbar = ({ onCreated, deleteSelected, disableDelete }) => {
 
       {showForm && (
         <>
-          <div
-            className="modal-backdrop fade show"
-            onClick={() => setShowForm(false)}
-          ></div>
+          <div className="modal-backdrop fade show" onClick={() => setShowForm(false)}></div>
 
-          <div
-            className="modal d-block"
-            tabIndex={-1}
-            onClick={() => setShowForm(false)}
-          >
+          <div className="modal d-block" tabIndex={-1} onClick={() => setShowForm(false)}>
             <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
               <div className="modal-content">
                 <div className="modal-header">
@@ -51,10 +44,7 @@ const Toolbar = ({ onCreated, deleteSelected, disableDelete }) => {
                   ></button>
                 </div>
                 <div className="modal-body">
-                  <AddInventoryForm
-                    onCreated={onCreated}
-                    onClose={() => setShowForm(false)}
-                  />
+                  <AddInventoryForm onCreated={onCreated} onClose={() => setShowForm(false)} />
                 </div>
               </div>
             </div>

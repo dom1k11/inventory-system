@@ -6,10 +6,8 @@ export function useInventories() {
 
   async function loadInventories() {
     const data = await fetchInventories();
-    console.log(data);
     setInventories([...data]);
-      setLoading(false);
-
+    setLoading(false);
   }
 
   useEffect(() => {

@@ -37,7 +37,6 @@ const LoginPage = () => {
       onSubmit={handleLogin}
       onGoToRegister={() => navigate("/register")}
       onGuestLogin={() => navigate("/inventories")}
-
     />
   );
 };

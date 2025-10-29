@@ -2,11 +2,7 @@ import ToolbarButton from "./ToolbarButton";
 import "./Toolbar.css";
 import { isLoggedIn } from "../../../../../../../helpers/auth";
 import { isOwner } from "../../../../../../../helpers/auth";
-const Toolbar = ({
-  deleteSelected,
-  disableDelete,
-  ownerId,
-}) => {
+const Toolbar = ({ deleteSelected, disableDelete, ownerId }) => {
   if (!isLoggedIn()) return null;
   if (!isOwner(ownerId)) return null;
 

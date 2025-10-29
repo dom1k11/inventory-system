@@ -1,10 +1,10 @@
-import prisma from "../prisma";
+import prisma from '../prisma';
 
 export async function insertItem(
   inventoryId: number,
   createdBy: number,
   customId: string,
-  sequenceNumber: number
+  sequenceNumber: number,
 ) {
   return prisma.items.create({
     data: {

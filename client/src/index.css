@@ -3,8 +3,7 @@
   --color-text: #212529;
   --color-primary: #0d6efd;
   --color-border: #dee2e6;
-  --font-main: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
-    sans-serif;
+  --font-main: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 * {

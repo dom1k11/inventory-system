@@ -1,10 +1,6 @@
 import prisma from '../../prisma';
 
-export async function insertAccess(
-  inventoryId,
-  userId,
-  canEdit
-) {
+export async function insertAccess(inventoryId, userId, canEdit) {
   return prisma.inventory_access.upsert({
     where: {
       inventory_id_user_id: {

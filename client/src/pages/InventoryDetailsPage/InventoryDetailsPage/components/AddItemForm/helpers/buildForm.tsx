@@ -1,5 +1,4 @@
 export function buildForm(fieldTemplates, handleChange) {
-  console.log("current field templates", fieldTemplates);
   return fieldTemplates.map((template) => {
     switch (template.field_type) {
       case "text_single":

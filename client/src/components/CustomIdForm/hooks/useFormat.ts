@@ -15,7 +15,7 @@ export function useFormat(inventoryId: number) {
             id: index + 1,
             type: f.field_type,
             value: f.value || "",
-          }))
+          })),
         );
       }
       setLoading(false);

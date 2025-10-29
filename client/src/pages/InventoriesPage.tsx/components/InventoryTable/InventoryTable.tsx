@@ -1,5 +1,5 @@
 import "./InventoryTable.css";
-import InventoryRow from "../InventoryRow/InventoryRow";
+import InventoryRow from "./InventoryRow/InventoryRow";
 
 const InventoryTable = ({ inventories, selectedIds, setSelectedIds }) => {
   if (!inventories?.length)
@@ -17,10 +17,7 @@ const InventoryTable = ({ inventories, selectedIds, setSelectedIds }) => {
               <input
                 type="checkbox"
                 className="form-check-input"
-                checked={
-                  inventories.length > 0 &&
-                  selectedIds.length === inventories.length
-                }
+                checked={inventories.length > 0 && selectedIds.length === inventories.length}
                 onChange={(e) =>
                   e.target.checked
                     ? setSelectedIds(inventories.map((i) => i.id))

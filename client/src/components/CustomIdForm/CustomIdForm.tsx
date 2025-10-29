@@ -7,7 +7,7 @@ import FieldsList from "./components/FieldsList/FieldsList";
 import ExamplePreview from "./components/ExamplePreview/ExamplePreview";
 import SubmitButton from "./components/SubmitButton/SubmitButton";
 import Header from "./components/Header/Header";
-import "./CustomIdForm.css"
+import "./CustomIdForm.css";
 const CustomIdForm = () => {
   const { id } = useParams();
   const { fields, setFields, loading } = useFormat(Number(id));
@@ -22,16 +22,13 @@ const CustomIdForm = () => {
         //TODO IMPORTANT: CREATE ENDPOINT TO GENERATE CUSTOM_ID PREVIEW ON SERVER
       }
 
-      <DragDropContext
-        onDragEnd={(result) => handleDragEnd(result, fields, setFields)}
-      >
+      <DragDropContext onDragEnd={(result) => handleDragEnd(result, fields, setFields)}>
         <FieldsList fields={fields} setFields={setFields} />
 
         <TrashZone />
       </DragDropContext>
 
-        <SubmitButton id={Number(id)} fields={fields} />
-
+      <SubmitButton id={Number(id)} fields={fields} />
     </div>
   );
 };

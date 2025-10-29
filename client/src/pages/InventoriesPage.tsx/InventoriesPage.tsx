@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Header from "../../components/Header/Header";
-import InventoriesTable from "./InventoryTable/InventoryTable";
+import InventoriesTable from "./components/InventoryTable/InventoryTable";
 import Toolbar from "./components/Toolbar/Toolbar";
 import { useInventories } from "../../hooks/useInventories";
 import { deleteInventories } from "../../api/inventories";

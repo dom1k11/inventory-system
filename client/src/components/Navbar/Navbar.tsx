@@ -9,40 +9,24 @@ const Navbar = ({ activeTab, setActiveTab, ownerId }) => {
         <NavbarButton
           onClick={() => setActiveTab("items")}
           label="Items"
-          variant={
-            activeTab === "items"
-              ? "btn btn-primary"
-              : "btn btn-outline-primary"
-          }
+          variant={activeTab === "items" ? "btn btn-primary" : "btn btn-outline-primary"}
         />
         <NavbarButton
           onClick={() => setActiveTab("fields")}
           label="Fields"
-          variant={
-            activeTab === "fields"
-              ? "btn btn-primary"
-              : "btn btn-outline-primary"
-          }
+          variant={activeTab === "fields" ? "btn btn-primary" : "btn btn-outline-primary"}
           disabled={!isOwner(ownerId)}
         />
         <NavbarButton
           onClick={() => setActiveTab("customId")}
           label="Custom ID"
-          variant={
-            activeTab === "customId"
-              ? "btn btn-primary"
-              : "btn btn-outline-primary"
-          }
+          variant={activeTab === "customId" ? "btn btn-primary" : "btn btn-outline-primary"}
           disabled={!isOwner(ownerId)}
         />
         <NavbarButton
           onClick={() => setActiveTab("access")}
           label="Access"
-          variant={
-            activeTab === "access"
-              ? "btn btn-primary"
-              : "btn btn-outline-primary"
-          }
+          variant={activeTab === "access" ? "btn btn-primary" : "btn btn-outline-primary"}
           disabled={!isOwner(ownerId)}
         />
       </div>

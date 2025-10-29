@@ -4,15 +4,11 @@ import UserSelector from "./components/UserSelector";
 import "./AccessForm.css";
 import { useEffect, useState } from "react";
 import { fetchUsers } from "../../../../../api/users";
-import {
-  fetchAccessUsers,
-  grantAccess,
-  removeAccess,
-} from "../../../../../api/access";
+import { fetchAccessUsers, grantAccess, removeAccess } from "../../../../../api/access";
 import { useParams } from "react-router-dom";
 import AccessList from "./components/AccessList";
 import Toolbar from "./components/Toolbar/Toolbar";
-const AccessForm = ({ownerId}) => {
+const AccessForm = ({ ownerId }) => {
   const { id } = useParams();
   const [users, setUsers] = useState([]);
   const [selectedUserId, setSelectedUserId] = useState(null);
@@ -42,19 +38,13 @@ const AccessForm = ({ownerId}) => {
     const loadAccessList = async () => {
       const data = await fetchAccessUsers(Number(id));
       setAccessList(data);
-      console.log(data, "users with access");
     };
     loadAccessList();
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("clicked submit");
-    await grantAccess(
-      Number(id),
-      Number(selectedUserId),
-      Boolean(selectedAccess)
-    );
+    await grantAccess(Number(id), Number(selectedUserId), Boolean(selectedAccess));
     await loadAccessList();
   };
 
@@ -63,7 +53,7 @@ const AccessForm = ({ownerId}) => {
       <Toolbar
         deleteSelected={handleDeleteSelected}
         disableDelete={!selectedIds.length}
-        ownerId={ownerId} 
+        ownerId={ownerId}
       ></Toolbar>
       <div className="access-form-container">
         <div className="row">

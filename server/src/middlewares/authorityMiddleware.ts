@@ -21,5 +21,3 @@ export async function canEditInventory(req, res, next) {
 
   return res.status(403).json({ error: 'Access denied' });
 }
-
-

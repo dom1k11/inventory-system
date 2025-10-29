@@ -17,5 +17,5 @@ export const handleRemoveAccess = controller(async (req, res) => {
 export const handleGetAccessUsers = controller(async (req, res) => {
   const { inventoryId } = req.body;
   const access = await getInventoryAccess(inventoryId);
-  res.json( access );
+  res.json(access);
 });

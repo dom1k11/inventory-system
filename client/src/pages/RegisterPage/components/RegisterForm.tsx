@@ -1,15 +1,7 @@
 import "./RegisterForm.css";
 import { useNavigate } from "react-router-dom";
 
-export const RegisterForm = ({
-  name,
-  email,
-  password,
-  errors,
-  success,
-  onChange,
-  onSubmit,
-}) => {
+export const RegisterForm = ({ name, email, password, errors, success, onChange, onSubmit }) => {
   const navigate = useNavigate();
 
   return (

@@ -1,10 +1,6 @@
 import { Droppable, Draggable } from "@hello-pangea/dnd";
 import FormatSelector from "../FormatSelector/FormatSelector";
-import {
-  handleChange,
-  handleTypeChange,
-  handleAdd,
-} from "../../handlers/handlers";
+import { handleChange, handleTypeChange, handleAdd } from "../../handlers/handlers";
 
 const FieldsList = ({ fields, setFields }) => {
   return (
@@ -16,11 +12,7 @@ const FieldsList = ({ fields, setFields }) => {
           className="d-flex flex-column gap-3"
         >
           {fields.map((field, index) => (
-            <Draggable
-              key={field.id}
-              draggableId={String(field.id)}
-              index={index}
-            >
+            <Draggable key={field.id} draggableId={String(field.id)} index={index}>
               {(provided) => (
                 <div
                   ref={provided.innerRef}
@@ -30,9 +22,7 @@ const FieldsList = ({ fields, setFields }) => {
                   <FormatSelector
                     type={field.type}
                     value={field.value}
-                    onChange={(val) =>
-                      setFields((prev) => handleChange(prev, field.id, val))
-                    }
+                    onChange={(val) => setFields((prev) => handleChange(prev, field.id, val))}
                     onTypeChange={(val) =>
                       setFields((prev) => handleTypeChange(prev, field.id, val))
                     }

@@ -1,5 +1,8 @@
 import { Router } from 'express';
-import { handleChangeCustomIdFields, handleGetCustomIdFormat } from '../controllers/CustomIdController';
+import {
+  handleChangeCustomIdFields,
+  handleGetCustomIdFormat,
+} from '../controllers/CustomIdController';
 import { authMiddleware } from '../middlewares/authMiddleware';
 const router = Router();
 

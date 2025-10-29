@@ -13,7 +13,7 @@ const FormatSelector = ({ type, value, onChange, onTypeChange }) => {
   return (
     <>
       <div className="custom-id-row">
-        <span style={{fontSize:"2em"}}>&#8645;</span>
+        <span style={{ fontSize: "2em" }}>&#8645;</span>
         <div className="col-md-3">
           <select
             className="form-select"
@@ -29,18 +29,13 @@ const FormatSelector = ({ type, value, onChange, onTypeChange }) => {
         </div>
 
         <div className="col-md-8">
-          {type === "fixed" && (
-            <PrefixSelector value={value} onChange={onChange}></PrefixSelector>
-          )}
+          {type === "fixed" && <PrefixSelector value={value} onChange={onChange}></PrefixSelector>}
 
           {type === "random_9" && <Random9Selector></Random9Selector>}
           {type === "random_6" && <Random6Selector></Random6Selector>}
 
           {type === "sequence" && (
-            <SequenceSelector
-              value={value}
-              onChange={onChange}
-            ></SequenceSelector>
+            <SequenceSelector value={value} onChange={onChange}></SequenceSelector>
           )}
 
           {type === "date" && <DateSelector></DateSelector>}
