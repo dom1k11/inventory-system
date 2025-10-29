@@ -2,6 +2,7 @@
   display: flex;
   gap: 8px;
   margin: 10px 0;
+  flex-wrap: wrap;
 }
 
 .tabs button {
@@ -10,10 +11,35 @@
   background: #f4f4f4;
   cursor: pointer;
   border-radius: 6px;
+  transition: background 0.2s;
 }
 
 .tabs button.active {
   background: #007bff;
   color: white;
   border-color: #007bff;
+}
+
+.tab-content {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+}
+
+/* 📱 мобильный адаптив */
+@media (max-width: 768px) {
+  .tabs {
+    flex-direction: column;
+  }
+
+  .tabs button {
+    width: 100%;
+  }
+
+  .tab-content {
+    padding: 0.75rem;
+    border-radius: 4px;
+  }
 }

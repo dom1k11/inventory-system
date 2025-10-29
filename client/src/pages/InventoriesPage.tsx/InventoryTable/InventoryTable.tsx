@@ -35,14 +35,17 @@ const InventoryTable = ({ inventories, selectedIds, setSelectedIds }) => {
           </tr>
         </thead>
         <tbody>
-          {inventories.map((inventory) => (
-            <InventoryRow
-              key={inventory.id}
-              inventory={inventory}
-              selectedIds={selectedIds}
-              setSelectedIds={setSelectedIds}
-            />
-          ))}
+          {
+            inventories.map((inventory) => (
+              <InventoryRow
+                key={inventory.id}
+                inventory={inventory}
+                selectedIds={selectedIds}
+                setSelectedIds={setSelectedIds}
+              />
+            ))
+            //TODO ADD PAGINATION
+          }
         </tbody>
       </table>
     </div>
