@@ -15,3 +15,5 @@ export const handleTypeChange = (fields, id, newType) =>
 export const handleAdd = (fields) => [...fields, { id: Date.now(), type: "fixed", value: "" }];
 
 export const handleRemove = (fields, id) => fields.filter((f) => f.id !== id);
+
+//TODO Check for handlers in other components and unify if needed
