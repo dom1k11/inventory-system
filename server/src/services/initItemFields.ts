@@ -1,5 +1,5 @@
 import { getFieldTemplates } from '../queries/inventories/customFields/getFieldtemplates';
-import { mapTemplateValues } from '../helpers/mapTemplates';
+import { mapTemplateValues } from '../helpers/mapTemplateValues';
 import { insertFieldValues } from '../queries/inventories/customFields/insertFieldValues';
 export async function initItemFields(itemId: number, inventoryId: number) {
   const templates = await getFieldTemplates(inventoryId);

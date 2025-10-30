@@ -8,5 +8,5 @@ export function generateToken(payload: {
   is_blocked: boolean | null;
   email?: string;
 }) {
-  return jwt.sign(payload, SECRET, { expiresIn: '1d' });
+  return jwt.sign(payload, SECRET, { expiresIn: '1h' });
 }

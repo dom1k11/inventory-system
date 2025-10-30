@@ -15,6 +15,6 @@ router.delete(
   canEditInventory,
   handleDeleteItems,
 );
-router.post('/item/fields', authMiddleware, handleGetFieldTemplates);
+router.post('/item/fields', authMiddleware, handleGetFieldTemplates); //TODO Rewrite as GET to make endpoint RESTful
 
 export default router;

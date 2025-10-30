@@ -41,3 +41,4 @@ ORDER BY i.id;
 }
 
 //TODO Make a limit (OFFSET) to not to pull all the data
+//TODO Rewrite in ORM Prisma

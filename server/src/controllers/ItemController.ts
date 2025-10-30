@@ -23,6 +23,7 @@ export const handleAddItem = controller(async (req, res) => {
   const defaults = await initItemFields(item.id, item.inventory_id);
   res.json({ item, fields: defaults });
 });
+//TODO Move to service
 
 export const handleDeleteItems = controller(async (req, res) => {
   const { inventoryId, ids } = req.body;

@@ -24,7 +24,6 @@ export const handleGetInventoryFields = controller(async (req, res) => {
 export const handleChangeTypeFields = controller(async (req, res) => {
   const { inventoryId, fields } = req.body;
   const newFields = await insertFieldTypes(inventoryId, fields);
-
   res.json({ newFields });
 });
 

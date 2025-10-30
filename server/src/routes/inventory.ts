@@ -15,14 +15,14 @@ router.get('/inventories', handleGetInventories);
 router.get('/inventories/:id/items', handleGetInventoryItems);
 router.get('/inventories/:id/fields', handleGetInventoryFields);
 
-router.post('/inventories/add', authMiddleware, handleAddInventory);
-router.delete('/inventories/delete', authMiddleware, handleDeleteInventories);
+router.post('/inventories/add', authMiddleware, handleAddInventory); //TODO Rewrite in RESTful style
+router.delete('/inventories/delete', authMiddleware, handleDeleteInventories); //TODO Rewrite in RESTful style
 
-router.post('/inventories/fields/add', authMiddleware, handleChangeTypeFields);
+router.post('/inventories/fields/add', authMiddleware, handleChangeTypeFields); //TODO Rewrite in RESTful style
 router.delete(
   '/inventories/fields/delete',
   authMiddleware,
   handleDeleteTypeFields,
-);
+); //TODO Rewrite in RESTful style
 
 export default router;

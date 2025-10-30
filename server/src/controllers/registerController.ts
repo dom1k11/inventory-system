@@ -4,7 +4,6 @@ import { hashPassword } from '../services/hashPassword';
 export const handleRegister = controller(async (req, res) => {
   const { name, email, password } = req.body;
   const hashedPassword = await hashPassword(password);
-
   const result = await registerUser({
     name,
     email,

@@ -55,3 +55,4 @@ export async function generateCustomId(
 
   return idParts.join('-');
 }
+//TODO Create Endpoint to call on client
