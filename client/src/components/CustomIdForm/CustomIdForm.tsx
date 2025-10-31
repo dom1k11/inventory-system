@@ -16,20 +16,20 @@ const CustomIdForm = () => {
   const [preview, setPreview] = useState("");
 
   useEffect(() => {
-  if (loading) return;
-  async function loadPreview() {
-    const preview = await fetchCustomIdPreview(Number(id), fields);
-    setPreview(preview);
-  }
-  loadPreview();
-}, [id, fields, loading]);
+    if (loading) return;
+    async function loadPreview() {
+      const preview = await fetchCustomIdPreview(Number(id), fields);
+      setPreview(preview);
+    }
+    loadPreview();
+  }, [id, fields, loading]);
 
   if (loading) return <p>Loading...</p>;
 
   return (
     <div className="custom-id-container">
       <Header></Header>
-      <ExamplePreview preview = {preview} />
+      <ExamplePreview preview={preview} />
       <DragDropContext onDragEnd={(result) => handleDragEnd(result, fields, setFields)}>
         <FieldsList fields={fields} setFields={setFields} />
         <TrashZone />

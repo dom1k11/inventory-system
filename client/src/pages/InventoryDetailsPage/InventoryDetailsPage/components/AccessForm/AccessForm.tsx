@@ -8,6 +8,7 @@ import { fetchAccessUsers, grantAccess, removeAccess } from "../../../../../api/
 import { useParams } from "react-router-dom";
 import AccessList from "./components/AccessList";
 import Toolbar from "./components/Toolbar/Toolbar";
+import Header from "./components/Header";
 const AccessForm = ({ ownerId }) => {
   const { id } = useParams();
   const [users, setUsers] = useState([]);
@@ -56,6 +57,8 @@ const AccessForm = ({ ownerId }) => {
         ownerId={ownerId}
       ></Toolbar>
       <div className="access-form-container">
+        <Header></Header>
+        <br></br>
         <div className="row">
           <div className="col-md-6 border-end pe-4">
             <h5 className="mb-3">Add new user</h5>

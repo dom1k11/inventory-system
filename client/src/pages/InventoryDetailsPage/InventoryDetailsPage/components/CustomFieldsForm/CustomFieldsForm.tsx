@@ -15,7 +15,6 @@ const CustomFieldsForm = () => {
   const { id } = useParams();
   const { fields, loading, setFields } = useFields(Number(id));
   const [trash, setTrash] = useState([]);
-
   if (loading) return <p>Loading...</p>;
 
   const handleDnd = (result) => {
@@ -24,7 +23,6 @@ const CustomFieldsForm = () => {
       const deleted = fields[source.index];
       setTrash((prev) => [...prev, deleted]);
     }
-
     handleDragEnd(result, fields, setFields);
   };
 
@@ -33,25 +31,26 @@ const CustomFieldsForm = () => {
     await deleteCustomField(Number(id), ids);
     setTrash([]);
   }
-
   return (
     <div className="custom-fields-container">
       <Header />
+      <br></br>
       <DragDropContext onDragEnd={handleDnd}>
         <FieldsList fields={fields} setFields={setFields} />
         <TrashZone />
       </DragDropContext>
-
+      <br></br>
       <NewElementBtn setFields={setFields} />
       <SubmitButton id={Number(id)} fields={fields} />
-
-    <div className="mt-3 d-flex gap-2">
- <button onClick={confirmDelete} disabled={trash.length === 0} className="btn btn-danger btn-lg w-50 mx-auto">
-        Confirm Delete ({trash.length})
-      </button>
-
-</div>
-     
+      <div className="mt-3 d-flex gap-2">
+        <button
+          onClick={confirmDelete}
+          disabled={trash.length === 0}
+          className="btn btn-danger btn-lg w-50 mx-auto"
+        >
+          Confirm Delete ({trash.length})
+        </button>
+      </div>
     </div>
   );
 };

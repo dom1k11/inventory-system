@@ -18,7 +18,7 @@ const FieldsList = ({ fields, setFields }) => {
                   {...provided.draggableProps}
                   {...provided.dragHandleProps}
                 >
-                  <div className="row g-3 align-items-center"> 
+                  <div className="row g-3 align-items-center">
                     <TypeSelector
                       field={field}
                       onChange={(newType) =>
