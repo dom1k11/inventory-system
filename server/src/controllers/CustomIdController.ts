@@ -18,7 +18,7 @@ export const handleGetCustomIdFormat = controller(async (req, res) => {
 });
 
 export const handlePreviewCustomId = controller(async (req, res) => {
-  const { fields } = req.body; 
+  const { fields } = req.body;
   const preview = buildCustomId(fields, 1);
   res.json(preview);
 });

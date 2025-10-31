@@ -1,5 +1,8 @@
 import { controller } from '../utils/controllerWrapper';
-import { getInventories, getInventoryItems } from '../queries/inventories/inventory';
+import {
+  getInventories,
+  getInventoryItems,
+} from '../queries/inventories/inventory';
 import { getItemFields } from '../queries/items/getItemFields';
 import { insertFieldTypes } from '../queries/inventories/customFields/insertFieldTypes';
 import { deleteFieldTypes } from '../queries/inventories/customFields/deleteFieldTypes';

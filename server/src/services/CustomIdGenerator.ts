@@ -6,7 +6,6 @@ export async function generateCustomId(
   sequenceNumber: number,
 ) {
   const fields = await getCustomIdFormat(Number(inventoryId));
-  const customId = buildCustomId(fields, sequenceNumber)
-  return customId
-  
+  const customId = buildCustomId(fields, sequenceNumber);
+  return customId;
 }

@@ -4,4 +4,3 @@ export const handleGetAllUsers = controller(async (req, res) => {
   const users = await getAllUsers();
   res.json(users);
 });
-

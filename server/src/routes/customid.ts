@@ -9,6 +9,6 @@ const router = Router();
 
 router.post('/customid', authMiddleware, handleChangeCustomIdFields);
 router.get('/customid/:inventoryId', handleGetCustomIdFormat);
-router.post('/customid/:inventoryId/preview', handlePreviewCustomId)
+router.post('/customid/:inventoryId/preview', handlePreviewCustomId);
 
 export default router;
