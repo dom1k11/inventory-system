@@ -8,23 +8,30 @@ import ExamplePreview from "./components/ExamplePreview/ExamplePreview";
 import SubmitButton from "./components/SubmitButton/SubmitButton";
 import Header from "./components/Header/Header";
 import "./CustomIdForm.css";
+import { useEffect, useState } from "react";
+import { fetchCustomIdPreview } from "../../api/customid";
 const CustomIdForm = () => {
   const { id } = useParams();
   const { fields, setFields, loading } = useFormat(Number(id));
+  const [preview, setPreview] = useState("");
+
+  useEffect(() => {
+  if (loading) return;
+  async function loadPreview() {
+    const preview = await fetchCustomIdPreview(Number(id), fields);
+    setPreview(preview);
+  }
+  loadPreview();
+}, [id, fields, loading]);
+
   if (loading) return <p>Loading...</p>;
 
   return (
     <div className="custom-id-container">
       <Header></Header>
-
-      <ExamplePreview fields={fields} />
-      {
-        //TODO IMPORTANT: CREATE ENDPOINT TO GENERATE CUSTOM_ID PREVIEW ON SERVER
-      }
-
+      <ExamplePreview preview = {preview} />
       <DragDropContext onDragEnd={(result) => handleDragEnd(result, fields, setFields)}>
         <FieldsList fields={fields} setFields={setFields} />
-
         <TrashZone />
       </DragDropContext>
 

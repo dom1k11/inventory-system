@@ -10,3 +10,10 @@ export async function changeCustomId(inventoryId, fields) {
 export async function fetchCurrentCustomId(inventoryId) {
   return apiWrapper(`/customid/${inventoryId}`);
 }
+
+export async function fetchCustomIdPreview(inventoryId, fields) {
+  return apiWrapper(`/customid/${inventoryId}/preview`, {
+    method: "POST",
+    body: JSON.stringify({ fields }),
+  });
+}
