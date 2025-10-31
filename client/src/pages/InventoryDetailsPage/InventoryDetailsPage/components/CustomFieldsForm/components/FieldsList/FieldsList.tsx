@@ -1,37 +1,46 @@
+import { Droppable, Draggable } from "@hello-pangea/dnd";
 import TypeSelector from "../TypeSelector/TypeSelector";
 import TitleInput from "../TitleInput/TitleInput";
 import Checkbox from "../Checkbox/Checkbox";
-import { handleRemove, handleTitleChange, handleTypeChange } from "../../handlers/handlers";
-import { deleteCustomField } from "../../../../../../../api/inventories";
+import { handleTitleChange, handleTypeChange } from "../../handlers/handlers";
 
-const FieldsList = ({ id, fields, setFields }) => {
-  const handleDelete = async (fieldId: number) => {
-    setFields((prev) => handleRemove(prev, fieldId));
-    await deleteCustomField(Number(id), [fieldId]);
-  };
-
+const FieldsList = ({ fields, setFields }) => {
   return (
-    <>
-      {fields.map((field) => (
-        <div key={field.id} className="card p-3 mb-3 shadow-sm">
-          <div className="row g-3 align-items-center">
-            <TypeSelector
-              field={field}
-              onChange={(newType) => setFields((prev) => handleTypeChange(prev, field.id, newType))}
-            />
-            <TitleInput
-              field={field}
-              onChange={(value) => setFields((prev) => handleTitleChange(prev, field.id, value))}
-            />
-            <Checkbox />
-          </div>
-
-          <button className="btn btn-danger mt-2" onClick={() => handleDelete(field.id)}>
-            Remove
-          </button>
+    <Droppable droppableId="fields">
+      {(provided) => (
+        <div ref={provided.innerRef} {...provided.droppableProps}>
+          {fields.map((field, index) => (
+            <Draggable key={field.id} draggableId={String(field.id)} index={index}>
+              {(provided) => (
+                <div
+                  className="card p-3 mb-3 shadow-sm"
+                  ref={provided.innerRef}
+                  {...provided.draggableProps}
+                  {...provided.dragHandleProps}
+                >
+                  <div className="row g-3 align-items-center"> 
+                    <TypeSelector
+                      field={field}
+                      onChange={(newType) =>
+                        setFields((prev) => handleTypeChange(prev, field.id, newType))
+                      }
+                    />
+                    <TitleInput
+                      field={field}
+                      onChange={(value) =>
+                        setFields((prev) => handleTitleChange(prev, field.id, value))
+                      }
+                    />
+                    <Checkbox />
+                  </div>
+                </div>
+              )}
+            </Draggable>
+          ))}
+          {provided.placeholder}
         </div>
-      ))}
-    </>
+      )}
+    </Droppable>
   );
 };
 
