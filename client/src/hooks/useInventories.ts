@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
 import { fetchInventories } from "../api/inventories";
-export function useInventories() {
+
+export function useInventories(offset = 0, limit = 5) {
   const [inventories, setInventories] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-  async function loadInventories() {
-    const data = await fetchInventories();
-    setInventories([...data]);
+  async function loadInventories(newOffset = offset, newLimit = limit) {
+    setLoading(true);
+    const data = await fetchInventories(newOffset, newLimit);
+    setInventories(data);
     setLoading(false);
   }
 
   useEffect(() => {
-    loadInventories();
-  }, []);
+    loadInventories(offset, limit);
+  }, [offset, limit]);
 
   return { inventories, loadInventories, loading };
 }

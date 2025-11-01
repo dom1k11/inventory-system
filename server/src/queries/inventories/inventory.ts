@@ -1,14 +1,23 @@
 import pool from '../../db';
+import prisma from '../../prisma';
 
-export async function getInventories() {
-  const query = `
-    SELECT id, title, description, category, created_by, is_public, created_at, updated_at 
-    FROM inventories
-    ORDER BY created_at DESC
-  `;
-  return pool.query(query);
+export async function getInventories(offset, limit) {
+  return prisma.inventories.findMany({
+    skip: offset, 
+    take: limit, 
+    orderBy: {
+      created_at: 'desc', 
+    },
+    include: {
+      users: {
+        select: {
+          name: true,
+          email: true,
+        },
+      },
+    },
+  });
 }
-//TODO Make a limit (OFFSET) to not to pull all the data
 
 export async function getInventoryItems(id: number) {
   const query = `

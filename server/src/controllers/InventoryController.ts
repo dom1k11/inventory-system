@@ -9,8 +9,10 @@ import { deleteFieldTypes } from '../queries/inventories/customFields/deleteFiel
 import { insertInventory } from '../queries/inventories/insertInventory';
 import { deleteInventories } from '../queries/inventories/deleteInventories';
 export const handleGetInventories = controller(async (req, res) => {
-  const result = await getInventories();
-  res.json(result.rows);
+  const offset = Number(req.query.offset) || 0;
+  const limit = Number(req.query.limit) || 5;
+  const result = await getInventories(offset, limit);
+  res.json(result);
 });
 
 export const handleGetInventoryItems = controller(async (req, res) => {
