@@ -10,7 +10,7 @@ const Toolbar = ({ onCreated, deleteSelected, disableDelete }) => {
 
   return (
     <>
-      <nav className="toolbar-container">
+      <nav className="toolbar-container" id = "inventories-toolbar">
         <div className="btn-toolbar-left">
           <ToolbarButton
             onClick={() => setShowForm(true)}

@@ -5,7 +5,7 @@ const InventoryRow = ({ inventory, selectedIds, setSelectedIds }) => {
   console.log(inventory)
   return (
     <>
-      <tr onClick={() => navigate(`/inventories/${inventory.id}`)} style={{ cursor: "pointer" }}>
+      <tr onClick={() => navigate(`/inventories/${inventory.id}`)} style={{ cursor: "pointer" }} id = "inventory-row">
         <td>
           {" "}
           <input

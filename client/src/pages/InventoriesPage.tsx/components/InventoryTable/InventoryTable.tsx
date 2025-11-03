@@ -10,7 +10,7 @@ const InventoryTable = ({ inventories, selectedIds, setSelectedIds }) => {
     );
   return (
     <div className="inventory-table-container">
-      <table className="table table-hover">
+      <table className="table table-hover" id="inventory-table">
         <thead>
           <tr>
             <th>
