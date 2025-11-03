@@ -1,3 +1,4 @@
+
 export function isLoggedIn() {
   const token = localStorage.getItem("token");
   return Boolean(token);
@@ -26,3 +27,6 @@ export function getUser() {
     return null;
   }
 }
+
+//TODO Rewrite access impelentation
+//Access should be given or not by comparing current user from table, not from payload(let's say our role has changed but we still logged in as an old role)
