@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { getTableKeys } from "../../../../utils/getTableKeys";
 import "./ItemsTable.css";
 import { toggleSelection } from "../../../../helpers/selection";
-
+import { formatKey } from "../../../../utils/formatKey";
 const ItemsTable = ({ items, selectedIds, setSelectedIds }) => {
   const allKeys = useMemo(() => getTableKeys(items), [items]);
 
@@ -29,7 +29,7 @@ const ItemsTable = ({ items, selectedIds, setSelectedIds }) => {
               />
             </th>
             {allKeys.map((key) => (
-              <th key={key}>{key}</th>
+              <th key={key}>{formatKey(key)}</th>
             ))}
           </tr>
         </thead>
