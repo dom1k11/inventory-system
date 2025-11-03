@@ -1,5 +1,9 @@
 import { apiWrapper } from "../utils/apiWrapper";
 
+export function fetchInventory(id: number) {
+  return apiWrapper(`/inventories/${id}`);
+}
+
 export function fetchInventories(offset = 0, limit = 5) {
   return apiWrapper(`/inventories?offset=${offset}&limit=${limit}`);
 }

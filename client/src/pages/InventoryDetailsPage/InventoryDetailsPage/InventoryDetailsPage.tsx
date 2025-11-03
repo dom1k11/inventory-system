@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Header from "../../../components/Header/Header";
 import Navbar from "../../../components/Navbar/Navbar";
@@ -6,25 +6,32 @@ import ItemsTable from "../Items/ItemsTable/ItemsTable";
 import CustomIdForm from "../../../components/CustomIdForm/CustomIdForm";
 import CustomFieldsForm from "./components/CustomFieldsForm/CustomFieldsForm";
 import Toolbar from "./components/Toolbar/Toolbar";
-import { useInventories } from "../../../hooks/useInventories";
 import { useItems } from "../../../hooks/useItem";
 import { deleteItems } from "../../../api/items";
 import "./InventoryDetailsPage.css";
 import AccessForm from "./components/AccessForm/AccessForm";
 import Pagination from "../../../components/Pagination/Pagination";
+import { fetchInventory } from "../../../api/inventories";
 //TODO REFACTOR! IMPORTANT! MAKE ONE SOURCE OF TRUTH
 
 const InventoryDetailsPage = () => {
   const { id } = useParams();
-  const { inventories, loading } = useInventories();
   const [page, setPage] = useState(1);
   const limit = 5;
   const offset = (page - 1) * limit;
   const { items, loadItems } = useItems(offset, limit);
   const [activeTab, setActiveTab] = useState<"items" | "fields" | "customId" | "access">("items");
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
-  const inventory = inventories.find((inv) => inv.id === Number(id));
-  if (loading) return <p>Loading...</p>;
+  const [inventory, setInventory] = useState<any>([]);
+  useEffect(() => {
+    if (!id) return;
+    (async () => {
+      const data = await fetchInventory(Number(id));
+      setInventory(data);
+    })();
+  }, [id]);
+  if (!inventory) return <p>Loading...</p>;
+
   async function handleDeleteSelected() {
     if (!selectedIds.length) return;
     await deleteItems(Number(id), selectedIds);
@@ -32,7 +39,6 @@ const InventoryDetailsPage = () => {
     setSelectedIds([]);
   }
 
-  console.log(page);
   return (
     <>
       <Header title={inventory ? inventory.title : "Loading..."} />

@@ -8,6 +8,14 @@ import { insertFieldTypes } from '../queries/inventories/customFields/insertFiel
 import { deleteFieldTypes } from '../queries/inventories/customFields/deleteFieldTypes';
 import { insertInventory } from '../queries/inventories/insertInventory';
 import { deleteInventories } from '../queries/inventories/deleteInventories';
+import { getInventory } from '../queries/inventories/getInventory';
+
+export const handleGetInventory = controller(async (req, res) => {
+  const id = Number(req.params.id);
+  const result = await getInventory(id);
+  res.json(result);
+});
+
 export const handleGetInventories = controller(async (req, res) => {
   const offset = Number(req.query.offset) || 0;
   const limit = Number(req.query.limit) || 5;

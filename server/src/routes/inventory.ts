@@ -7,6 +7,7 @@ import {
   handleGetInventoryFields,
   handleGetInventoryItems,
   handleDeleteInventories,
+  handleGetInventory,
 } from '../controllers/InventoryController';
 import { authMiddleware } from '../middlewares/authMiddleware';
 const router = Router();
@@ -14,6 +15,7 @@ const router = Router();
 router.get('/inventories', handleGetInventories);
 router.get('/inventories/:id/items', handleGetInventoryItems);
 router.get('/inventories/:id/fields', handleGetInventoryFields);
+router.get('/inventories/:id', handleGetInventory)
 
 router.post('/inventories/add', authMiddleware, handleAddInventory); //TODO Rewrite in RESTful style
 router.delete('/inventories/delete', authMiddleware, handleDeleteInventories); //TODO Rewrite in RESTful style

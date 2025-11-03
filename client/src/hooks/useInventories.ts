@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchInventories } from "../api/inventories";
 
-export function useInventories(offset = 0, limit = 5) {
+export function useInventories(offset, limit) {
   const [inventories, setInventories] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 

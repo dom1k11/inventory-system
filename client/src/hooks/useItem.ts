@@ -8,7 +8,7 @@ export function useItems(offset = 0, limit = 5) {
 
   async function loadItems(newOffset = offset, newLimit = limit) {
     if (!id) return;
-    const data = await fetchItems(Number(id), newOffset, newLimit );
+    const data = await fetchItems(Number(id), newOffset, newLimit);
     setItems(data);
   }
 
