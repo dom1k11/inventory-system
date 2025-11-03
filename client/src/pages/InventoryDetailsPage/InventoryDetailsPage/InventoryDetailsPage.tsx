@@ -5,7 +5,7 @@ import Navbar from "../../../components/Navbar/Navbar";
 import ItemsTable from "../Items/ItemsTable/ItemsTable";
 import CustomIdForm from "../../../components/CustomIdForm/CustomIdForm";
 import CustomFieldsForm from "./components/CustomFieldsForm/CustomFieldsForm";
-import ItemsToolbar from "./components/Toolbar/Toolbar";
+import ItemsToolbar from "./components/ItemsToolbar/ItemsToolbar";
 import { useItems } from "../../../hooks/useItem";
 import { deleteItems } from "../../../api/items";
 import "./InventoryDetailsPage.css";

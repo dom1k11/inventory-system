@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Header from "../../components/Header/Header";
 import InventoriesTable from "./components/InventoryTable/InventoryTable";
-import Toolbar from "./components/Toolbar/Toolbar";
+import InventoriesToolbar from "./components/InventoriesToolbar/InventoriesToolbar";
 import { useInventories } from "../../hooks/useInventories";
 import { deleteInventories } from "../../api/inventories";
 import Pagination from "../../components/Pagination/Pagination";
@@ -30,7 +30,7 @@ const InventoriesPage = () => {
   return (
     <>
       <Header title="Inventories" />
-      <Toolbar
+      <InventoriesToolbar
         onCreated={loadInventories}
         deleteSelected={handleDeleteSelected}
         disableDelete={!selectedIds.length}

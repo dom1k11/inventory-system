@@ -4,7 +4,7 @@ import AddInventoryForm from "../AddInventoryForm/AddInventoryForm";
 import "./Toolbar.css";
 import { isLoggedIn } from "../../../../helpers/auth";
 
-const Toolbar = ({ onCreated, deleteSelected, disableDelete }) => {
+const InventoriesToolbar = ({ onCreated, deleteSelected, disableDelete }) => {
   const [showForm, setShowForm] = useState(false);
   if (!isLoggedIn()) return null;
 
@@ -55,4 +55,4 @@ const Toolbar = ({ onCreated, deleteSelected, disableDelete }) => {
   );
 };
 
-export default Toolbar;
+export default InventoriesToolbar;
