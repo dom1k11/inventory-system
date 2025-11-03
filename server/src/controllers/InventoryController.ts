@@ -17,7 +17,9 @@ export const handleGetInventories = controller(async (req, res) => {
 
 export const handleGetInventoryItems = controller(async (req, res) => {
   const id = Number(req.params.id);
-  const result = await getInventoryItems(id);
+  const offset = Number(req.query.offset) || 0;
+  const limit = Number(req.query.limit) || 5;
+  const result = await getInventoryItems(id, offset, limit);
   res.json(result.rows);
 });
 

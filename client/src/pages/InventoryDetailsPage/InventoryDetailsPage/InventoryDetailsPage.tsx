@@ -11,17 +11,18 @@ import { useItems } from "../../../hooks/useItem";
 import { deleteItems } from "../../../api/items";
 import "./InventoryDetailsPage.css";
 import AccessForm from "./components/AccessForm/AccessForm";
-
+import Pagination from "../../../components/Pagination/Pagination";
 //TODO REFACTOR! IMPORTANT! MAKE ONE SOURCE OF TRUTH
 
 const InventoryDetailsPage = () => {
   const { id } = useParams();
   const { inventories, loading } = useInventories();
-  const { items, loadItems } = useItems();
-
+  const [page, setPage] = useState(1);
+  const limit = 5;
+  const offset = (page - 1) * limit;
+  const { items, loadItems } = useItems(offset, limit);
   const [activeTab, setActiveTab] = useState<"items" | "fields" | "customId" | "access">("items");
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
-
   const inventory = inventories.find((inv) => inv.id === Number(id));
   if (loading) return <p>Loading...</p>;
   async function handleDeleteSelected() {
@@ -30,8 +31,8 @@ const InventoryDetailsPage = () => {
     await loadItems();
     setSelectedIds([]);
   }
-  //TODO MOVE TO SERVICES
 
+  console.log(page);
   return (
     <>
       <Header title={inventory ? inventory.title : "Loading..."} />
@@ -46,6 +47,7 @@ const InventoryDetailsPage = () => {
             disableDelete={!selectedIds.length}
             ownerId={inventory.created_by}
           />
+          <Pagination page={page} onPageChange={setPage}></Pagination>
           <ItemsTable items={items} selectedIds={selectedIds} setSelectedIds={setSelectedIds} />
         </>
       )}

@@ -1,7 +1,7 @@
 import { apiWrapper } from "../utils/apiWrapper";
 
-export function fetchItems(id: number) {
-  return apiWrapper(`/inventories/${id}/items`);
+export function fetchItems(id: number, offset, limit) {
+  return apiWrapper(`/inventories/${id}/items?offset=${offset}&limit=${limit}`);
 }
 
 export async function createItem(inventoryId, fields) {
