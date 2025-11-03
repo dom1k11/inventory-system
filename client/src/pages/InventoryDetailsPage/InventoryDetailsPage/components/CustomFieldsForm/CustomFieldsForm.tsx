@@ -14,7 +14,7 @@ import { useState } from "react";
 const CustomFieldsForm = () => {
   const { id } = useParams();
   const { fields, loading, setFields } = useFields(Number(id));
-  const [trash, setTrash] = useState([]);
+  const [trash, setTrash] = useState<[]>([]);
   if (loading) return <p>Loading...</p>;
 
   const handleDnd = (result) => {
