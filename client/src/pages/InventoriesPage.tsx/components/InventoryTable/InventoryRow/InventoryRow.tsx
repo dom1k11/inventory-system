@@ -20,7 +20,7 @@ const InventoryRow = ({ inventory, selectedIds, setSelectedIds }) => {
         <td>{inventory.title}</td>
         <td>{inventory.description}</td>
         <td>{inventory.category}</td>
-        <td>{inventory.created_by}</td>
+        <td>{inventory.users.name}</td>
       </tr>
     </>
   );

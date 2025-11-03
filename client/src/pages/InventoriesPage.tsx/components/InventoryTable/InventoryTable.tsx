@@ -41,7 +41,6 @@ const InventoryTable = ({ inventories, selectedIds, setSelectedIds }) => {
                 setSelectedIds={setSelectedIds}
               />
             ))
-            //TODO ADD PAGINATION
           }
         </tbody>
       </table>
