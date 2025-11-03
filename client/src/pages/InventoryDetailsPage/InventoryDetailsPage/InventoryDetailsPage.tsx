@@ -5,13 +5,14 @@ import Navbar from "../../../components/Navbar/Navbar";
 import ItemsTable from "../Items/ItemsTable/ItemsTable";
 import CustomIdForm from "../../../components/CustomIdForm/CustomIdForm";
 import CustomFieldsForm from "./components/CustomFieldsForm/CustomFieldsForm";
-import Toolbar from "./components/Toolbar/Toolbar";
+import ItemsToolbar from "./components/Toolbar/Toolbar";
 import { useItems } from "../../../hooks/useItem";
 import { deleteItems } from "../../../api/items";
 import "./InventoryDetailsPage.css";
 import AccessForm from "./components/AccessForm/AccessForm";
 import Pagination from "../../../components/Pagination/Pagination";
 import { fetchInventory } from "../../../api/inventories";
+import { startInventoryDetailsOnboarding } from "../../../services/onboarding/InventoryDetailsOnboarding";
 //TODO REFACTOR! IMPORTANT! MAKE ONE SOURCE OF TRUTH
 
 const InventoryDetailsPage = () => {
@@ -23,6 +24,14 @@ const InventoryDetailsPage = () => {
   const [activeTab, setActiveTab] = useState<"items" | "fields" | "customId" | "access">("items");
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const [inventory, setInventory] = useState<any>([]);
+
+  useEffect(() => {
+    if (inventory && inventory.id && !localStorage.getItem("onboarded-details")) {
+      startInventoryDetailsOnboarding();
+      localStorage.setItem("onboarded-details", "true");
+    }
+  }, [inventory]);
+
   useEffect(() => {
     if (!id) return;
     (async () => {
@@ -46,7 +55,7 @@ const InventoryDetailsPage = () => {
 
       {activeTab === "items" && (
         <>
-          <Toolbar
+          <ItemsToolbar
             onCreated={loadItems}
             loadItems={loadItems}
             deleteSelected={handleDeleteSelected}

@@ -4,7 +4,7 @@ import "./Toolbar.css";
 import AddItemForm from "../AddItemForm/AddItemForm";
 import { isLoggedIn } from "../../../../../helpers/auth";
 import { isOwner } from "../../../../../helpers/auth";
-const Toolbar = ({ onCreated, deleteSelected, disableDelete, loadItems, ownerId }) => {
+const ItemsToolbar = ({ onCreated, deleteSelected, disableDelete, loadItems, ownerId }) => {
   const [showForm, setShowForm] = useState(false);
 
   if (!isLoggedIn()) return null;
@@ -13,7 +13,7 @@ const Toolbar = ({ onCreated, deleteSelected, disableDelete, loadItems, ownerId 
   return (
     <>
       <nav className="toolbar-container">
-        <div className="btn-toolbar-left">
+        <div className="btn-toolbar-left" id = "items-toolbar">
           <ToolbarButton
             onClick={async () => {
               setShowForm(true);
@@ -62,4 +62,4 @@ const Toolbar = ({ onCreated, deleteSelected, disableDelete, loadItems, ownerId 
   );
 };
 
-export default Toolbar;
+export default ItemsToolbar;
