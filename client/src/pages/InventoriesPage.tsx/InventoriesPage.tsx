@@ -5,7 +5,7 @@ import InventoriesToolbar from "./components/InventoriesToolbar/InventoriesToolb
 import { useInventories } from "../../hooks/useInventories";
 import { deleteInventories } from "../../api/inventories";
 import Pagination from "../../components/Pagination/Pagination";
-import { startOnboarding } from "../../services/onboarding";
+import { InventoriesOnboarding } from "../../services/onboarding/InventoriesOnboarding";
 const InventoriesPage = () => {
   const [page, setPage] = useState(1);
   const limit = 5;
@@ -15,7 +15,7 @@ const InventoriesPage = () => {
 
  useEffect(() => {
   if (inventories.length && !localStorage.getItem("onboarded")) {
-    startOnboarding();
+    InventoriesOnboarding();
     localStorage.setItem("onboarded", "true");
   }
 }, [inventories]);

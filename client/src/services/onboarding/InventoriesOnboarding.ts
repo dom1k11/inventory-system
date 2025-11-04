@@ -1,7 +1,7 @@
 import introJs from "intro.js";
 import "intro.js/introjs.css";
 
-export function startOnboarding() {
+export function InventoriesOnboarding() {
   const steps: any[] = [
     {
       intro: "Welcome! Let's take a quick tour.",
