@@ -68,7 +68,7 @@ const InventoryDetailsPage = () => {
       )}
 
       {activeTab === "customId" && <CustomIdForm />}
-      {activeTab === "fields" && <CustomFieldsForm />}
+      {activeTab === "fields" && <CustomFieldsForm loadItems={loadItems} />}
       {activeTab === "access" && <AccessForm ownerId={inventory.created_by} />}
     </>
   );

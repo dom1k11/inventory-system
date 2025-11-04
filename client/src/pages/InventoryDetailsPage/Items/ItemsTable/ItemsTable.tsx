@@ -5,7 +5,7 @@ import { toggleSelection } from "../../../../helpers/selection";
 import { formatKey } from "../../../../utils/formatKey";
 const ItemsTable = ({ items, selectedIds, setSelectedIds }) => {
   const allKeys = useMemo(() => getTableKeys(items), [items]);
-
+  console.log(selectedIds);
   if (!items?.length)
     return (
       <div className="text-center my-5">
@@ -24,7 +24,9 @@ const ItemsTable = ({ items, selectedIds, setSelectedIds }) => {
                 className="form-check-input"
                 checked={items.length > 0 && selectedIds.length === items.length}
                 onChange={(e) =>
-                  e.target.checked ? setSelectedIds(items.map((i) => i.id)) : setSelectedIds([])
+                  e.target.checked
+                    ? setSelectedIds(items.map((i) => i.item_id))
+                    : setSelectedIds([])
                 }
               />
             </th>

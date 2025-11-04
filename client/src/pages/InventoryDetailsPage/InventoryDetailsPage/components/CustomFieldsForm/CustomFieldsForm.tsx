@@ -11,7 +11,7 @@ import TrashZone from "../../../../../components/CustomIdForm/components/TrashZo
 import { deleteCustomField } from "../../../../../api/inventories";
 import { useState } from "react";
 
-const CustomFieldsForm = () => {
+const CustomFieldsForm = ({ loadItems }) => {
   const { id } = useParams();
   const { fields, loading, setFields } = useFields(Number(id));
   const [trash, setTrash] = useState<any[]>([]);
@@ -29,6 +29,7 @@ const CustomFieldsForm = () => {
   async function confirmDelete() {
     const ids = trash.map((f) => f.id);
     await deleteCustomField(Number(id), ids);
+    await loadItems();
     setTrash([]);
   }
   return (

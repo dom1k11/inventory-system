@@ -8,9 +8,7 @@ const SubmitButton = ({ id, fields }) => {
 
   const handleClick = async () => {
     await addCustomField(id, newFields);
-
     setIsSaved(true);
-
     setTimeout(() => setIsSaved(false), 2000);
   };
 
