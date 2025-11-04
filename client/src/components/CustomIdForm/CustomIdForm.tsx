@@ -27,7 +27,7 @@ const CustomIdForm = () => {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <div className="custom-id-container" id = "custom-id-form">
+    <div className="custom-id-container" id="custom-id-form">
       <Header></Header>
       <ExamplePreview preview={preview} />
       <DragDropContext onDragEnd={(result) => handleDragEnd(result, fields, setFields)}>

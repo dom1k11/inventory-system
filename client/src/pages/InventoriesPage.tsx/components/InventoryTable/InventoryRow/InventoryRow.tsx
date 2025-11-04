@@ -2,10 +2,13 @@ import { useNavigate } from "react-router-dom";
 import { toggleSelection } from "../../../../../helpers/selection";
 const InventoryRow = ({ inventory, selectedIds, setSelectedIds }) => {
   const navigate = useNavigate();
-  console.log(inventory)
   return (
     <>
-      <tr onClick={() => navigate(`/inventories/${inventory.id}`)} style={{ cursor: "pointer" }} id = "inventory-row">
+      <tr
+        onClick={() => navigate(`/inventories/${inventory.id}`)}
+        style={{ cursor: "pointer" }}
+        id="inventory-row"
+      >
         <td>
           {" "}
           <input

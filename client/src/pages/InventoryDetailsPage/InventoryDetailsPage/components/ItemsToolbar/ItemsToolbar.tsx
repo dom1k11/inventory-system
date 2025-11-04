@@ -13,7 +13,7 @@ const ItemsToolbar = ({ onCreated, deleteSelected, disableDelete, loadItems, own
   return (
     <>
       <nav className="toolbar-container">
-        <div className="btn-toolbar-left" id = "items-toolbar">
+        <div className="btn-toolbar-left" id="items-toolbar">
           <ToolbarButton
             onClick={async () => {
               setShowForm(true);

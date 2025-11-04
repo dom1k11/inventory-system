@@ -1,5 +1,3 @@
-export function formatKey(key){
-  return key
-    .replace(/_/g, " ")        
-    .replace(/\b\w/g, (c) => c.toUpperCase());
+export function formatKey(key) {
+  return key.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }

@@ -1,4 +1,4 @@
-const Pagination = ({page, onPageChange}) => {
+const Pagination = ({ page, onPageChange }) => {
   return (
     <nav className="my-3">
       <ul className="pagination justify-content-center">

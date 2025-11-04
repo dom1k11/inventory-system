@@ -5,7 +5,6 @@ import { toggleSelection } from "../../../../helpers/selection";
 import { formatKey } from "../../../../utils/formatKey";
 const ItemsTable = ({ items, selectedIds, setSelectedIds }) => {
   const allKeys = useMemo(() => getTableKeys(items), [items]);
-  console.log(selectedIds);
   if (!items?.length)
     return (
       <div className="text-center my-5">

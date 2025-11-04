@@ -10,14 +10,14 @@ const Navbar = ({ activeTab, setActiveTab, ownerId }) => {
           onClick={() => setActiveTab("items")}
           label="Items"
           variant={activeTab === "items" ? "btn btn-primary" : "btn btn-outline-primary"}
-          id = {"btn-items"}
+          id={"btn-items"}
         />
         <NavbarButton
           onClick={() => setActiveTab("fields")}
           label="Fields"
           variant={activeTab === "fields" ? "btn btn-primary" : "btn btn-outline-primary"}
           disabled={!isOwner(ownerId)}
-          id = {"btn-custom-fields"}
+          id={"btn-custom-fields"}
         />
         <NavbarButton
           onClick={() => setActiveTab("customId")}
