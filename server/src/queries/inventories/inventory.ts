@@ -3,10 +3,10 @@ import prisma from '../../prisma';
 
 export async function getInventories(offset, limit) {
   return prisma.inventories.findMany({
-    skip: offset, 
-    take: limit, 
+    skip: offset,
+    take: limit,
     orderBy: {
-      created_at: 'desc', 
+      created_at: 'desc',
     },
     include: {
       users: {
@@ -43,14 +43,11 @@ export async function getInventoryItems(id: number, offset, limit) {
     GROUP BY 
       i.id, i.inventory_id, i.custom_id, 
       i.created_by, i.created_at, u.name
-    ORDER BY i.id
+    ORDER BY i.id DESC
     LIMIT $2 OFFSET $3;
   `;
 
   return pool.query(query, [id, limit, offset]);
 }
 
-
-
-//TODO Make a limit (OFFSET) to not to pull all the data
 //TODO Rewrite in ORM Prisma
