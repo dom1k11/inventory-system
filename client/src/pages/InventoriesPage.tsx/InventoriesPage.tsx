@@ -6,25 +6,24 @@ import { useInventories } from "../../hooks/useInventories";
 import { deleteInventories } from "../../api/inventories";
 import Pagination from "../../components/Pagination/Pagination";
 import { InventoriesOnboarding } from "../../services/onboarding/InventoriesOnboarding";
+import { countOffset, LIMIT } from "../../constants/pagination";
 const InventoriesPage = () => {
   const [page, setPage] = useState(1);
-  const limit = 5;
-  const offset = (page - 1) * limit;
-  const { inventories, loadInventories } = useInventories(offset, limit);
+  const offset = countOffset(page);
+  const { inventories, loadInventories } = useInventories(offset, LIMIT);
   const [selectedIds, setSelectedIds] = useState([]);
 
- useEffect(() => {
-  if (inventories.length && !localStorage.getItem("onboarded")) {
-    InventoriesOnboarding();
-    localStorage.setItem("onboarded", "true");
-  }
-}, [inventories]);
-
+  useEffect(() => {
+    if (inventories.length && !localStorage.getItem("onboarded")) {
+      InventoriesOnboarding();
+      localStorage.setItem("onboarded", "true");
+    }
+  }, [inventories]);
 
   async function handleDeleteSelected() {
     if (!selectedIds.length) return;
     await deleteInventories(selectedIds);
-    await loadInventories(offset, limit);
+    await loadInventories(offset, LIMIT);
     setSelectedIds([]);
   }
   return (

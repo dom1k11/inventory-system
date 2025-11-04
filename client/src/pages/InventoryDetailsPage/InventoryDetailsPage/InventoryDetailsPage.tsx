@@ -13,14 +13,13 @@ import AccessForm from "./components/AccessForm/AccessForm";
 import Pagination from "../../../components/Pagination/Pagination";
 import { fetchInventory } from "../../../api/inventories";
 import { startInventoryDetailsOnboarding } from "../../../services/onboarding/InventoryDetailsOnboarding";
+import { countOffset, LIMIT } from "../../../constants/pagination";
 //TODO REFACTOR! IMPORTANT! MAKE ONE SOURCE OF TRUTH
-
 const InventoryDetailsPage = () => {
   const { id } = useParams();
   const [page, setPage] = useState(1);
-  const limit = 5;
-  const offset = (page - 1) * limit;
-  const { items, loadItems } = useItems(offset, limit);
+  const offset = countOffset(page);
+  const { items, loadItems } = useItems(offset, LIMIT);
   const [activeTab, setActiveTab] = useState<"items" | "fields" | "customId" | "access">("items");
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
   const [inventory, setInventory] = useState<any>([]);

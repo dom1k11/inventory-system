@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { fetchItems } from "../api/items";
 import { useParams } from "react-router-dom";
+import { LIMIT } from "../constants/pagination";
 
-export function useItems(offset = 0, limit = 5) {
+export function useItems(offset = 0, limit = LIMIT) {
   const { id } = useParams();
   const [items, setItems] = useState([]);
 
