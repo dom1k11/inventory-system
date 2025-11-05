@@ -3,8 +3,12 @@ import { getFieldTemplates } from "../../../../../api/items";
 import { createItem } from "../../../../../api/items";
 import { useParams } from "react-router-dom";
 import { buildForm } from "./helpers/buildForm";
+import { validateForm } from "../../../../../utils/validation/validateForm";
+import { itemSchema } from "../../../../../utils/validation/itemSchemas";
+import { normalizeErrors } from "../../../../../utils/validation/normalizeErrors";
 const AddItemForm = ({ onCreated, onClose, loadItems }) => {
   const [formData, setFormData] = useState({});
+  const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [fieldTemplates, setFieldTemplates] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
@@ -35,14 +39,25 @@ const AddItemForm = ({ onCreated, onClose, loadItems }) => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    await createItem(Number(id), getValues());
-    if (onCreated) await onCreated();
-    loadItems();
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      if (onClose) onClose();
-    }, 1000);
+    const { valid, errors, data } = validateForm(itemSchema, { fields: getValues() });
+    if (!valid) {
+      const normalizedErrors = normalizeErrors(errors, fieldTemplates);
+      setErrors(normalizedErrors);
+      return;
+    }
+
+    try {
+      await createItem(Number(id), data.fields);
+      if (onCreated) await onCreated();
+      loadItems();
+      setIsSubmitted(true);
+      setTimeout(() => {
+        setIsSubmitted(false);
+        if (onClose) onClose();
+      }, 1000);
+    } catch (err) {
+      setErrors({ general: ["❌ Failed to add items"] });
+    }
   }
 
   if (loading) {
@@ -51,7 +66,7 @@ const AddItemForm = ({ onCreated, onClose, loadItems }) => {
   return (
     <>
       <form className="p-4 border rounded bg-light" onSubmit={handleSubmit}>
-        {buildForm(fieldTemplates, handleChange)}
+        {buildForm(fieldTemplates, handleChange, errors)}
         <button
           type="submit"
           className={`btn w-100 ${isSubmitted ? "btn-outline-success" : "btn-success"}`}
@@ -59,6 +74,7 @@ const AddItemForm = ({ onCreated, onClose, loadItems }) => {
         >
           {isSubmitted ? "Created ✓" : "Create Item"}
         </button>
+        {errors.general && <p className="text-danger small mt-2">{errors.general[0]}</p>}
       </form>
     </>
   );

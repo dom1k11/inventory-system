@@ -1,5 +1,6 @@
-export function buildForm(fieldTemplates, handleChange) {
+export function buildForm(fieldTemplates, handleChange, errors) {
   return fieldTemplates.map((template) => {
+    const fieldError = errors[template.id]?.[0];
     switch (template.field_type) {
       case "text_single":
         return (
@@ -15,6 +16,7 @@ export function buildForm(fieldTemplates, handleChange) {
               className="form-control"
               onChange={handleChange}
             />
+            {fieldError && <p className="text-danger small mt-1">{fieldError}</p>}
           </div>
         );
 
@@ -31,6 +33,7 @@ export function buildForm(fieldTemplates, handleChange) {
               className="form-control"
               onChange={handleChange}
             />
+            {fieldError && <p className="text-danger small mt-1">{fieldError}</p>}
           </div>
         );
 
@@ -48,6 +51,7 @@ export function buildForm(fieldTemplates, handleChange) {
               className="form-control"
               onChange={handleChange}
             />
+            {fieldError && <p className="text-danger small mt-1">{fieldError}</p>}
           </div>
         );
 
@@ -65,6 +69,7 @@ export function buildForm(fieldTemplates, handleChange) {
               className="form-control"
               onChange={handleChange}
             />
+            {fieldError && <p className="text-danger small mt-1">{fieldError}</p>}
           </div>
         );
 
@@ -81,6 +86,7 @@ export function buildForm(fieldTemplates, handleChange) {
             <label htmlFor={template.id} className="form-check-label ms-2">
               {template.title}
             </label>
+            {fieldError && <p className="text-danger small mt-1">{fieldError}</p>}
           </div>
         );
 

@@ -6,9 +6,17 @@ import {
 } from '../controllers/ItemController';
 import { authMiddleware } from '../middlewares/authMiddleware';
 import { canEditInventory } from '../middlewares/authorityMiddleware';
+import { validate } from '../middlewares/validateMiddleware';
+import { itemSchema } from '../validation/itemSchemas';
 const router = Router();
 
-router.post('/item', authMiddleware, canEditInventory, handleAddItem);
+router.post(
+  '/item',
+  authMiddleware,
+  canEditInventory,
+  validate(itemSchema),
+  handleAddItem,
+);
 router.delete(
   '/item/delete',
   authMiddleware,
