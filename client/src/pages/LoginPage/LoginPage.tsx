@@ -2,6 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "../../components/LoginForm/LoginForm";
 import { login } from "../../api/login";
+import { validateForm } from "../../utils/validation/validateForm";
+import { loginSchema } from "../../utils/validation/authSchemas";
+
 const LoginPage = () => {
   const navigate = useNavigate();
 
@@ -15,13 +18,19 @@ const LoginPage = () => {
 
   async function handleLogin() {
     setError("");
+    const { valid, errors, data } = validateForm(loginSchema, form);
+    if (!valid) {
+      const msg =
+        errors.email?.[0] || errors.password?.[0] || "Invalid credentials";
+      setError(msg);
+      return;
+    }
     setLoading(true);
-
     try {
-      await login(form.email, form.password); //it@school.local | hash_it
+      await login(data.email, data.password);
       navigate("/inventories");
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err:any) {
+      setError(err.message || "Login failed");
     } finally {
       setLoading(false);
     }
