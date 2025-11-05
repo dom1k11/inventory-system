@@ -67,6 +67,9 @@ const AddItemForm = ({ onCreated, onClose, loadItems }) => {
     <>
       <form className="p-4 border rounded bg-light" onSubmit={handleSubmit}>
         {buildForm(fieldTemplates, handleChange, errors)}
+        {
+          //IMPORTANT NOTE: Could just add required to fields than playing with that zod validation
+        }
         <button
           type="submit"
           className={`btn w-100 ${isSubmitted ? "btn-outline-success" : "btn-success"}`}
