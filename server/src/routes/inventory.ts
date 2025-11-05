@@ -10,6 +10,8 @@ import {
   handleGetInventory,
 } from '../controllers/InventoryController';
 import { authMiddleware } from '../middlewares/authMiddleware';
+import { validate } from '../middlewares/validateMiddleware';
+import { inventorySchema } from '../validation/inventorySchemas';
 const router = Router();
 
 router.get('/inventories', handleGetInventories);
@@ -17,7 +19,12 @@ router.get('/inventories/:id/items', handleGetInventoryItems);
 router.get('/inventories/:id/fields', handleGetInventoryFields);
 router.get('/inventories/:id', handleGetInventory);
 
-router.post('/inventories/add', authMiddleware, handleAddInventory); //TODO Rewrite in RESTful style
+router.post(
+  '/inventories/add',
+  authMiddleware,
+  validate(inventorySchema),
+  handleAddInventory,
+); //TODO Rewrite in RESTful style
 router.delete('/inventories/delete', authMiddleware, handleDeleteInventories); //TODO Rewrite in RESTful style
 
 router.post('/inventories/fields/add', authMiddleware, handleChangeTypeFields); //TODO Rewrite in RESTful style
