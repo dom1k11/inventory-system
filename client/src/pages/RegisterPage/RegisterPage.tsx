@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../api/register";
-import { validateRegistrationForm } from "../../utils/registerValidation";
 import RegisterForm from "./components/RegisterForm";
+import { validateForm } from "../../utils/validation/validateForm";
+import { registerSchema } from "../../utils/validation/authSchemas";
 const RegisterPage = () => {
   const navigate = useNavigate();
 
@@ -17,20 +18,18 @@ const RegisterPage = () => {
   async function handleRegister() {
     setErrors({});
     setSuccess("");
-
-    const newErrors = validateRegistrationForm(form.name, form.email, form.password);
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
+    const { valid, errors, data } = validateForm(registerSchema, form);
+    if (!valid) {
+      setErrors(errors);
       return;
     }
-
     try {
-      await register(form.name, form.email, form.password);
+      await register(data.name, data.email, data.password);
       setSuccess("✅ Registration successful! You can log in now! Redirecting...");
       setTimeout(() => navigate("/login"), 3000);
     } catch (err) {
       console.error("Registration failed", err);
-      setErrors({ email: "❌ This email is already registered" });
+      setErrors({ email: ["❌ This email is already registered"] });
     }
   }
 
