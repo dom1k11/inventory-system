@@ -8,7 +8,7 @@ import { itemSchema } from "../../../../../utils/validation/itemSchemas";
 import { normalizeErrors } from "../../../../../utils/validation/normalizeErrors";
 const AddItemForm = ({ onCreated, onClose, loadItems }) => {
   const [formData, setFormData] = useState({});
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<any>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [fieldTemplates, setFieldTemplates] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);

@@ -8,7 +8,7 @@ const AddInventoryForm = ({ onCreated, onClose }) => {
     description: "",
     category: "",
   });
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<any>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   function handleChange(e) {
