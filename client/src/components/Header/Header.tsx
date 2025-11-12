@@ -1,10 +1,13 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUser } from "../../helpers/auth";
 import "./Header.css";
+import SalesforceForm from "../SaleforceForm/SaleforceForm";
 
 const Header = ({ title = "" }) => {
   const navigate = useNavigate();
   const user = getUser();
+  const [showSalesforce, setShowSalesforce] = useState(false);
 
   return (
     <header className="app-header">
@@ -13,14 +16,29 @@ const Header = ({ title = "" }) => {
       </button>
 
       <h1>{title}</h1>
+
       <h2>
-        {" "}
         {user && (
           <span className="user-info">
             {user.email} ({user.role})
           </span>
         )}
       </h2>
+
+      <button
+        className="btn btn-outline-primary"
+        onClick={() => setShowSalesforce(true)}
+      >
+        Connect to Salesforce
+      </button>
+
+      <SalesforceForm
+        show={showSalesforce}
+        onClose={() => setShowSalesforce(false)}
+        onSubmit={(data) => {
+          console.log("Submitted Salesforce data:", data);
+        }}
+      />
 
       <button
         className="btn btn-outline-secondary"
