@@ -6,6 +6,8 @@ import CustomIdRoute from './routes/customid';
 import authRoute from './routes/authentication';
 import AccessRoute from './routes/access';
 import UserRoute from './routes/users';
+import SalesForceRoute from './routes/salesforce';
+
 
 const app = express();
 app.use(corsConfig);
@@ -17,5 +19,7 @@ app.use('/', ItemRoute);
 app.use('/', CustomIdRoute);
 app.use('/', AccessRoute);
 app.use('/', UserRoute);
+app.use('/', SalesForceRoute);
+
 
 export default app;
