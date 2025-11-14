@@ -1,45 +1,73 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUser } from "../../helpers/auth";
-import "./Header.css";
+import { fetchUserData } from "../../api/users";
+import { SFSyncUser } from "../../api/salesforce";
 import SalesforceForm from "../SaleforceForm/SaleforceForm";
-      import {SFSyncUser} from "../../api/salesforce";
+import "./Header.css";
 
 const Header = ({ title = "" }) => {
   const navigate = useNavigate();
-  const user = getUser();
+  const jwtUser = getUser();
+
   const [showSalesforce, setShowSalesforce] = useState(false);
+  const [dbUser, setDbUser] = useState(null); 
+  const [loadingUser, setLoadingUser] = useState(true);
+
+  useEffect(() => {
+    async function load() {
+      try {
+        const user = await fetchUserData();
+        setDbUser(user);
+      } finally {
+        setLoadingUser(false);
+      }
+    }
+    load();
+  }, []);
+
+
+  async function handleSyncSubmit(data) {
+    await SFSyncUser(data.companyName, data.firstName, data.lastName, data.email, data.phone);
+    const updated = await fetchUserData();
+    setDbUser(updated);
+    setShowSalesforce(false);
+  }
+
+  const isSynced = dbUser?.is_synced === true;
 
   return (
     <header className="app-header">
       <button onClick={() => navigate("/inventories")} className="btn btn-primary">
         Home
       </button>
+
       <h1>{title}</h1>
+
       <h2>
-        {user && (
+        {jwtUser && (
           <span className="user-info">
-            {user.email} ({user.role})
+            {jwtUser.email} ({jwtUser.role})
           </span>
         )}
       </h2>
-      <button className="btn btn-outline-primary" onClick={() => setShowSalesforce(true)}>
-        Connect to Salesforce
-      </button>
-     <SalesforceForm
-  show={showSalesforce}
-  onClose={() => setShowSalesforce(false)}
-  userEmail={user?.email}
-  onSubmit={async (data) => {
-    await SFSyncUser(
-      data.companyName,
-      data.firstName,
-      data.lastName,
-      data.email,
-      data.phone
-    );
-  }}
-/>
+
+      {!loadingUser && (
+        <button
+          className={`btn ${isSynced ? "btn-success" : "btn-outline-primary"}`}
+          disabled={isSynced}
+          onClick={() => !isSynced && setShowSalesforce(true)}
+        >
+          {isSynced ? "Connected ✓" : "Connect to Salesforce"}
+        </button>
+      )}
+
+      <SalesforceForm
+        show={showSalesforce}
+        onClose={() => setShowSalesforce(false)}
+        userEmail={jwtUser?.email}
+        onSubmit={handleSyncSubmit}
+      />
 
       <button
         className="btn btn-outline-secondary"
