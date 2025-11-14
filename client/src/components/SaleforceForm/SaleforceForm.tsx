@@ -1,13 +1,17 @@
 import { useState } from "react";
 
+
 const SalesforceForm = ({ show, onClose, onSubmit }) => {
-  const [formData, setFormData] = useState({
-    firstName: "John",
-    lastName: "Doe",
-    email: "john@gmail.com",
-    position: "Player",
-    phone: "+37012345678",
-  });
+  const initialState = {
+    companyName: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+  };
+
+  const [formData, setFormData] = useState(initialState);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   function handleChange(e) {
     const { id, value } = e.target;
@@ -16,10 +20,20 @@ const SalesforceForm = ({ show, onClose, onSubmit }) => {
 
   if (!show) return null;
 
+  async function handleSubmit(e) {
+    e.preventDefault();
+    await onSubmit(formData);
+    setIsSubmitted(true);
+    setTimeout(() => {
+      setIsSubmitted(false);
+      setFormData(initialState);
+      onClose();
+    }, 1000);
+  }
+
   return (
     <>
       <div className="modal-backdrop fade show" onClick={onClose}></div>
-
       <div className="modal d-block" tabIndex={-1} onClick={onClose}>
         <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
           <div className="modal-content">
@@ -32,14 +46,23 @@ const SalesforceForm = ({ show, onClose, onSubmit }) => {
               <form
                 className="p-4 border rounded bg-light"
                 autoComplete="off"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  if (onSubmit) {
-                    onSubmit(formData);
-                  }
-                  onClose();
-                }}
+                onSubmit={handleSubmit}
               >
+                <div className="mb-3">
+                  <label htmlFor="companyName" className="form-label">
+                    Company Name
+                  </label>
+                  <input
+                    id="companyName"
+                    type="text"
+                    className="form-control"
+                    value={formData.companyName}
+                    onChange={handleChange}
+                    placeholder="Dominik Corp"
+                    required
+                  />
+                </div>
+
                 <div className="mb-3">
                   <label htmlFor="firstName" className="form-label">
                     First Name
@@ -48,10 +71,9 @@ const SalesforceForm = ({ show, onClose, onSubmit }) => {
                     id="firstName"
                     type="text"
                     className="form-control"
-                    placeholder="John"
                     value={formData.firstName}
                     onChange={handleChange}
-                    autoComplete="off"
+                    placeholder="Dominik"
                     required
                   />
                 </div>
@@ -64,10 +86,9 @@ const SalesforceForm = ({ show, onClose, onSubmit }) => {
                     id="lastName"
                     type="text"
                     className="form-control"
-                    placeholder="Doe"
                     value={formData.lastName}
                     onChange={handleChange}
-                    autoComplete="off"
+                    placeholder="Sedusov"
                     required
                   />
                 </div>
@@ -80,26 +101,9 @@ const SalesforceForm = ({ show, onClose, onSubmit }) => {
                     id="email"
                     type="email"
                     className="form-control"
-                    placeholder="john@example.com"
                     value={formData.email}
                     onChange={handleChange}
-                    autoComplete="off"
-                    required
-                  />
-                </div>
-
-                <div className="mb-3">
-                  <label htmlFor="position" className="form-label">
-                    Position / Role
-                  </label>
-                  <input
-                    id="position"
-                    type="text"
-                    className="form-control"
-                    placeholder="Product Manager"
-                    value={formData.position}
-                    onChange={handleChange}
-                    autoComplete="off"
+                    placeholder="dom@example.com"
                     required
                   />
                 </div>
@@ -112,16 +116,19 @@ const SalesforceForm = ({ show, onClose, onSubmit }) => {
                     id="phone"
                     type="tel"
                     className="form-control"
-                    placeholder="+370 600 12345"
                     value={formData.phone}
                     onChange={handleChange}
-                    autoComplete="off"
+                    placeholder="+37060000000"
                     required
                   />
                 </div>
 
-                <button type="submit" className="btn btn-success w-100">
-                  Submit
+                <button
+                  type="submit"
+                  className={`btn w-100 ${isSubmitted ? "btn-outline-success" : "btn-success"}`}
+                  disabled={isSubmitted}
+                >
+                  {isSubmitted ? "Synced ✓" : "Sync to Salesforce"}
                 </button>
               </form>
             </div>

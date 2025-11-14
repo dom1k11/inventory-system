@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getUser } from "../../helpers/auth";
 import "./Header.css";
 import SalesforceForm from "../SaleforceForm/SaleforceForm";
+      import {SFSyncUser} from "../../api/salesforce";
 
 const Header = ({ title = "" }) => {
   const navigate = useNavigate();
@@ -14,9 +15,7 @@ const Header = ({ title = "" }) => {
       <button onClick={() => navigate("/inventories")} className="btn btn-primary">
         Home
       </button>
-
       <h1>{title}</h1>
-
       <h2>
         {user && (
           <span className="user-info">
@@ -24,22 +23,16 @@ const Header = ({ title = "" }) => {
           </span>
         )}
       </h2>
-
-      <button
-        className="btn btn-outline-primary"
-        onClick={() => setShowSalesforce(true)}
-      >
+      <button className="btn btn-outline-primary" onClick={() => setShowSalesforce(true)}>
         Connect to Salesforce
       </button>
-
       <SalesforceForm
         show={showSalesforce}
         onClose={() => setShowSalesforce(false)}
-        onSubmit={(data) => {
-          console.log("Submitted Salesforce data:", data);
+        onSubmit={async (data) => {
+          await SFSyncUser(data.companyName, data.firstName, data.lastName, data.email, data.phone);
         }}
       />
-
       <button
         className="btn btn-outline-secondary"
         onClick={() => {
