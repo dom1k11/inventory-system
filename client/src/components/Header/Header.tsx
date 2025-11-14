@@ -26,13 +26,21 @@ const Header = ({ title = "" }) => {
       <button className="btn btn-outline-primary" onClick={() => setShowSalesforce(true)}>
         Connect to Salesforce
       </button>
-      <SalesforceForm
-        show={showSalesforce}
-        onClose={() => setShowSalesforce(false)}
-        onSubmit={async (data) => {
-          await SFSyncUser(data.companyName, data.firstName, data.lastName, data.email, data.phone);
-        }}
-      />
+     <SalesforceForm
+  show={showSalesforce}
+  onClose={() => setShowSalesforce(false)}
+  userEmail={user?.email}
+  onSubmit={async (data) => {
+    await SFSyncUser(
+      data.companyName,
+      data.firstName,
+      data.lastName,
+      data.email,
+      data.phone
+    );
+  }}
+/>
+
       <button
         className="btn btn-outline-secondary"
         onClick={() => {

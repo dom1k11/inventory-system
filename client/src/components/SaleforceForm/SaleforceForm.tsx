@@ -1,7 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-
-const SalesforceForm = ({ show, onClose, onSubmit }) => {
+const SalesforceForm = ({ show, onClose, onSubmit, userEmail }) => {
   const initialState = {
     companyName: "",
     firstName: "",
@@ -13,17 +12,30 @@ const SalesforceForm = ({ show, onClose, onSubmit }) => {
   const [formData, setFormData] = useState(initialState);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  // --- AUTO-FILL FROM USER EMAIL ---
+  useEffect(() => {
+    if (userEmail) {
+      const baseName = userEmail.split("@")[0];
+      setFormData((prev) => ({
+        ...prev,
+        email: userEmail,
+        companyName: `${baseName} Corp`,
+      }));
+    }
+  }, [userEmail]);
+
   function handleChange(e) {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
   }
 
-  if (!show) return null;
-
   async function handleSubmit(e) {
     e.preventDefault();
+
     await onSubmit(formData);
+
     setIsSubmitted(true);
+
     setTimeout(() => {
       setIsSubmitted(false);
       setFormData(initialState);
@@ -31,23 +43,22 @@ const SalesforceForm = ({ show, onClose, onSubmit }) => {
     }, 1000);
   }
 
+  if (!show) return null;
+
   return (
     <>
-      <div className="modal-backdrop fade show" onClick={onClose}></div>
+      <div className="modal-backdrop fade show" onClick={onClose} />
+
       <div className="modal d-block" tabIndex={-1} onClick={onClose}>
         <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title">Connect to Salesforce</h5>
-              <button type="button" className="btn-close" onClick={onClose}></button>
+              <button type="button" className="btn-close" onClick={onClose} />
             </div>
 
             <div className="modal-body">
-              <form
-                className="p-4 border rounded bg-light"
-                autoComplete="off"
-                onSubmit={handleSubmit}
-              >
+              <form className="p-4 border rounded bg-light" onSubmit={handleSubmit}>
                 <div className="mb-3">
                   <label htmlFor="companyName" className="form-label">
                     Company Name
@@ -58,7 +69,6 @@ const SalesforceForm = ({ show, onClose, onSubmit }) => {
                     className="form-control"
                     value={formData.companyName}
                     onChange={handleChange}
-                    placeholder="Dominik Corp"
                     required
                   />
                 </div>
@@ -73,7 +83,7 @@ const SalesforceForm = ({ show, onClose, onSubmit }) => {
                     className="form-control"
                     value={formData.firstName}
                     onChange={handleChange}
-                    placeholder="Dominik"
+                    placeholder="John"
                     required
                   />
                 </div>
@@ -88,7 +98,7 @@ const SalesforceForm = ({ show, onClose, onSubmit }) => {
                     className="form-control"
                     value={formData.lastName}
                     onChange={handleChange}
-                    placeholder="Sedusov"
+                    placeholder="Doe"
                     required
                   />
                 </div>
@@ -103,14 +113,13 @@ const SalesforceForm = ({ show, onClose, onSubmit }) => {
                     className="form-control"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder="dom@example.com"
                     required
                   />
                 </div>
 
                 <div className="mb-3">
                   <label htmlFor="phone" className="form-label">
-                    Phone Number
+                    Phone
                   </label>
                   <input
                     id="phone"

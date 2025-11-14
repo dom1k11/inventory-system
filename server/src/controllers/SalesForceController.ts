@@ -1,5 +1,5 @@
 import { controller } from '../utils/controllerWrapper';
-
+import { markUserSynced } from '../queries/users/markUserSynced';
 export const handleGetSFToken = controller(async (req, res) => {
   const url = `${process.env.SALESFORCE_LOGIN_URL}/services/oauth2/token`;
 
@@ -98,6 +98,8 @@ export const handleSyncUser = controller(async (req, res) => {
     throw new Error('Salesforce Contact error: ' + errText);
   }
   const contactData = await contactResponse.json();
+  await markUserSynced(req.user.id);
+
   return {
     success: true,
     salesforceAccountId: accountId,

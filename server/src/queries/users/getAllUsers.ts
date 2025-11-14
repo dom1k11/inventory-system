@@ -8,3 +8,9 @@ export async function getAllUsers() {
     },
   });
 }
+
+export async function getUserById(userId: number) {
+  return await prisma.users.findUnique({
+    where: { id: userId },
+  });
+}
