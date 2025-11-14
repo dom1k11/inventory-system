@@ -11,7 +11,7 @@ const Header = ({ title = "" }) => {
   const jwtUser = getUser();
 
   const [showSalesforce, setShowSalesforce] = useState(false);
-  const [dbUser, setDbUser] = useState(null); 
+  const [dbUser, setDbUser] = useState<any>(null); 
   const [loadingUser, setLoadingUser] = useState(true);
 
   useEffect(() => {

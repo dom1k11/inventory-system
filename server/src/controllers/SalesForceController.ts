@@ -98,7 +98,7 @@ export const handleSyncUser = controller(async (req, res) => {
     throw new Error('Salesforce Contact error: ' + errText);
   }
   const contactData = await contactResponse.json();
-  await markUserSynced(req.user.id);
+  await markUserSynced((req as any).user.id);
 
   return {
     success: true,
